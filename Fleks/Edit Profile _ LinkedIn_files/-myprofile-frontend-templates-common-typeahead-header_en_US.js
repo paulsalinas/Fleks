@@ -1,0 +1,1 @@
+(function(){function a(a,b){return a.write('\x3ch5 class\x3d"edu-tt-header"\x3e').reference(b.get(["heading"],!1),b,"h").write("\x3c/h5\x3e")}dust.register("templates/common/typeahead/header",a);return a})();

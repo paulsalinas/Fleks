@@ -1,0 +1,6 @@
+framework module Pods_Fleks {
+  umbrella header "Pods-Fleks-umbrella.h"
+
+  export *
+  module * { export * }
+}
