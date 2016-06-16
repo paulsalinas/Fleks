@@ -20,6 +20,7 @@
 		3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */; };
 		3C4E50231CD826FD00440D78 /* AddExerciseCompletionSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */; };
 		3C8124F81D0CE2D20038A018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */; };
+		3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8124F91D12266B0038A018 /* FleksTabBarController.swift */; };
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
 		3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */; };
@@ -72,6 +73,7 @@
 		3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewController.swift; sourceTree = "<group>"; };
 		3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseCompletionSegue.swift; sourceTree = "<group>"; };
 		3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3C8124F91D12266B0038A018 /* FleksTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FleksTabBarController.swift; sourceTree = "<group>"; };
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExercisesTableViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */,
 				3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */,
 				3CB25B051CFA58ED00756B45 /* ExerciseResultsCache.swift */,
+				3C8124F91D12266B0038A018 /* FleksTabBarController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 			files = (
 				3C036ACA1CCF112800E9F8C1 /* ExerciseSet.swift in Sources */,
 				3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */,
+				3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */,
 				3CB25B061CFA58ED00756B45 /* ExerciseResultsCache.swift in Sources */,
 				3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */,
 				3C036AC41CCEFADF00E9F8C1 /* ExerciseTableViewController.swift in Sources */,

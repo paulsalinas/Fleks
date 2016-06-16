@@ -215,10 +215,10 @@
             </objects>
             <point key="canvasLocation" x="3656" y="-203"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Fleks Tab Bar Controller-->
         <scene sceneID="1XN-9N-pCO">
             <objects>
-                <tabBarController id="Hez-kE-mC5" sceneMemberID="viewController">
+                <tabBarController id="Hez-kE-mC5" customClass="FleksTabBarController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="FEl-ZL-WOJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
