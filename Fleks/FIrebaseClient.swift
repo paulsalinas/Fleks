@@ -23,36 +23,46 @@ class FirebaseClient {
         return Singleton.sharedInstance
     }
     
-//    func setupUser(authData: FAuthData) {
-//        let fbRef = ref.childByAppendingPath("user-mappings/facebook")
-//        let providerData = authData.providerData
-//        let fbUserRef = fbRef.childByAppendingPath(authData.uid)
-//        
-//        fbUserRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-//            
-//            // user has logged in before, retrieve app_id
-//            if (snapshot.childrenCount > 0) {
-//                
-//                // TODO: update latest provider data
-//                print(snapshot.value["user_id"])
-//                return
-//            }
-//            
-//            // user has NOT logged in before, set up their data
-//            
-//            fbUserRef.setValue(providerData)
-//            
-//            let userRef = self.ref.childByAppendingPath("users")
-//                .childByAutoId()
-//            
-//            userRef.childByAppendingPath("facebook_id")
-//                .setValue(authData.uid)
-//            
-//            fbUserRef.childByAppendingPath("user_id")
-//                .setValue(userRef.key)
-//        
-//        })
-//    }
+    func LoginWithFacebook(tokenString: String, onComplete: () -> Void, onError: (error: NSError) -> Void) {
+        let credential = FIRFacebookAuthProvider.credentialWithAccessToken(tokenString)
+        FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+            if let error = error  {
+                onError(error: error)
+            } else if let user = user {
+                FirebaseClient.sharedInstance().setupUser(user)
+                onComplete();            }
+        }
+    }
+    
+    private func setupUser(user: FIRUser) {
+        let fbRef = ref.child("user-mappings/facebook")
+        let providerData = user.providerData
+        let fbUserRef = fbRef.child(user.uid)
+        
+        fbUserRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            // user has logged in before, retrieve app_id
+            if (snapshot.childrenCount > 0) {
+                
+                // TODO: update latest provider data
+                return
+            }
+            
+            // user has NOT logged in before, set up their data
+            
+            fbUserRef.setValue(providerData)
+            
+            let userRef = self.ref.child("users")
+                .childByAutoId()
+            
+            userRef.child("facebook_id")
+                .setValue(user.uid)
+            
+            fbUserRef.child("user_id")
+                .setValue(userRef.key)
+        
+        })
+    }
     
     func fetchData() {
         

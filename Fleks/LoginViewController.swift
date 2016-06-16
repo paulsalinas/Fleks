@@ -31,24 +31,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else if result.isCancelled {
             print("Facebook login was cancelled.")
         } else {
-            let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-            FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                if error != nil {
-                    print("Login failed. \(error)")
-                } else {
-                      print(user)
-//                    FirebaseClient.sharedInstance().setupUser(authData)
-//                    self.performSegueWithIdentifier("ShowTabBar", sender: self)
-                }
-            }
-//            ref.authWithOAuthProvider("facebook", token: accessToken) { error, authData in
-//                if error != nil {
-//                    print("Login failed. \(error)")
-//                } else {
-//                    FirebaseClient.sharedInstance().setupUser(authData)
-//                    self.performSegueWithIdentifier("ShowTabBar", sender: self)
-//                }
-//            }
+             FirebaseClient
+                .sharedInstance()
+                .LoginWithFacebook(
+                    FBSDKAccessToken.currentAccessToken().tokenString,
+                    onComplete: { () in
+                        self.performSegueWithIdentifier("ShowTabBar", sender: self)
+                    },
+                    onError: { error in
+                        print("Login failed. \(error)")
+                    }
+                )
         }
     }
     
