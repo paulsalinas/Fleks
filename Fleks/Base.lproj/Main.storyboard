@@ -111,7 +111,7 @@
                     <navigationItem key="navigationItem" id="Fy5-wU-GwW">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LA5-aj-jPN">
                             <connections>
-                                <segue destination="rjv-OW-5HL" kind="show" id="KWd-4r-qV1"/>
+                                <segue destination="rjv-OW-5HL" kind="show" identifier="AddExerciseSegue" id="KWd-4r-qV1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

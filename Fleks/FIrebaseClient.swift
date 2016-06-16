@@ -11,17 +11,9 @@ import Firebase
 
 class FirebaseClient {
     
-    let ref = FIRDatabase.database().reference() 
+    let ref = FIRDatabase.database().reference()
+    private var user: FIRUser!
     let accessToken: String? = nil
-    
-    class func sharedInstance() -> FirebaseClient {
-        
-        struct Singleton {
-            static var sharedInstance = FirebaseClient()
-        }
-        
-        return Singleton.sharedInstance
-    }
     
     func LoginWithFacebook(tokenString: String, onComplete: () -> Void, onError: (error: NSError) -> Void) {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(tokenString)
@@ -29,13 +21,14 @@ class FirebaseClient {
             if let error = error  {
                 onError(error: error)
             } else if let user = user {
-                FirebaseClient.sharedInstance().setupUser(user)
+                self.user = user
+                self.setupUser()
                 onComplete();            }
         }
     }
     
-    private func setupUser(user: FIRUser) {
-        let fbRef = ref.child("user-mappings/facebook")
+    private func setupUser() {
+        let fbRef = FIRDatabase.database().reference().child("user-mappings/facebook")
         let providerData = user.providerData
         let fbUserRef = fbRef.child(user.uid)
         
@@ -56,7 +49,7 @@ class FirebaseClient {
                 .childByAutoId()
             
             userRef.child("facebook_id")
-                .setValue(user.uid)
+                .setValue(self.user.uid)
             
             fbUserRef.child("user_id")
                 .setValue(userRef.key)

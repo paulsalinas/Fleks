@@ -14,19 +14,19 @@ class MuscleDataSource: NSObject,  UITableViewDataSource {
     private var muscles:[Muscle] = [Muscle]()
     var selectedMuscles: [Muscle] = [Muscle]()
     var onSelectMuscle: (muscle: Muscle) -> Void
-    private let ref: FIRDatabaseReference
+    private let client: FirebaseClient
     private let tableView: UITableView
     
     private let cellReuseIdentifier: String
     
-    init(cellReuseIdentifier: String, tableView: UITableView, onSelectMuscle: (muscle: Muscle) -> Void) {
+    init(cellReuseIdentifier: String, client: FirebaseClient, tableView: UITableView, onSelectMuscle: (muscle: Muscle) -> Void) {
         self.cellReuseIdentifier = cellReuseIdentifier
+        self.client = client
         self.onSelectMuscle = onSelectMuscle
-        self.ref = FirebaseClient.sharedInstance().ref.child("muscles")
         self.tableView = tableView
         super.init()
         
-        self.ref.observeEventType(.Value, withBlock: { snapshot in
+        self.client.ref.child("muscles").ref.observeEventType(.Value, withBlock: { snapshot in
             self.muscles = snapshot.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
             self.tableView.reloadData()
         })

@@ -9,11 +9,14 @@
 import UIKit
 
 class FleksTabBarController: UITabBarController {
-
+    var client: FirebaseClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let exerciseViewController = (self.childViewControllers[0] as! UINavigationController).topViewController as! ExerciseTableViewController
+        exerciseViewController.client = client
     }
 
     override func didReceiveMemoryWarning() {

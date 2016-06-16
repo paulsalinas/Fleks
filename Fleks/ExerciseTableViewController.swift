@@ -15,6 +15,8 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     private var dataSource: ExerciseDataSource!
     private var dataManager: ExerciseDataManager!
     
+    var client: FirebaseClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataManager = ExerciseDataManager()
@@ -28,6 +30,13 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     @IBAction func unwindFromAddController(segue: AddExerciseCompletionSegue) {
         dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "AddExerciseSegue" ) {
+            let addExerciseController = segue.destinationViewController as! AddExerciseViewController
+            addExerciseController.client = client
+        }
     }
 
 }
