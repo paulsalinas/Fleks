@@ -13,7 +13,7 @@ class FirebaseClient {
     
     let ref = FIRDatabase.database().reference()
     private var user: FIRUser!
-    let accessToken: String? = nil
+    private var userDataRef: FIRDatabaseReference!
     
     func LoginWithFacebook(tokenString: String, onComplete: () -> Void, onError: (error: NSError) -> Void) {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(tokenString)
@@ -28,8 +28,7 @@ class FirebaseClient {
     }
     
     private func setupUser() {
-        let fbRef = FIRDatabase.database().reference().child("user-mappings/facebook")
-        let providerData = user.providerData
+        let fbRef = FIRDatabase.database().reference().child("user_mappings/facebook")
         let fbUserRef = fbRef.child(user.uid)
         
         fbUserRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -37,13 +36,13 @@ class FirebaseClient {
             // user has logged in before, retrieve app_id
             if (snapshot.childrenCount > 0) {
                 
+                fbUserRef.child("user_id").observeSingleEventOfType(.Value, withBlock: { self.userDataRef = fbRef.child("users/\($0)") })
+                
                 // TODO: update latest provider data
                 return
             }
             
             // user has NOT logged in before, set up their data
-            
-            fbUserRef.setValue(providerData)
             
             let userRef = self.ref.child("users")
                 .childByAutoId()
@@ -53,6 +52,8 @@ class FirebaseClient {
             
             fbUserRef.child("user_id")
                 .setValue(userRef.key)
+            
+            self.userDataRef = userRef
         
         })
     }
