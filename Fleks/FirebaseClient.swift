@@ -14,6 +14,20 @@ class FirebaseClient {
     let ref = FIRDatabase.database().reference()
     private var user: FIRUser!
     private var userDataRef: FIRDatabaseReference!
+    private var muscles: [Muscle]!
+    var exercises: [Exercise]!
+    
+    init() {
+        ref.child("muscles").observeSingleEventOfType(.Value, withBlock: { muscleSnap in
+            self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
+            self.ref.child("exercises").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                self.exercises = snapshot.children.map { snap in
+                    let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
+                    return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
+                }
+            })
+        })
+    }
     
     func LoginWithFacebook(tokenString: String, onComplete: () -> Void, onError: (error: NSError) -> Void) {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(tokenString)
@@ -28,15 +42,18 @@ class FirebaseClient {
     }
     
     private func setupUser() {
-        let fbRef = FIRDatabase.database().reference().child("user_mappings/facebook")
-        let fbUserRef = fbRef.child(user.uid)
+        let userMapping = FIRDatabase.database().reference().child("user_mappings")
+        let providerDataRef = FIRDatabase.database().reference().child("provide_data")
+        let fbUserRef = userMapping.child(user.uid)
+        let uid = user.uid
+        let providerData = user.providerData[0]
         
         fbUserRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             // user has logged in before, retrieve app_id
             if (snapshot.childrenCount > 0) {
                 
-                fbUserRef.child("user_id").observeSingleEventOfType(.Value, withBlock: { self.userDataRef = fbRef.child("users/\($0)") })
+                fbUserRef.child("user_id").observeSingleEventOfType(.Value, withBlock: { self.userDataRef = userMapping.child("users/\($0)") })
                 
                 // TODO: update latest provider data
                 return
@@ -44,17 +61,16 @@ class FirebaseClient {
             
             // user has NOT logged in before, set up their data
             
-            let userRef = self.ref.child("users")
-                .childByAutoId()
+            let userRef = self.ref.child("users").childByAutoId()
             
-            userRef.child("facebook_id")
-                .setValue(self.user.uid)
-            
-            fbUserRef.child("user_id")
-                .setValue(userRef.key)
+            userRef.child("facebook_id").setValue(uid)
+            fbUserRef.child("user_id").setValue(userRef.key)
+            providerDataRef.child("\(uid)/email" ).setValue(providerData.email)
+            providerDataRef.child("\(uid)/providerId" ).setValue(providerData.providerID)
+            providerDataRef.child("\(uid)/displayName" ).setValue(providerData.displayName)
+            providerDataRef.child("\(uid)/photoUrl" ).setValue(providerData.photoURL!.absoluteString)
             
             self.userDataRef = userRef
-        
         })
     }
     

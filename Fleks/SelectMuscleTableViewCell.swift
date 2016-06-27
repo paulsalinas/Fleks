@@ -17,7 +17,9 @@ class SelectMuscleTableViewCell: UITableViewCell {
     
     var viewData : ViewData?  {
         didSet {
-            muscleTextLabel?.text = viewData?.muscle.name
+            if let muscleTextLabel = muscleTextLabel {
+                 muscleTextLabel.text = viewData?.muscle.name
+            }
         }
     }
     

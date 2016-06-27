@@ -13,10 +13,10 @@ class ExerciseDataSource: NSObject,  UITableViewDataSource, DataManagerDelegate 
     
     
     private let cellReuseIdentifier: String
-    private let exerciseDataManager: ExerciseDataManager
+    private let exerciseDataManager: ExerciseFirebaseDataManager
     private let tableView: UITableView
     
-    init(cellReuseIdentifier: String, exerciseDataManager: ExerciseDataManager, tableView: UITableView) {
+    init(cellReuseIdentifier: String, exerciseDataManager: ExerciseFirebaseDataManager, tableView: UITableView) {
         self.cellReuseIdentifier = cellReuseIdentifier
         self.exerciseDataManager = exerciseDataManager
         self.tableView = tableView

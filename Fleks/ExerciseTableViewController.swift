@@ -13,13 +13,13 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     private var dataSource: ExerciseDataSource!
-    private var dataManager: ExerciseDataManager!
+    private var dataManager: ExerciseFirebaseDataManager!
     
     var client: FirebaseClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager = ExerciseDataManager()
+        dataManager = ExerciseFirebaseDataManager(firebaseClient: client)
         dataSource = ExerciseDataSource(cellReuseIdentifier: "cell", exerciseDataManager: dataManager, tableView: tableView)
         dataManager.delegate = dataSource
         tableView.delegate = self
@@ -28,7 +28,7 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     }
     
     @IBAction func unwindFromAddController(segue: AddExerciseCompletionSegue) {
-        dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
+        // dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
         tableView.reloadData()
     }
     
