@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else if result.isCancelled {
             print("Facebook login was cancelled.")
         } else {
-            client.LoginWithFacebook(
+            client.loginWithFacebook(
                 FBSDKAccessToken.currentAccessToken().tokenString,
                 onComplete: { () in
                     self.performSegueWithIdentifier("ShowTabBar", sender: self)

@@ -28,7 +28,7 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     }
     
     @IBAction func unwindFromAddController(segue: AddExerciseCompletionSegue) {
-        // dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
+        dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
         tableView.reloadData()
     }
     

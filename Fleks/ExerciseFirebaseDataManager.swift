@@ -16,11 +16,15 @@ class ExerciseFirebaseDataManager: NSObject {
     
     var delegate: DataManagerDelegate? {
         didSet {
-            // TODO: bind reference observers to delegate methods
-            fireBaseClient.ref.child("exercises").observeEventType(FIRDataEventType.ChildAdded, withBlock: { snap in
-                
+            fireBaseClient.userDataRef.child("exercises").observeEventType(FIRDataEventType.ChildAdded, withBlock: { snap in
+                self.exercises.append(Exercise(snapshot: snap, muscles: self.fireBaseClient.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) } ))
+                self.delegate?.dataManager(self, didInsertRowAtIndexPath: NSIndexPath(forItem: self.exercises.count - 1, inSection: 0))
             })
         }
+    }
+    
+    func createExercise(name: String, muscles: [Muscle]) {
+        fireBaseClient.creatExercise(name, muscles: muscles)
     }
     
     init(firebaseClient: FirebaseClient) {

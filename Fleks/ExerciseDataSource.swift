@@ -22,10 +22,6 @@ class ExerciseDataSource: NSObject,  UITableViewDataSource, DataManagerDelegate 
         self.tableView = tableView
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return exerciseDataManager.exercises.count
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return exerciseDataManager.exercises.count
     }
@@ -43,19 +39,19 @@ class ExerciseDataSource: NSObject,  UITableViewDataSource, DataManagerDelegate 
     }
     
     
-    func dataManagerWillChangeContent(dataManager: ExerciseDataManager) {
+    func dataManagerWillChangeContent(dataManager: ExerciseFirebaseDataManager) {
         tableView.beginUpdates()
     }
     
-    func dataManagerDidChangeContent(dataManager: ExerciseDataManager) {
+    func dataManagerDidChangeContent(dataManager: ExerciseFirebaseDataManager) {
         tableView.endUpdates()
     }
     
-    func dataManager(dataManager: ExerciseDataManager, didInsertRowAtIndexPath indexPath: NSIndexPath) {
+    func dataManager(dataManager: ExerciseFirebaseDataManager, didInsertRowAtIndexPath indexPath: NSIndexPath) {
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
-    func dataManager(dataManager: ExerciseDataManager, didDeleteRowAtIndexPath indexPath: NSIndexPath) {
+    func dataManager(dataManager: ExerciseFirebaseDataManager, didDeleteRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
 
