@@ -43,8 +43,13 @@ class FirebaseClient {
     
     func creatExercise(name: String, muscles: [Muscle]) {
         let exerciseRef = userDataRef.child("exercises").childByAutoId()
-        exerciseRef.child("name").setValue(name)
-        muscles.forEach { muscle in exerciseRef.child("muscles").child(muscle.id).setValue(true) }
+        var exercise: [String: AnyObject] = ["name": name]
+        var musclesDict = [String: Bool]()
+        for muscle in muscles {
+            musclesDict[muscle.id] = true
+        }
+        exercise["muscles"] = musclesDict
+        exerciseRef.setValue(exercise)
     }
     
     private func setupUser(onComplete: () -> Void) {
