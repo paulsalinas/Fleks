@@ -258,7 +258,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9vi-bz-Ugg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx">
+                            <connections>
+                                <segue destination="uD3-N0-ngM" kind="show" id="Ulf-qe-18k"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -269,7 +273,7 @@
         <!--Enter Workout Name-->
         <scene sceneID="DEE-jo-lRH">
             <objects>
-                <viewController title="Enter Workout Name" id="uD3-N0-ngM" sceneMemberID="viewController">
+                <viewController title="Enter Workout Name" id="uD3-N0-ngM" customClass="EnterWorkoutNameViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NA0-xe-rlu"/>
                         <viewControllerLayoutGuide type="bottom" id="hIH-Yl-eGP"/>
@@ -278,23 +282,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Workout Name" placeholder="  Enter Exercise Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Enter Workout Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
                                 <rect key="frame" x="20" y="164" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dnS-Ze-DvG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dnS-Ze-DvG"/>
+                                    </mask>
+                                </variation>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hIH-Yl-eGP" firstAttribute="top" secondItem="npW-3O-ShU" secondAttribute="bottom" constant="386" id="F5F-fH-QkV"/>
                             <constraint firstItem="npW-3O-ShU" firstAttribute="trailing" secondItem="bLc-M1-jJ5" secondAttribute="trailingMargin" id="J7D-X7-rVV"/>
+                            <constraint firstItem="hIH-Yl-eGP" firstAttribute="top" secondItem="npW-3O-ShU" secondAttribute="bottom" constant="342" id="NE0-eG-t0Z"/>
                             <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="144" id="UQz-zV-jsc"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="100" id="fE4-gq-vzO"/>
                             <constraint firstItem="npW-3O-ShU" firstAttribute="leading" secondItem="bLc-M1-jJ5" secondAttribute="leadingMargin" id="j2K-Me-f9O"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="UQz-zV-jsc"/>
+                                <exclude reference="F5F-fH-QkV"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Enter Workout Name" id="kSN-uy-gXU">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="amA-Be-FQK">
+                            <connections>
+                                <segue destination="Gdo-ru-AEJ" kind="show" identifier="showSelectExercise" id="iTe-aH-MXa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameTextField" destination="npW-3O-ShU" id="DQu-bd-Fa2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kxv-4Z-hJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -338,7 +365,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ycT-oF-nvn">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycT-oF-nvn" id="oyg-cc-Tlu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
