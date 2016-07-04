@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="481" y="443"/>
         </scene>
-        <!--Exercises-->
+        <!--Exercise Navigation-->
         <scene sceneID="nle-Yu-S5N">
             <objects>
-                <navigationController id="Ufx-4j-pL3" sceneMemberID="viewController">
+                <navigationController title="Exercise Navigation" id="Ufx-4j-pL3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Exercises" id="gW4-Yh-S3Y"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VEE-dP-cmS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -233,10 +233,10 @@
             </objects>
             <point key="canvasLocation" x="1222" y="443"/>
         </scene>
-        <!--Workout Table View Controller-->
+        <!--Workout List-->
         <scene sceneID="r1B-F5-Xea">
             <objects>
-                <tableViewController id="Cxy-M3-e9e" customClass="WorkoutTableViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Workout List" id="Cxy-M3-e9e" customClass="WorkoutTableViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="29w-mQ-KmO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -258,17 +258,75 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9vi-bz-Ugg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx">
-                            <connections>
-                                <segue destination="Gdo-ru-AEJ" kind="show" id="1M9-IC-zHY"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYN-7P-Jwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2900" y="669"/>
+        </scene>
+        <!--Enter Workout Name-->
+        <scene sceneID="DEE-jo-lRH">
+            <objects>
+                <viewController title="Enter Workout Name" id="uD3-N0-ngM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NA0-xe-rlu"/>
+                        <viewControllerLayoutGuide type="bottom" id="hIH-Yl-eGP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bLc-M1-jJ5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Workout Name" placeholder="  Enter Exercise Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
+                                <rect key="frame" x="20" y="164" width="560" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dnS-Ze-DvG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hIH-Yl-eGP" firstAttribute="top" secondItem="npW-3O-ShU" secondAttribute="bottom" constant="386" id="F5F-fH-QkV"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="trailing" secondItem="bLc-M1-jJ5" secondAttribute="trailingMargin" id="J7D-X7-rVV"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="144" id="UQz-zV-jsc"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="leading" secondItem="bLc-M1-jJ5" secondAttribute="leadingMargin" id="j2K-Me-f9O"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kxv-4Z-hJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3673" y="660"/>
+        </scene>
+        <!--Workout-->
+        <scene sceneID="RT1-AJ-LcF">
+            <objects>
+                <tableViewController title="Workout" id="8bZ-SS-daU" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2fA-N4-l2m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wjZ-Bj-wCt">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wjZ-Bj-wCt" id="lMY-fv-gwx">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8bZ-SS-daU" id="I3g-I3-fZM"/>
+                            <outlet property="delegate" destination="8bZ-SS-daU" id="Kk5-yd-2SS"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iiG-mV-0LV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3344" y="1398"/>
         </scene>
         <!--Select Exercises-->
         <scene sceneID="RZ5-3I-upU">
@@ -280,7 +338,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ycT-oF-nvn">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycT-oF-nvn" id="oyg-cc-Tlu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -296,12 +354,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhn-Kp-ZHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3698" y="669"/>
+            <point key="canvasLocation" x="4406" y="651"/>
         </scene>
-        <!--Workouts-->
+        <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
             <objects>
-                <navigationController id="x2W-HR-nOB" sceneMemberID="viewController">
+                <navigationController title="Workout Navigation" id="x2W-HR-nOB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Workouts" id="lhl-4F-ucQ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ib5-Zg-X0p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
