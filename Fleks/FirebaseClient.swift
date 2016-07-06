@@ -22,6 +22,12 @@ class FirebaseClient {
         }
     }
     
+    var workoutRef: FIRDatabaseReference! {
+        get {
+            return userDataRef.child("workouts")
+        }
+    }
+    
     init() {
         ref.child("muscles").observeSingleEventOfType(.Value, withBlock: { muscleSnap in
             self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }

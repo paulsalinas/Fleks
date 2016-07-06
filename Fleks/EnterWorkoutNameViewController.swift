@@ -11,11 +11,23 @@ import UIKit
 class EnterWorkoutNameViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
+    var client: FirebaseClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSelectExercise" {
+            if let destinationController = segue.destinationViewController as? SelectExercisesTableViewController {
+                
+                if let name = nameTextField.text {
+                    client.workoutRef.childByAutoId().setValue(["name": name])
+                } else {
+                    // TODO: fail with message!
+                }
+            }
+        }
+     }
 
 }

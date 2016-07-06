@@ -260,7 +260,7 @@
                     <navigationItem key="navigationItem" id="9vi-bz-Ugg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx">
                             <connections>
-                                <segue destination="uD3-N0-ngM" kind="show" id="Ulf-qe-18k"/>
+                                <segue destination="uD3-N0-ngM" kind="show" identifier="addWorkoutSegue" id="Ulf-qe-18k"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

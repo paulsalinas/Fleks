@@ -11,9 +11,18 @@ import UIKit
 class WorkoutTableViewController: UITableViewController {
     
     private let dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell")
-
+    var client: FirebaseClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = dataSource
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addWorkoutSegue" {
+            if let destinationController = segue.destinationViewController as? EnterWorkoutNameViewController {
+                destinationController.client = client
+            }
+        }
     }
 }

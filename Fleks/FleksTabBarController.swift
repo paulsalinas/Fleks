@@ -16,7 +16,10 @@ class FleksTabBarController: UITabBarController {
 
         // Do any additional setup after loading the view.
         let exerciseViewController = (self.childViewControllers[0] as! UINavigationController).topViewController as! ExerciseTableViewController
+        let workoutViewController = (self.childViewControllers[1] as! UINavigationController).topViewController as! WorkoutTableViewController
+        
         exerciseViewController.client = client
+        workoutViewController.client = client
     }
 
     override func didReceiveMemoryWarning() {
