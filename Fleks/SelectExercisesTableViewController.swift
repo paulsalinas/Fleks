@@ -9,7 +9,8 @@
 import UIKit
 
 class SelectExercisesTableViewController: UITableViewController {
-
+    var client: FirebaseClient!
+    var workout: Workout!
     override func viewDidLoad() {
         super.viewDidLoad()
 

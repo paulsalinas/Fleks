@@ -137,19 +137,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C9378D31D2C8B3500A0CA8B /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				3C036ACF1CD18FC900E9F8C1 /* MuscleDataSource.swift */,
+				3C036AC51CCF06BA00E9F8C1 /* ExerciseDataSource.swift */,
+				3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */,
+			);
+			name = DataSources;
+			sourceTree = "<group>";
+		};
+		3C9378D41D2C8B3E00A0CA8B /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				3CB25B031CFA522D00756B45 /* ExerciseDataManager.swift */,
+				3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */,
+			);
+			name = DataManagers;
+			sourceTree = "<group>";
+		};
 		3CB25AFA1CF3C0E400756B45 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3C036AC51CCF06BA00E9F8C1 /* ExerciseDataSource.swift */,
-				3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */,
-				3CB25B031CFA522D00756B45 /* ExerciseDataManager.swift */,
+				3C9378D41D2C8B3E00A0CA8B /* DataManagers */,
+				3C9378D31D2C8B3500A0CA8B /* DataSources */,
 				3C036AC31CCEFADF00E9F8C1 /* ExerciseTableViewController.swift */,
-				3C036ACF1CD18FC900E9F8C1 /* MuscleDataSource.swift */,
 				3C036ACD1CD18EAC00E9F8C1 /* AddExerciseViewController.swift */,
 				3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */,
 				3C2C154C1CE7CADA009956AF /* WorkoutTableViewController.swift */,
 				3CFEBB6E1CC98F55007E7817 /* LoginViewController.swift */,
-				3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */,
 				3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */,
 				3CB25B051CFA58ED00756B45 /* ExerciseResultsCache.swift */,
 				3C8124F91D12266B0038A018 /* FleksTabBarController.swift */,

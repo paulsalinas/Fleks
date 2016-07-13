@@ -12,6 +12,7 @@ class EnterWorkoutNameViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
     var client: FirebaseClient!
+    var workout: Workout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,9 @@ class EnterWorkoutNameViewController: UIViewController {
             if let destinationController = segue.destinationViewController as? SelectExercisesTableViewController {
                 
                 if let name = nameTextField.text {
-                    client.workoutRef.childByAutoId().setValue(["name": name])
+                    workout = client.createWorkout(name)
+                    destinationController.client = client
+                    destinationController.workout = workout
                 } else {
                     // TODO: fail with message!
                 }
