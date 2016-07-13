@@ -63,6 +63,12 @@ class FirebaseClient {
         exerciseRef.setValue(exercise)
     }
     
+    func createWorkout(name: String) -> Workout {
+        let ref = workoutRef.childByAutoId()
+        ref.setValue(["name": name])
+        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSet]())
+    }
+    
     private func setupUser(onComplete: () -> Void) {
         let userMapping = FIRDatabase.database().reference().child("user_mappings")
         let providerDataRef = FIRDatabase.database().reference().child("provider_data")
