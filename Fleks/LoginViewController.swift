@@ -13,15 +13,14 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
-    private var client: FirebaseClient!
+    var viewModel: LoginViewModel!
+    private var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = ["email"];
-        client = FirebaseClient()
-        
     }
     
     /* facebook button delegate to handle the result from login */
@@ -31,10 +30,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else if result.isCancelled {
             print("Facebook login was cancelled.")
         } else {
-            client.loginWithFacebook(
+            viewModel.loginWithFacebook(
                 FBSDKAccessToken.currentAccessToken().tokenString,
-                onComplete: { () in
+                onComplete: { user in
                     self.performSegueWithIdentifier("ShowTabBar", sender: self)
+                    self.user = user
                 },
                 onError: { error in
                     print("Login failed. \(error)")
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "ShowTabBar") {
             let tabBarController = segue.destinationViewController as! FleksTabBarController
-            tabBarController.client = client
+             // tabBarController.client = client
         }
     }
 }

@@ -19,8 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         FIRApp.configure()
+        
+        let loginViewController = window?.rootViewController as! LoginViewController
+        loginViewController.viewModel = LoginViewModel(store: FIRDatabase.database())
+        
         return FBSDKApplicationDelegate.sharedInstance()
             .application(application, didFinishLaunchingWithOptions: launchOptions)
     }
