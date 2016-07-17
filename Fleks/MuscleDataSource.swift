@@ -11,34 +11,34 @@ import Firebase
 
 class MuscleDataSource: NSObject,  UITableViewDataSource {
     
-    private var muscles:[Muscle] = [Muscle]()
     var selectedMuscles: [Muscle] = [Muscle]()
     var onSelectMuscle: (muscle: Muscle) -> Void
-    private let client: FirebaseClient
+    private let viewModel: ExerciseViewModel
     private let tableView: UITableView
     
     private let cellReuseIdentifier: String
     
-    init(cellReuseIdentifier: String, client: FirebaseClient, tableView: UITableView, onSelectMuscle: (muscle: Muscle) -> Void) {
+    init(cellReuseIdentifier: String, viewModel: ExerciseViewModel, tableView: UITableView, onSelectMuscle: (muscle: Muscle) -> Void) {
         self.cellReuseIdentifier = cellReuseIdentifier
-        self.client = client
         self.onSelectMuscle = onSelectMuscle
         self.tableView = tableView
+        self.viewModel = viewModel
+        
         super.init()
         
-        self.client.ref.child("muscles").ref.observeEventType(.Value, withBlock: { snapshot in
-            self.muscles = snapshot.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
+        self.viewModel.refreshMuscles { _ in
             self.tableView.reloadData()
-        })
+        }
+    
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return muscles.count
+        return viewModel.muscles.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! SelectMuscleTableViewCell
-        let muscle = muscles[indexPath.row]
+        let muscle = viewModel.muscles[indexPath.row]
         
         cell.viewData = SelectMuscleTableViewCell.ViewData(muscle: muscle, onSelectMuscle: onSelectMuscle)
         return cell

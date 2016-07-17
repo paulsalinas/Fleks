@@ -32,11 +32,10 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
         tableView.reloadData()
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if (segue.identifier == "AddExerciseSegue" ) {
-//            let addExerciseController = segue.destinationViewController as! AddExerciseViewController
-//            addExerciseController.client = client
-//        }
-//    }
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "AddExerciseSegue" ) {
+            let addExerciseController = segue.destinationViewController as! AddExerciseViewController
+            addExerciseController.injectDependencies(viewModel)
+        }
+    }
 }
