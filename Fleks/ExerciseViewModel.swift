@@ -55,7 +55,7 @@ class ExerciseViewModel {
         exerciseRef.setValue(exercise)
     }
     
-    func exercises(onAdd: NSIndexPath -> Void) {
+    func exercises(onAdd onAdd: NSIndexPath -> Void) {
         exerciseRef.observeEventType(FIRDataEventType.ChildAdded, withBlock: { snap in
             self.muscleRef.observeSingleEventOfType(.Value, withBlock: { muscleSnap in
                 self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
