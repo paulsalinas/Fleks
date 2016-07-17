@@ -26,6 +26,10 @@ class ExerciseDataSource: NSObject,  UITableViewDataSource {
         self.viewModel.refreshExercises { _ in
             self.tableView.reloadData()
         }
+        
+        self.viewModel.exercises(onAdd: { indexPath in
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,22 +47,4 @@ class ExerciseDataSource: NSObject,  UITableViewDataSource {
         cell.detailTextLabel?.text = "Muscles: \(muscleString)"
         return cell
     }
-    
-    
-//    func dataManagerWillChangeContent(dataManager: ExerciseFirebaseDataManager) {
-//        tableView.beginUpdates()
-//    }
-//    
-//    func dataManagerDidChangeContent(dataManager: ExerciseFirebaseDataManager) {
-//        tableView.endUpdates()
-//    }
-    
-//    func dataManager(dataManager: ExerciseFirebaseDataManager, didInsertRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//    }
-    
-//    func dataManager(dataManager: ExerciseFirebaseDataManager, didDeleteRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//    }
-
 }
