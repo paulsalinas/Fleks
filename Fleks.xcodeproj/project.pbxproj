@@ -26,13 +26,13 @@
 		3C9378D71D35CD3000A0CA8B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378D61D35CD3000A0CA8B /* LoginViewModel.swift */; };
 		3C9378D91D35D37200A0CA8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378D81D35D37200A0CA8B /* User.swift */; };
 		3C9378DB1D35D6AC00A0CA8B /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378DA1D35D6AC00A0CA8B /* ExerciseViewModel.swift */; };
+		3C9378DE1D3AE0B800A0CA8B /* ShowTabBarSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */; };
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
 		3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */; };
 		3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */; };
 		3CB25B021CF536C800756B45 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25B011CF536C800756B45 /* CoreDataStore.swift */; };
 		3CB25B041CFA522D00756B45 /* ExerciseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25B031CFA522D00756B45 /* ExerciseDataManager.swift */; };
-		3CB25B061CFA58ED00756B45 /* ExerciseResultsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25B051CFA58ED00756B45 /* ExerciseResultsCache.swift */; };
 		3CB25B081D04CEDB00756B45 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25B071D04CEDA00756B45 /* FirebaseClient.swift */; };
 		3CFEBB6D1CC98F55007E7817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB6C1CC98F55007E7817 /* AppDelegate.swift */; };
 		3CFEBB6F1CC98F55007E7817 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB6E1CC98F55007E7817 /* LoginViewController.swift */; };
@@ -84,13 +84,13 @@
 		3C9378D61D35CD3000A0CA8B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3C9378D81D35D37200A0CA8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3C9378DA1D35D6AC00A0CA8B /* ExerciseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTabBarSegue.swift; sourceTree = "<group>"; };
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExercisesTableViewController.swift; sourceTree = "<group>"; };
 		3CB25AFF1CF3C57B00756B45 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3CB25B011CF536C800756B45 /* CoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		3CB25B031CFA522D00756B45 /* ExerciseDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDataManager.swift; sourceTree = "<group>"; };
-		3CB25B051CFA58ED00756B45 /* ExerciseResultsCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseResultsCache.swift; sourceTree = "<group>"; };
 		3CB25B071D04CEDA00756B45 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		3CFEBB691CC98F55007E7817 /* Fleks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFEBB6C1CC98F55007E7817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +171,14 @@
 			name = ViewModels;
 			sourceTree = "<group>";
 		};
+		3C9378DC1D3ADE2100A0CA8B /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */,
+			);
+			name = Segues;
+			sourceTree = "<group>";
+		};
 		3CB25AFA1CF3C0E400756B45 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +190,6 @@
 				3C2C154C1CE7CADA009956AF /* WorkoutTableViewController.swift */,
 				3CFEBB6E1CC98F55007E7817 /* LoginViewController.swift */,
 				3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */,
-				3CB25B051CFA58ED00756B45 /* ExerciseResultsCache.swift */,
 				3C8124F91D12266B0038A018 /* FleksTabBarController.swift */,
 				3C9378D11D29E6C100A0CA8B /* EnterWorkoutNameViewController.swift */,
 			);
@@ -227,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */,
+				3C9378DC1D3ADE2100A0CA8B /* Segues */,
 				3C9378D51D35CC8400A0CA8B /* ViewModels */,
 				3CB25AFB1CF3C10500756B45 /* Models */,
 				3CB25AFA1CF3C0E400756B45 /* Controllers */,
@@ -552,9 +560,9 @@
 				3C036ACA1CCF112800E9F8C1 /* ExerciseSet.swift in Sources */,
 				3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */,
 				3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */,
-				3CB25B061CFA58ED00756B45 /* ExerciseResultsCache.swift in Sources */,
 				3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */,
 				3C9378D91D35D37200A0CA8B /* User.swift in Sources */,
+				3C9378DE1D3AE0B800A0CA8B /* ShowTabBarSegue.swift in Sources */,
 				3C036AC41CCEFADF00E9F8C1 /* ExerciseTableViewController.swift in Sources */,
 				3C036AD21CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift in Sources */,
 				3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */,

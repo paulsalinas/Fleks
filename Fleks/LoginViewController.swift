@@ -13,14 +13,19 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
-    var viewModel: LoginViewModel!
-    private var user: User?
+    
+    private var viewModel: LoginViewModel!
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = ["email"];
+    }
+    
+    func injectDependencies(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
     }
     
     /* facebook button delegate to handle the result from login */
@@ -33,8 +38,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             viewModel.loginWithFacebook(
                 FBSDKAccessToken.currentAccessToken().tokenString,
                 onComplete: { user in
-                    self.performSegueWithIdentifier("ShowTabBar", sender: self)
                     self.user = user
+                    self.performSegueWithIdentifier("ShowTabBar", sender: self)
                 },
                 onError: { error in
                     print("Login failed. \(error)")
@@ -49,10 +54,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         return
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "ShowTabBar") {
-            let tabBarController = segue.destinationViewController as! FleksTabBarController
-             // tabBarController.client = client
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if (segue.identifier == "ShowTabBar") {
+//         //    onCompleteLoginSegue(segue: segue)
+//        }
+//    }
 }

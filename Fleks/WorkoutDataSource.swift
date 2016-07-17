@@ -10,7 +10,6 @@ import UIKit
 
 class WorkoutDataSource: NSObject, UITableViewDataSource {
     var workouts = [Workout]()
-
     
     private let cellReuseIdentifier: String
     

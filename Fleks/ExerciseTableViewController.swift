@@ -13,30 +13,30 @@ class ExerciseTableViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     private var dataSource: ExerciseDataSource!
-    private var dataManager: ExerciseFirebaseDataManager!
-    
-    var client: FirebaseClient!
+    private var viewModel: ExerciseViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager = ExerciseFirebaseDataManager(firebaseClient: client)
-        dataSource = ExerciseDataSource(cellReuseIdentifier: "cell", exerciseDataManager: dataManager, tableView: tableView)
-        dataManager.delegate = dataSource
+        dataSource = ExerciseDataSource(cellReuseIdentifier: "cell", viewModel: viewModel, tableView: tableView)
         tableView.delegate = self
         tableView.dataSource = dataSource
         tableView.allowsSelection = false
     }
     
+    func injectDependency(viewModel: ExerciseViewModel) {
+        self.viewModel = viewModel
+    }
+    
     @IBAction func unwindFromAddController(segue: AddExerciseCompletionSegue) {
-        dataManager.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
+        viewModel.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
         tableView.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "AddExerciseSegue" ) {
-            let addExerciseController = segue.destinationViewController as! AddExerciseViewController
-            addExerciseController.client = client
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if (segue.identifier == "AddExerciseSegue" ) {
+//            let addExerciseController = segue.destinationViewController as! AddExerciseViewController
+//            addExerciseController.client = client
+//        }
+//    }
 
 }

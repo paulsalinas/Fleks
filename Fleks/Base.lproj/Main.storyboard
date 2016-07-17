@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" id="Thj-Cb-F9a"/>
                     <connections>
                         <outlet property="fbLoginButton" destination="f2Z-Uq-mlJ" id="m9n-2a-3AY"/>
-                        <segue destination="Hez-kE-mC5" kind="presentation" identifier="ShowTabBar" id="DlG-4R-0FB"/>
+                        <segue destination="Hez-kE-mC5" kind="presentation" identifier="ShowTabBar" customClass="ShowTabBarSegue" customModule="Fleks" customModuleProvider="target" id="DlG-4R-0FB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

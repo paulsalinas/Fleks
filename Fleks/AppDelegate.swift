@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         let loginViewController = window?.rootViewController as! LoginViewController
-        loginViewController.viewModel = LoginViewModel(store: FIRDatabase.database())
+        loginViewController.injectDependencies(LoginViewModel(store: FIRDatabase.database()))
         
         return FBSDKApplicationDelegate.sharedInstance()
             .application(application, didFinishLaunchingWithOptions: launchOptions)
