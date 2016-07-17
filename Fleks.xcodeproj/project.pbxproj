@@ -175,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */,
+				3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */,
 			);
 			name = Segues;
 			sourceTree = "<group>";
@@ -245,7 +246,6 @@
 				3CFEBB781CC98F55007E7817 /* Info.plist */,
 				3C036AD11CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift */,
 				3C036AD31CD1A4A800E9F8C1 /* Checkbox.swift */,
-				3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */,
 				3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */,
 				3CB25B011CF536C800756B45 /* CoreDataStore.swift */,
 				3CB25B071D04CEDA00756B45 /* FirebaseClient.swift */,
