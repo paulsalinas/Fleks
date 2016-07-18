@@ -27,12 +27,6 @@ class ExerciseViewModel {
         }
     }
     
-    private var commonExerciseRef: FIRDatabaseReference {
-        get {
-            return store.reference().child("exercises")
-        }
-    }
-    
     private var muscleRef: FIRDatabaseReference {
         get {
             return store.reference().child("muscles")
