@@ -59,8 +59,11 @@ class ExerciseViewModel {
         exerciseRef.observeEventType(FIRDataEventType.ChildAdded, withBlock: { snap in
             self.muscleRef.observeSingleEventOfType(.Value, withBlock: { muscleSnap in
                 self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
-                self.exercises.append(Exercise(snapshot: snap, muscles: self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) } ))
-                onAdd(NSIndexPath(forItem: self.exercises.count - 1, inSection: 0))
+                let exercise = Exercise(snapshot: snap, muscles: self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) })
+                if !self.exercises.contains(exercise) {
+                    self.exercises.append(exercise)
+                     onAdd(NSIndexPath(forItem: self.exercises.count - 1, inSection: 0))
+                }
             })
         })
     }
@@ -75,21 +78,16 @@ class ExerciseViewModel {
     func refreshExercises(onComplete: ([Exercise]) -> Void) {
          muscleRef.observeSingleEventOfType(.Value, withBlock: { muscleSnap in
             self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
-            self.commonExerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                let commonExercises:[Exercise] = snapshot.children.map { snap in
+            
+            self.exerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                let userExercises:[Exercise] = snapshot.children.map { snap in
                     let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
                     return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
                 }
-                
-                self.exerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    let userExercises:[Exercise] = snapshot.children.map { snap in
-                        let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
-                        return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
-                    }
-                    self.exercises = [commonExercises, userExercises].flatMap { $0 }
-                    onComplete(self.exercises)
-                })
+                self.exercises = userExercises
+                onComplete(self.exercises)
             })
+
         })
     }
 
