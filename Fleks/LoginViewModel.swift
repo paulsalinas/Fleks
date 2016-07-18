@@ -37,6 +37,7 @@ public class LoginViewModel {
     private func setupUser(onComplete: User -> Void) {
         let userMapping = FIRDatabase.database().reference().child("user_mappings")
         let providerDataRef = FIRDatabase.database().reference().child("provider_data")
+        let baseExerciseRef = FIRDatabase.database().reference().child("exercises")
         let fbUserRef = userMapping.child(user.uid)
         let uid = user.uid
         let providerData = user.providerData[0]
@@ -66,16 +67,24 @@ public class LoginViewModel {
             userDataRef.child("facebook_id").setValue(uid)
             fbUserRef.child("user_id").setValue(userDataRef.key)
             
-            providerDataRef.child("\(uid)/email" ).setValue(providerData.email)
-            providerDataRef.child("\(uid)/providerId" ).setValue(providerData.providerID)
-            providerDataRef.child("\(uid)/displayName" ).setValue(providerData.displayName)
-            providerDataRef.child("\(uid)/photoUrl" ).setValue(providerData.photoURL!.absoluteString)
-            onComplete(
-                User(
-                    uid: uid,
-                    universalId: userDataRef.key
+            providerDataRef.child("\(uid)/email").setValue(providerData.email)
+            providerDataRef.child("\(uid)/providerId").setValue(providerData.providerID)
+            providerDataRef.child("\(uid)/displayName").setValue(providerData.displayName)
+            providerDataRef.child("\(uid)/photoUrl").setValue(providerData.photoURL!.absoluteString)
+            
+            baseExerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                
+                // copy base exercises to user ref
+                userDataRef.child("exercises").setValue(snapshot.value)
+                
+                onComplete(
+                    User(
+                        uid: uid,
+                        universalId: userDataRef.key
+                    )
                 )
-            )
+            })
+            
         })
     }
 
