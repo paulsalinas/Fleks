@@ -7,9 +7,20 @@
 //
 
 import Foundation
+import Firebase
 
 struct Workout {
     var id: String
     var name: String
     var exerciseSets: [ExerciseSet]
+}
+
+extension Workout {
+    init(snapshot: FIRDataSnapshot) {
+        self.id = snapshot.key
+        self.name = (snapshot.value as! NSDictionary)["name"] as! String
+        
+        // TODO: need to fill exercise sets
+        self.exerciseSets = [ExerciseSet]()
+    }
 }
