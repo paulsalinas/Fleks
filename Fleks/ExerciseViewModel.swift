@@ -11,7 +11,7 @@ import Firebase
 
 class ExerciseViewModel {
     private let store: FIRDatabase
-    let user: User
+    private let user: User
     var exercises = [Exercise]()
     var muscles = [Muscle]()
     
