@@ -9,8 +9,9 @@
 import UIKit
 
 class SelectExercisesTableViewController: UITableViewController {
-    var client: FirebaseClient!
-    var workout: Workout!
+    private var workout: Workout!
+    private var viewModel: WorkoutViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +20,11 @@ class SelectExercisesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func injectDependency(viewModel viewModel: WorkoutViewModel, workout: Workout) {
+        self.viewModel = viewModel
+        self.workout = workout
     }
 
     override func didReceiveMemoryWarning() {

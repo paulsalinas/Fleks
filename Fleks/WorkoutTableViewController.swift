@@ -12,6 +12,11 @@ class WorkoutTableViewController: UITableViewController {
     
     private let dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell")
     var client: FirebaseClient!
+    private var viewModel: WorkoutViewModel!
+    
+    func injectDependency(viewModel: WorkoutViewModel) {
+        self.viewModel = viewModel
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +26,10 @@ class WorkoutTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addWorkoutSegue" {
             if let destinationController = segue.destinationViewController as? EnterWorkoutNameViewController {
-                destinationController.client = client
+                destinationController.injectDependency(viewModel)
             }
         }
     }
+    
+    
 }

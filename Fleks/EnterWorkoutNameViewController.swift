@@ -11,11 +11,16 @@ import UIKit
 class EnterWorkoutNameViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
-    var client: FirebaseClient!
-    var workout: Workout!
+    private var client: FirebaseClient!
+    private var viewModel: WorkoutViewModel!
+    private var workout: Workout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func injectDependency(viewModel: WorkoutViewModel) {
+        self.viewModel = viewModel
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -23,9 +28,8 @@ class EnterWorkoutNameViewController: UIViewController {
             if let destinationController = segue.destinationViewController as? SelectExercisesTableViewController {
                 
                 if let name = nameTextField.text {
-                    workout = client.createWorkout(name)
-                    destinationController.client = client
-                    destinationController.workout = workout
+                    workout = viewModel.createWorkout(name)
+                    destinationController.injectDependency(viewModel: viewModel, workout: workout)
                 } else {
                     // TODO: fail with message!
                 }
