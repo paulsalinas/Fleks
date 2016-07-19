@@ -32,9 +32,10 @@ class WorkoutViewModel {
         self.user = user
     }
     
-    func createWorkout(name: String) {
+    func createWorkout(name: String) -> Workout {
         let ref = workoutsRef.childByAutoId()
         ref.setValue(["name": name])
+        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSet]())
     }
     
     func refreshWorkouts(onComplete: [Workout] -> Void) {
