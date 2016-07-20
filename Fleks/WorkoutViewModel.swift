@@ -11,9 +11,11 @@ import Firebase
 
 class WorkoutViewModel {
     private let store: FIRDatabase
-    let user: User
+    private let user: User
+    private var muscles: [Muscle]!
     
     var workouts =  [Workout]()
+    var exercises = [Exercise]()
     
     private var userDataRef: FIRDatabaseReference {
         get {
@@ -21,9 +23,21 @@ class WorkoutViewModel {
         }
     }
     
+    private var exerciseRef: FIRDatabaseReference {
+        get {
+            return userDataRef.child("exercises")
+        }
+    }
+    
     private var workoutsRef: FIRDatabaseReference {
         get {
             return userDataRef.child("workouts")
+        }
+    }
+    
+    private var muscleRef: FIRDatabaseReference {
+        get {
+            return store.reference().child("muscles")
         }
     }
     
@@ -44,4 +58,21 @@ class WorkoutViewModel {
             onComplete(self.workouts)
         })
     }
+    
+    func refreshExercises(onComplete: [Exercise] -> Void) {
+        muscleRef.observeSingleEventOfType(.Value, withBlock: { muscleSnap in
+            self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
+            
+            self.exerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                let userExercises:[Exercise] = snapshot.children.map { snap in
+                    let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
+                    return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
+                }
+                self.exercises = userExercises
+                onComplete(self.exercises)
+            })
+            
+        })
+    }
+
 }
