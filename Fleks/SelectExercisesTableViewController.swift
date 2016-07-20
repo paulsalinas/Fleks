@@ -14,12 +14,10 @@ class SelectExercisesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        viewModel.refreshExercises { _ in
+            self.tableView.reloadData()
+        }
     }
     
     func injectDependency(viewModel viewModel: WorkoutViewModel, workout: Workout) {
@@ -27,32 +25,25 @@ class SelectExercisesTableViewController: UITableViewController {
         self.workout = workout
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel.exercises.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectExerciseCell", forIndexPath: indexPath)
+        let exercise = viewModel.exercises[indexPath.row]
+        let muscleString = exercise.muscles
+            .map { $0.name }
+            .joinWithSeparator(", ")
+        
+        cell.textLabel?.text = exercise.name
+        cell.detailTextLabel?.text = "Muscles: \(muscleString)"
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
