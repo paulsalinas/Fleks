@@ -9,21 +9,31 @@
 import UIKit
 
 class WorkoutDataSource: NSObject, UITableViewDataSource {
-    var workouts = [Workout]()
-    
+
+    private let viewModel: WorkoutViewModel
     private let cellReuseIdentifier: String
+    private let tableView: UITableView
     
-    init(cellReuseIdentifier: String) {
+    init(cellReuseIdentifier: String, viewModel: WorkoutViewModel, tableView: UITableView) {
         self.cellReuseIdentifier = cellReuseIdentifier
+        self.viewModel = viewModel
+        self.tableView = tableView
+        
+        super.init()
+        
+        self.viewModel.refreshWorkouts { _ in
+            self.tableView.reloadData()
+        }
+
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workouts.count
+        return viewModel.workouts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
-        let workout = workouts[indexPath.row]
+        let workout = viewModel.workouts[indexPath.row]
   
         cell.textLabel?.text = workout.name
         return cell

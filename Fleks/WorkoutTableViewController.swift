@@ -10,7 +10,7 @@ import UIKit
 
 class WorkoutTableViewController: UITableViewController {
     
-    private let dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell")
+    private var dataSource: WorkoutDataSource!
     var client: FirebaseClient!
     private var viewModel: WorkoutViewModel!
     
@@ -19,8 +19,10 @@ class WorkoutTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell", viewModel: viewModel, tableView: tableView)
+        tableView.dataSource = dataSource
         super.viewDidLoad()
-        self.tableView.dataSource = dataSource
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
