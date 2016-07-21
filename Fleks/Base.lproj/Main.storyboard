@@ -313,6 +313,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Enter Workout Name" id="kSN-uy-gXU">
+                        <barButtonItem key="backBarButtonItem" title="Name" id="Elq-gp-0hj"/>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="amA-Be-FQK">
                             <connections>
                                 <segue destination="Gdo-ru-AEJ" kind="show" identifier="showSelectExercise" id="iTe-aH-MXa"/>
