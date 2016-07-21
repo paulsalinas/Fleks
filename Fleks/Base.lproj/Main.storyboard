@@ -282,7 +282,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Enter Workout Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Enter Workout Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
                                 <rect key="frame" x="20" y="164" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dnS-Ze-DvG"/>
@@ -298,19 +298,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hIH-Yl-eGP" firstAttribute="top" secondItem="npW-3O-ShU" secondAttribute="bottom" constant="386" id="F5F-fH-QkV"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="trailing" secondItem="bLc-M1-jJ5" secondAttribute="trailingMargin" id="J7D-X7-rVV"/>
-                            <constraint firstItem="hIH-Yl-eGP" firstAttribute="top" secondItem="npW-3O-ShU" secondAttribute="bottom" constant="342" id="NE0-eG-t0Z"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="144" id="UQz-zV-jsc"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="100" id="fE4-gq-vzO"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="leading" secondItem="bLc-M1-jJ5" secondAttribute="leadingMargin" id="j2K-Me-f9O"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="100" id="23D-Qr-Jkz"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="leading" secondItem="bLc-M1-jJ5" secondAttribute="leadingMargin" id="E5y-PL-e3z"/>
+                            <constraint firstItem="npW-3O-ShU" firstAttribute="trailing" secondItem="bLc-M1-jJ5" secondAttribute="trailingMargin" id="iKK-Mh-fMH"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="UQz-zV-jsc"/>
-                                <exclude reference="F5F-fH-QkV"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Enter Workout Name" id="kSN-uy-gXU">
                         <barButtonItem key="backBarButtonItem" title="Name" id="Elq-gp-0hj"/>
