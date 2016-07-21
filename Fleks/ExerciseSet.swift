@@ -9,8 +9,9 @@
 import Foundation
 
 struct ExerciseSet {
-    var id: String
+    var order: Int
     var repetitions: Int
     var resistance: Float
     var exercise: Exercise
+    var notes: String
 }
