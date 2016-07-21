@@ -23,6 +23,7 @@ class WorkoutDataSource: NSObject, UITableViewDataSource {
         
         self.viewModel.refreshWorkouts { _ in
             self.tableView.reloadData()
+            self.tableView.allowsMultipleSelectionDuringEditing = false
         }
 
     }
@@ -38,4 +39,13 @@ class WorkoutDataSource: NSObject, UITableViewDataSource {
         cell.textLabel?.text = workout.name
         return cell
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            viewModel.deleteWorkout(viewModel.workouts[indexPath.row], onDelete: {
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
 }

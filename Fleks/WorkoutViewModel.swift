@@ -52,6 +52,14 @@ class WorkoutViewModel {
         return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSet]())
     }
     
+    func deleteWorkout(workout: Workout, onDelete: ()-> Void) {
+        workoutsRef.child(workout.id).removeValueWithCompletionBlock { error, ref in
+            let index = self.workouts.indexOf { $0 == workout }
+            self.workouts.removeAtIndex(index!)
+            onDelete()
+        }
+    }
+    
     func refreshWorkouts(onComplete: [Workout] -> Void) {
         workoutsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             self.workouts = snapshot.children.map { Workout(snapshot: $0 as! FIRDataSnapshot) }

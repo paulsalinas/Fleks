@@ -24,3 +24,7 @@ extension Workout {
         self.exerciseSets = [ExerciseSet]()
     }
 }
+
+func ==(lhs: Workout, rhs: Workout) -> Bool {
+    return lhs.id == rhs.id 
+}
