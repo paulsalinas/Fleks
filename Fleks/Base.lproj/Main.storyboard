@@ -366,10 +366,10 @@
             </objects>
             <point key="canvasLocation" x="4466" y="660"/>
         </scene>
-        <!--View Controller-->
+        <!--Exercise Set Form View Controller-->
         <scene sceneID="cvx-yI-A0c">
             <objects>
-                <viewController id="jcZ-Qn-JNT" sceneMemberID="viewController">
+                <viewController id="jcZ-Qn-JNT" customClass="ExerciseSetFormViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FNf-vP-GyY"/>
                         <viewControllerLayoutGuide type="bottom" id="9In-0r-bw0"/>
@@ -378,6 +378,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtM-QK-ghk">
+                                <rect key="frame" x="491" y="518" width="89" height="30"/>
+                                <state key="normal" title="Add Exercise"/>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
                                 <rect key="frame" x="55" y="84" width="491" height="219"/>
                                 <subviews>
@@ -402,7 +406,7 @@
                                                     <constraint firstAttribute="width" constant="75" id="v66-3O-eKY"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vcZ-1n-xfk">
                                                 <rect key="frame" x="397" y="11" width="94" height="29"/>
@@ -433,10 +437,13 @@
                                                     <constraint firstAttribute="width" constant="75" id="2wL-XL-6bt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="UNv-t5-cbd">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000000" translatesAutoresizingMaskIntoConstraints="NO" id="UNv-t5-cbd">
                                                 <rect key="frame" x="397" y="11" width="94" height="29"/>
+                                                <connections>
+                                                    <action selector="setsStepperOnValueChanged:" destination="jcZ-Qn-JNT" eventType="valueChanged" id="HC2-sT-7tv"/>
+                                                </connections>
                                             </stepper>
                                         </subviews>
                                         <constraints>
@@ -464,7 +471,7 @@
                                                     <constraint firstAttribute="width" constant="75" id="A30-Nk-N1a"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="dGl-SM-E4j">
                                                 <rect key="frame" x="397" y="11" width="94" height="29"/>
@@ -474,7 +481,7 @@
                                             <constraint firstAttribute="height" constant="51" id="F96-DB-zgW"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
                                         <rect key="frame" x="0.0" y="168" width="491" height="51"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -482,10 +489,6 @@
                                     </textView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtM-QK-ghk">
-                                <rect key="frame" x="491" y="518" width="89" height="30"/>
-                                <state key="normal" title="Add Exercise"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -496,6 +499,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="j3h-pf-XyT" secondAttribute="trailing" constant="34" id="j0u-lp-HNP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="repsStepper" destination="dGl-SM-E4j" id="cbO-rm-mo4"/>
+                        <outlet property="repsTextField" destination="LAB-un-o4V" id="wKZ-g0-Bsi"/>
+                        <outlet property="resistanceStepper" destination="vcZ-1n-xfk" id="z7k-U8-XIS"/>
+                        <outlet property="resistanceTextField" destination="Y9t-Xa-drq" id="Rmd-om-YDg"/>
+                        <outlet property="setsStepper" destination="UNv-t5-cbd" id="6jw-ea-Q1j"/>
+                        <outlet property="setsTextField" destination="YEc-sp-4a1" id="7ma-JJ-Fj8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOg-8n-IT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -19,6 +19,10 @@
 		3C2C15511CE7CBED009956AF /* WorkoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */; };
 		3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */; };
 		3C4E50231CD826FD00440D78 /* AddExerciseCompletionSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */; };
+		3C64A2D71D42FCB8005D0F69 /* ExerciseSetFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */; };
+		3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */; };
+		3C64A2DC1D44017E005D0F69 /* IntegerTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */; };
+		3C64A2E01D443508005D0F69 /* ExerciseSetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */; };
 		3C7950B81D208EF000265F93 /* ExerciseFirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */; };
 		3C8124F81D0CE2D20038A018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */; };
 		3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8124F91D12266B0038A018 /* FleksTabBarController.swift */; };
@@ -78,6 +82,10 @@
 		3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataSource.swift; sourceTree = "<group>"; };
 		3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewController.swift; sourceTree = "<group>"; };
 		3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseCompletionSegue.swift; sourceTree = "<group>"; };
+		3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetFormViewController.swift; sourceTree = "<group>"; };
+		3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalTextFieldDelegate.swift; sourceTree = "<group>"; };
+		3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTextViewDelegate.swift; sourceTree = "<group>"; };
+		3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewModel.swift; sourceTree = "<group>"; };
 		3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseFirebaseDataManager.swift; sourceTree = "<group>"; };
 		3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C8124F91D12266B0038A018 /* FleksTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FleksTabBarController.swift; sourceTree = "<group>"; };
@@ -145,6 +153,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C64A2D81D43FF2D005D0F69 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */,
+				3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		3C9378D31D2C8B3500A0CA8B /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +187,7 @@
 				3C9378D61D35CD3000A0CA8B /* LoginViewModel.swift */,
 				3C9378DA1D35D6AC00A0CA8B /* ExerciseViewModel.swift */,
 				3C9378E11D3D9E9300A0CA8B /* WorkoutViewModel.swift */,
+				3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -196,6 +214,7 @@
 				3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */,
 				3C8124F91D12266B0038A018 /* FleksTabBarController.swift */,
 				3C9378D11D29E6C100A0CA8B /* EnterWorkoutNameViewController.swift */,
+				3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +259,7 @@
 				3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */,
 				3C9378DC1D3ADE2100A0CA8B /* Segues */,
 				3C9378D51D35CC8400A0CA8B /* ViewModels */,
+				3C64A2D81D43FF2D005D0F69 /* Views */,
 				3CB25AFB1CF3C10500756B45 /* Models */,
 				3CB25AFA1CF3C0E400756B45 /* Controllers */,
 				3CFEBB6C1CC98F55007E7817 /* AppDelegate.swift */,
@@ -561,7 +581,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C036ACA1CCF112800E9F8C1 /* ExerciseSet.swift in Sources */,
+				3C64A2DC1D44017E005D0F69 /* IntegerTextViewDelegate.swift in Sources */,
 				3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */,
+				3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */,
 				3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */,
 				3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */,
 				3C9378D91D35D37200A0CA8B /* User.swift in Sources */,
@@ -569,6 +591,7 @@
 				3C036AC41CCEFADF00E9F8C1 /* ExerciseTableViewController.swift in Sources */,
 				3C036AD21CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift in Sources */,
 				3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */,
+				3C64A2E01D443508005D0F69 /* ExerciseSetViewModel.swift in Sources */,
 				3C9378D71D35CD3000A0CA8B /* LoginViewModel.swift in Sources */,
 				3C036AD01CD18FC900E9F8C1 /* MuscleDataSource.swift in Sources */,
 				3C036ACE1CD18EAC00E9F8C1 /* AddExerciseViewController.swift in Sources */,
@@ -587,6 +610,7 @@
 				3C9378D21D29E6C100A0CA8B /* EnterWorkoutNameViewController.swift in Sources */,
 				3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */,
 				3C7950B81D208EF000265F93 /* ExerciseFirebaseDataManager.swift in Sources */,
+				3C64A2D71D42FCB8005D0F69 /* ExerciseSetFormViewController.swift in Sources */,
 				3C9378DB1D35D6AC00A0CA8B /* ExerciseViewModel.swift in Sources */,
 				3C4E50231CD826FD00440D78 /* AddExerciseCompletionSegue.swift in Sources */,
 			);
