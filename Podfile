@@ -11,6 +11,7 @@ target 'Fleks' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'ReactiveCocoa', '~> 4.2.1'
 end
 
 def testing_pods
