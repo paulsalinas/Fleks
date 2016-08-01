@@ -1,0 +1,9 @@
+//
+//  ExerciseSetViewModel.swift
+//  Fleks
+//
+//  Created by Paul Salinas on 2016-07-23.
+//  Copyright © 2016 Paul Salinas. All rights reserved.
+//
+
+import Foundation
