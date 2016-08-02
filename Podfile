@@ -3,7 +3,7 @@ platform :ios, '9.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-target 'Fleks' do
+def shared_pods
   pod 'Firebase'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
@@ -19,10 +19,22 @@ def testing_pods
     pod 'Nimble', '~> 3.2.0'
 end
 
-target 'FleksTests' do
-  testing_pods
+target 'Fleks' do
+  shared_pods
+  
+  target 'FleksTests' do
+      inherit! :search_paths
+      testing_pods
+  end
+  
+  target 'FleksUITests' do
+      inherit! :search_paths
+      testing_pods
+  end
 end
 
-target 'FleksUITests' do
-  testing_pods
-end
+
+
+
+
+

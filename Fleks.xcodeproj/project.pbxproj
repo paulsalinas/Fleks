@@ -285,8 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				3C64A2E51D501D99005D0F69 /* FleksTests.swift */,
-				3CFEBB831CC98F55007E7817 /* Info.plist */,
 				3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */,
+				3CFEBB831CC98F55007E7817 /* Info.plist */,
 			);
 			path = FleksTests;
 			sourceTree = "<group>";
@@ -764,6 +764,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$CONFIGURATION_BUILD_DIR/Bolts\"",
+					"\"$CONFIGURATION_BUILD_DIR/FBSDKCoreKit\"",
+					"\"$CONFIGURATION_BUILD_DIR/FBSDKLoginKit\"",
+					"\"$CONFIGURATION_BUILD_DIR/FBSDKShareKit\"",
+					"\"$CONFIGURATION_BUILD_DIR/ReactiveCocoa\"",
+					"\"$CONFIGURATION_BUILD_DIR/Result\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleParsingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/Firebase\"",
+				);
 				INFOPLIST_FILE = Fleks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.Fleks;
@@ -789,6 +808,13 @@
 			baseConfigurationReference = AA192474D631402D778E2F30 /* Pods-FleksTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$CONFIGURATION_BUILD_DIR/Nimble\"",
+					"\"$CONFIGURATION_BUILD_DIR/Quick\"",
+					"\"${PODS_ROOT}/Firebase\"",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				INFOPLIST_FILE = FleksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.FleksTests;
@@ -802,6 +828,7 @@
 			baseConfigurationReference = C4F6CA2B319426188674BF2F /* Pods-FleksTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 				INFOPLIST_FILE = FleksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.FleksTests;

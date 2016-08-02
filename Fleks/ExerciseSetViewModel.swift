@@ -57,7 +57,9 @@ class ExerciseSetViewModel {
         combineLatest(_reps.signal, _sets.signal, _resistance.signal)
             .observeNext { reps, sets, resistance in
                 if reps == nil || sets == nil || resistance == nil {
-                    self.isValid.swap(false)
+                    self.isValid.value = false
+                } else {
+                    self.isValid.value = true
                 }
             }
 
