@@ -23,6 +23,9 @@
 		3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */; };
 		3C64A2DC1D44017E005D0F69 /* IntegerTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */; };
 		3C64A2E01D443508005D0F69 /* ExerciseSetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */; };
+		3C64A2E21D4973A7005D0F69 /* UIKit+ReactiveCococa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */; };
+		3C64A2E41D501800005D0F69 /* ExerciseSetViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */; };
+		3C64A2E61D501D99005D0F69 /* FleksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2E51D501D99005D0F69 /* FleksTests.swift */; };
 		3C7950B81D208EF000265F93 /* ExerciseFirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */; };
 		3C8124F81D0CE2D20038A018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */; };
 		3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8124F91D12266B0038A018 /* FleksTabBarController.swift */; };
@@ -44,7 +47,6 @@
 		3CFEBB721CC98F55007E7817 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFEBB701CC98F55007E7817 /* Main.storyboard */; };
 		3CFEBB741CC98F55007E7817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFEBB731CC98F55007E7817 /* Assets.xcassets */; };
 		3CFEBB771CC98F55007E7817 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFEBB751CC98F55007E7817 /* LaunchScreen.storyboard */; };
-		3CFEBB821CC98F55007E7817 /* FleksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB811CC98F55007E7817 /* FleksTests.swift */; };
 		3CFEBB8D1CC98F55007E7817 /* FleksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB8C1CC98F55007E7817 /* FleksUITests.swift */; };
 		3F88EE65156C4AFD534B84CF /* Pods_FleksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437E2DB22794BB3E0E517E12 /* Pods_FleksUITests.framework */; };
 		575CA0D6090C0F4D45D6854E /* Pods_FleksTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FBEC7CF3BB67DD58F03F76 /* Pods_FleksTests.framework */; };
@@ -86,6 +88,9 @@
 		3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalTextFieldDelegate.swift; sourceTree = "<group>"; };
 		3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTextViewDelegate.swift; sourceTree = "<group>"; };
 		3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewModel.swift; sourceTree = "<group>"; };
+		3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+ReactiveCococa.swift"; sourceTree = "<group>"; };
+		3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewModelSpec.swift; sourceTree = "<group>"; };
+		3C64A2E51D501D99005D0F69 /* FleksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FleksTests.swift; sourceTree = "<group>"; };
 		3C7950B71D208EF000265F93 /* ExerciseFirebaseDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseFirebaseDataManager.swift; sourceTree = "<group>"; };
 		3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C8124F91D12266B0038A018 /* FleksTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FleksTabBarController.swift; sourceTree = "<group>"; };
@@ -110,7 +115,6 @@
 		3CFEBB761CC98F55007E7817 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CFEBB781CC98F55007E7817 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CFEBB7D1CC98F55007E7817 /* FleksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FleksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CFEBB811CC98F55007E7817 /* FleksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FleksTests.swift; sourceTree = "<group>"; };
 		3CFEBB831CC98F55007E7817 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CFEBB881CC98F55007E7817 /* FleksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FleksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFEBB8C1CC98F55007E7817 /* FleksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FleksUITests.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */,
 				3CB25B011CF536C800756B45 /* CoreDataStore.swift */,
 				3CB25B071D04CEDA00756B45 /* FirebaseClient.swift */,
+				3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */,
 			);
 			path = Fleks;
 			sourceTree = "<group>";
@@ -279,8 +284,9 @@
 		3CFEBB801CC98F55007E7817 /* FleksTests */ = {
 			isa = PBXGroup;
 			children = (
-				3CFEBB811CC98F55007E7817 /* FleksTests.swift */,
+				3C64A2E51D501D99005D0F69 /* FleksTests.swift */,
 				3CFEBB831CC98F55007E7817 /* Info.plist */,
+				3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */,
 			);
 			path = FleksTests;
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 				3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */,
 				3C7950B81D208EF000265F93 /* ExerciseFirebaseDataManager.swift in Sources */,
 				3C64A2D71D42FCB8005D0F69 /* ExerciseSetFormViewController.swift in Sources */,
+				3C64A2E21D4973A7005D0F69 /* UIKit+ReactiveCococa.swift in Sources */,
 				3C9378DB1D35D6AC00A0CA8B /* ExerciseViewModel.swift in Sources */,
 				3C4E50231CD826FD00440D78 /* AddExerciseCompletionSegue.swift in Sources */,
 			);
@@ -620,7 +627,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CFEBB821CC98F55007E7817 /* FleksTests.swift in Sources */,
+				3C64A2E41D501800005D0F69 /* ExerciseSetViewModelSpec.swift in Sources */,
+				3C64A2E61D501D99005D0F69 /* FleksTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +763,7 @@
 			baseConfigurationReference = C7380879E56C33D964A02A48 /* Pods-Fleks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Fleks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.Fleks;
@@ -767,6 +776,7 @@
 			baseConfigurationReference = 39B36075706B4BF38F88654B /* Pods-Fleks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Fleks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.Fleks;

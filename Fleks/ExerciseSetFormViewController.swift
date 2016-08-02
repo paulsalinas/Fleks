@@ -7,17 +7,11 @@
 //
 
 import UIKit
+import ReactiveCocoa
+import Result
+import Foundation
 
 class ExerciseSetFormViewController: UIViewController {
-    
-    private var exerciseSet: ExerciseSet! {
-        didSet {
-            repsTextField.text = String(exerciseSet.repetitions)
-            resistanceTextField.text = String(exerciseSet.resistance)
-            repsStepper.value = Double(exerciseSet.repetitions)
-            resistanceStepper.value = Double(exerciseSet.resistance)
-        }
-    }
 
     @IBOutlet weak var resistanceTextField: UITextField!
     @IBOutlet weak var setsTextField: UITextField!
@@ -34,28 +28,64 @@ class ExerciseSetFormViewController: UIViewController {
         setsTextField.text = String(Int(stepper.value))
     }
     
-    var textFieldStepperMapping: [UITextField: UIStepper]!
+    let reps: MutableProperty<Int> = MutableProperty(10)
+    let sets: MutableProperty<Int> = MutableProperty(4)
+    let resistance: MutableProperty<String?> = MutableProperty(String(20))
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // set defaults
-        exerciseSet = ExerciseSet(order: 1, repetitions: 10, resistance: 20, exercise: Exercise(id: "", name: "", muscles: [Muscle]()), notes: "")
     
         setsTextField.delegate = integerTextViewDelegate
         repsTextField.delegate = integerTextViewDelegate
         resistanceTextField.delegate = decimalTextViewDelegate
-        
-        textFieldStepperMapping = [
-            setsTextField: setsStepper,
-            repsTextField: repsStepper,
-            resistanceTextField: repsStepper
-        ]
-        
-        setsTextField.addTarget(self, action: #selector(ExerciseSetFormViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
     }
     
-    func textFieldDidChange(textField: UITextField){
-        print("Hi")
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reps.producer
+            .startWithNext { next in
+                self.repsTextField.text = String(next)
+                self.repsStepper.value = Double(next)
+            }
+        
+        sets.producer
+            .startWithNext { next in
+                self.setsTextField.text = String(next)
+                self.setsStepper.value = Double(next)
+            }
+        
+        resistance.producer
+            .startWithNext { next in
+                if let next = next  {
+                    self.resistanceTextField.text = String(next)
+                    self.resistanceStepper.value = Double(next) ?? 0
+                }
+            }
+        
+        reps <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
+            .map { Int($0) ?? 0 }
+        
+        sets <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
+            .map { Int($0) ?? 0 }
+        
+        resistance <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
+            .map { val in
+                if Double(val) != nil {
+                    return val
+                } else {
+                    return nil
+                }
+            }
     }
+    
+    func createMergedSignalProducer(textField textField: UITextField, stepper: UIStepper) -> SignalProducer<String, NoError> {
+        let textProducer: SignalProducer<String, NoError> = textField.keyPress()
+        let stepperProducer: SignalProducer<String, NoError> =  stepper.changeValue().map { String($0) }
+        
+        return SignalProducer(values: [textProducer, stepperProducer])
+            .flatten(.Merge)
+    }
+    
 }
