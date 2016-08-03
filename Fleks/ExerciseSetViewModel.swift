@@ -40,7 +40,7 @@ class ExerciseSetViewModel {
         get {
             return repsInput
                 .producer
-                .scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+                .scan("") { (prev, next) in Int(next) == nil && next != "" ? prev : next }
         }
     }
     
@@ -48,14 +48,14 @@ class ExerciseSetViewModel {
         get {
             return setsInput
                 .producer
-                .scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+                .scan("") { (prev, next) in Int(next) == nil && next != "" ? prev : next }
         }
     }
     var resistanceDisplay: SignalProducer<String, NoError> {
         get {
             return resistanceInput
                 .producer
-                .scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
+                .scan("") { (prev, next) in Double(next) == nil && next != "" ? prev : next }
         }
     }
     
@@ -77,7 +77,6 @@ class ExerciseSetViewModel {
         _reps <~ repsInput.signal.map { Int($0) }
         _sets <~ setsInput.signal.map { Int($0) }
         _resistance <~ resistanceInput.signal.map { Double($0) }
-        
         
         // states where private value is invalid
         isValid <~ _reps.signal.map { $0 != nil }
