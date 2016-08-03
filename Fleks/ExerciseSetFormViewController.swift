@@ -20,14 +20,7 @@ class ExerciseSetFormViewController: UIViewController {
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
     
-    
-    @IBAction func setsStepperOnValueChanged(sender: AnyObject) {
-//        let stepper = sender as! UIStepper
-//        setsTextField.text = String(Int(stepper.value))
-    }
-    
     var viewModel: ExerciseSetViewModel!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,19 +30,19 @@ class ExerciseSetFormViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.repsDisplay.producer
+        viewModel.repsDisplay
             .startWithNext { next in
                 self.repsTextField.text = next
                 self.repsStepper.value = Double(next) ?? 0
             }
         
-        viewModel.setsDisplay.producer
+        viewModel.setsDisplay
             .startWithNext { next in
                 self.setsTextField.text = next
                 self.setsStepper.value = Double(next) ?? 0
             }
         
-        viewModel.resistanceDisplay.producer
+        viewModel.resistanceDisplay
             .startWithNext { next in
                 self.resistanceTextField.text = next
                 self.resistanceStepper.value = Double(next) ?? 0

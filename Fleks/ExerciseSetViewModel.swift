@@ -8,7 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
-
+import Result
 
 
 // requirements:
@@ -34,9 +34,28 @@ class ExerciseSetViewModel {
     var sets: MutableProperty<String>
     var resistance: MutableProperty<String>
     
-    var repsDisplay: MutableProperty<String>
-    var setsDisplay: MutableProperty<String>
-    var resistanceDisplay: MutableProperty<String>
+    var repsDisplay: SignalProducer<String, NoError> {
+        get {
+            return reps
+                .producer
+                .scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+        }
+    }
+    
+    var setsDisplay: SignalProducer<String, NoError> {
+        get {
+            return sets
+                .producer
+                .scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+        }
+    }
+    var resistanceDisplay: SignalProducer<String, NoError> {
+        get {
+            return resistance
+                .producer
+                .scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
+        }
+    }
     
     var isValid: MutableProperty<Bool> = MutableProperty(true)
     
@@ -58,9 +77,9 @@ class ExerciseSetViewModel {
         sets = MutableProperty(String(_setsVal))
         resistance = MutableProperty(String(_resistanceVal))
         
-        repsDisplay = MutableProperty(String(_repsVal))
-        setsDisplay = MutableProperty(String(_setsVal))
-        resistanceDisplay = MutableProperty(String(_resistanceVal))
+//        repsDisplay = MutableProperty(String(_repsVal))
+//        setsDisplay = MutableProperty(String(_setsVal))
+//        resistanceDisplay = MutableProperty(String(_resistanceVal))
         
         _reps <~ reps.signal.map { Int($0) }
         _sets <~ sets.signal.map { Int($0) }
@@ -71,9 +90,9 @@ class ExerciseSetViewModel {
         isValid <~ _reps.signal.map { $0 != nil }
         isValid <~ _sets.signal.map { $0 != nil }
         isValid <~ _resistance.signal.map { $0 != nil }
-        
-        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
-        setsDisplay <~ sets.signal.scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
-        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
+//        
+//        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+//        setsDisplay <~ sets.signal.scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+//        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
     }
 }

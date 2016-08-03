@@ -441,9 +441,6 @@
                                             </textField>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000000" translatesAutoresizingMaskIntoConstraints="NO" id="UNv-t5-cbd">
                                                 <rect key="frame" x="397" y="11" width="94" height="29"/>
-                                                <connections>
-                                                    <action selector="setsStepperOnValueChanged:" destination="jcZ-Qn-JNT" eventType="valueChanged" id="HC2-sT-7tv"/>
-                                                </connections>
                                             </stepper>
                                         </subviews>
                                         <constraints>

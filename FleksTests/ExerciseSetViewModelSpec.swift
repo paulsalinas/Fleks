@@ -38,35 +38,84 @@ class ExerciseSetViewModelSpec: QuickSpec {
             
             it("should display a valid number for reps even with bad inputs") {
                 viewModel.reps.value = "1"
-                expect(viewModel.repsDisplay.value).to(equal("1"))
+                var result = [String]()
+                
+                viewModel.repsDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
                 viewModel.reps.value = "1a"
-                expect(viewModel.repsDisplay.value).to(equal("1"))
                 viewModel.reps.value = "1."
-                expect(viewModel.repsDisplay.value).to(equal("1"))
+
+                expect(result).to(equal(["1", "1", "1"]))
             }
-            
-            it("should be able to clear the input") {
+
+            it("should be able to clear the reps input") {
                 viewModel.reps.value = "1"
+                var result = [String]()
+                
+                viewModel.repsDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
                 viewModel.reps.value = ""
-                expect(viewModel.repsDisplay.value).to(equal(""))
+                
+                expect(result).to(equal(["1", ""]))
             }
             
             it("should display a valid number for sets even with bad inputs") {
                 viewModel.sets.value = "1"
-                expect(viewModel.setsDisplay.value).to(equal("1"))
+                var result = [String]()
+                
+                viewModel.setsDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
                 viewModel.sets.value = "1a"
-                expect(viewModel.setsDisplay.value).to(equal("1"))
                 viewModel.sets.value = "1."
-                expect(viewModel.setsDisplay.value).to(equal("1"))
+                
+                expect(result).to(equal(["1", "1", "1"]))
+            }
+            
+            it("should be able to clear the sets input") {
+                viewModel.sets.value = "1"
+                var result = [String]()
+                
+                viewModel.setsDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
+                viewModel.sets.value = ""
+                
+                expect(result).to(equal(["1", ""]))
             }
             
             it("should display a valid number for resistance even with bad inputs") {
                 viewModel.resistance.value = "1"
-                expect(viewModel.resistanceDisplay.value).to(equal("1"))
+                var result = [String]()
+                
+                viewModel.resistanceDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
                 viewModel.resistance.value = "1a"
-                expect(viewModel.resistanceDisplay.value).to(equal("1"))
                 viewModel.resistance.value = "1."
-                expect(viewModel.resistanceDisplay.value).to(equal("1."))
+                viewModel.resistance.value = "1.2"
+                
+                expect(result).to(equal(["1", "1", "1.", "1.2"]))
+            }
+            
+            it("should be able to clear the resistance input") {
+                viewModel.sets.value = "1"
+                var result = [String]()
+                
+                viewModel.setsDisplay.startWithNext { next in
+                    result.append(next)
+                }
+                
+                viewModel.sets.value = ""
+                
+                expect(result).to(equal(["1", ""]))
             }
         }
     }
