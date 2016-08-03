@@ -20,64 +20,50 @@ class ExerciseSetFormViewController: UIViewController {
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
     
-    private let decimalTextViewDelegate = DecimalTextFieldDelegate()
-    private let integerTextViewDelegate = IntegerTextViewDelegate()
     
     @IBAction func setsStepperOnValueChanged(sender: AnyObject) {
-        let stepper = sender as! UIStepper
-        setsTextField.text = String(Int(stepper.value))
+//        let stepper = sender as! UIStepper
+//        setsTextField.text = String(Int(stepper.value))
     }
     
-    let reps: MutableProperty<Int> = MutableProperty(10)
-    let sets: MutableProperty<Int> = MutableProperty(4)
-    let resistance: MutableProperty<String?> = MutableProperty(String(20))
+    var viewModel: ExerciseSetViewModel!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        setsTextField.delegate = integerTextViewDelegate
-        repsTextField.delegate = integerTextViewDelegate
-        resistanceTextField.delegate = decimalTextViewDelegate
+        viewModel = ExerciseSetViewModel()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModel.repsDisplay.producer
+            .startWithNext { next in
+                self.repsTextField.text = next
+                self.repsStepper.value = Double(next) ?? 0
+            }
+        
+        viewModel.setsDisplay.producer
+            .startWithNext { next in
+                self.setsTextField.text = next
+                self.setsStepper.value = Double(next) ?? 0
+            }
+        
+        viewModel.resistanceDisplay.producer
+            .startWithNext { next in
+                self.resistanceTextField.text = next
+                self.resistanceStepper.value = Double(next) ?? 0
+            }
+        
+        let removeDecimalsIfAny: String -> String = { $0.containsString(".") ? $0.characters.split(".").map(String.init)[0] : $0 }
+        
+        viewModel.reps <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
+            .map(removeDecimalsIfAny)
+        viewModel.sets <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
+            .map(removeDecimalsIfAny)
+        
+        viewModel.resistance <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
 
-        reps.producer
-            .startWithNext { next in
-                self.repsTextField.text = String(next)
-                self.repsStepper.value = Double(next)
-            }
-        
-        sets.producer
-            .startWithNext { next in
-                self.setsTextField.text = String(next)
-                self.setsStepper.value = Double(next)
-            }
-        
-        resistance.producer
-            .startWithNext { next in
-                if let next = next  {
-                    self.resistanceTextField.text = String(next)
-                    self.resistanceStepper.value = Double(next) ?? 0
-                }
-            }
-        
-        reps <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
-            .map { Int($0) ?? 0 }
-        
-        sets <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
-            .map { Int($0) ?? 0 }
-        
-        resistance <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
-            .map { val in
-                if Double(val) != nil {
-                    return val
-                } else {
-                    return nil
-                }
-            }
     }
     
     func createMergedSignalProducer(textField textField: UITextField, stepper: UIStepper) -> SignalProducer<String, NoError> {
