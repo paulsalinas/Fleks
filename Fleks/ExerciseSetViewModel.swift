@@ -30,13 +30,15 @@ class ExerciseSetViewModel {
     private var _sets: MutableProperty<Int?>
     private var _resistance: MutableProperty<Double?>
     
-    var reps: MutableProperty<String>
-    var sets: MutableProperty<String>
-    var resistance: MutableProperty<String>
+    
+    // bound to inp
+    var repsInput: MutableProperty<String>
+    var setsInput: MutableProperty<String>
+    var resistanceInput: MutableProperty<String>
     
     var repsDisplay: SignalProducer<String, NoError> {
         get {
-            return reps
+            return repsInput
                 .producer
                 .scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
         }
@@ -44,14 +46,14 @@ class ExerciseSetViewModel {
     
     var setsDisplay: SignalProducer<String, NoError> {
         get {
-            return sets
+            return setsInput
                 .producer
                 .scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
         }
     }
     var resistanceDisplay: SignalProducer<String, NoError> {
         get {
-            return resistance
+            return resistanceInput
                 .producer
                 .scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
         }
@@ -64,35 +66,22 @@ class ExerciseSetViewModel {
     let resistanceStepValue = 2.5
     
     init() {
-        
-        // bind:
-        // input -> display
-        // input -> backing value
-        
         _reps = MutableProperty(_repsVal)
         _sets = MutableProperty(_setsVal)
         _resistance = MutableProperty(_resistanceVal)
         
-        reps = MutableProperty(String(_repsVal))
-        sets = MutableProperty(String(_setsVal))
-        resistance = MutableProperty(String(_resistanceVal))
+        repsInput = MutableProperty(String(_repsVal))
+        setsInput = MutableProperty(String(_setsVal))
+        resistanceInput = MutableProperty(String(_resistanceVal))
         
-//        repsDisplay = MutableProperty(String(_repsVal))
-//        setsDisplay = MutableProperty(String(_setsVal))
-//        resistanceDisplay = MutableProperty(String(_resistanceVal))
-        
-        _reps <~ reps.signal.map { Int($0) }
-        _sets <~ sets.signal.map { Int($0) }
-        _resistance <~ resistance.signal.map { Double($0) }
+        _reps <~ repsInput.signal.map { Int($0) }
+        _sets <~ setsInput.signal.map { Int($0) }
+        _resistance <~ resistanceInput.signal.map { Double($0) }
         
         
         // states where private value is invalid
         isValid <~ _reps.signal.map { $0 != nil }
         isValid <~ _sets.signal.map { $0 != nil }
         isValid <~ _resistance.signal.map { $0 != nil }
-//        
-//        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
-//        setsDisplay <~ sets.signal.scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
-//        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
     }
 }

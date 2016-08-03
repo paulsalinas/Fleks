@@ -50,12 +50,12 @@ class ExerciseSetFormViewController: UIViewController {
         
         let removeDecimalsIfAny: String -> String = { $0.containsString(".") ? $0.characters.split(".").map(String.init)[0] : $0 }
         
-        viewModel.reps <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
+        viewModel.repsInput <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
             .map(removeDecimalsIfAny)
-        viewModel.sets <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
+        viewModel.setsInput <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
             .map(removeDecimalsIfAny)
         
-        viewModel.resistance <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
+        viewModel.resistanceInput <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
 
     }
     

@@ -27,93 +27,93 @@ class ExerciseSetViewModelSpec: QuickSpec {
             }
             
             it("should be valid when reps is a valid number") {
-                viewModel.reps.value = "2"
+                viewModel.repsInput.value = "2"
                 expect(viewModel.isValid.value).to(equal(true))
             }
             
             it("should be invalid when a reps input is not a number") {
-                viewModel.reps.value = "invalid input"
+                viewModel.repsInput.value = "invalid input"
                 expect(viewModel.isValid.value).to(equal(false))
             }
             
             it("should display a valid number for reps even with bad inputs") {
-                viewModel.reps.value = "1"
+                viewModel.repsInput.value = "1"
                 var result = [String]()
                 
                 viewModel.repsDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.reps.value = "1a"
-                viewModel.reps.value = "1."
+                viewModel.repsInput.value = "1a"
+                viewModel.repsInput.value = "1."
 
                 expect(result).to(equal(["1", "1", "1"]))
             }
 
             it("should be able to clear the reps input") {
-                viewModel.reps.value = "1"
+                viewModel.repsInput.value = "1"
                 var result = [String]()
                 
                 viewModel.repsDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.reps.value = ""
+                viewModel.repsInput.value = ""
                 
                 expect(result).to(equal(["1", ""]))
             }
             
             it("should display a valid number for sets even with bad inputs") {
-                viewModel.sets.value = "1"
+                viewModel.setsInput.value = "1"
                 var result = [String]()
                 
                 viewModel.setsDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.sets.value = "1a"
-                viewModel.sets.value = "1."
+                viewModel.setsInput.value = "1a"
+                viewModel.setsInput.value = "1."
                 
                 expect(result).to(equal(["1", "1", "1"]))
             }
             
             it("should be able to clear the sets input") {
-                viewModel.sets.value = "1"
+                viewModel.setsInput.value = "1"
                 var result = [String]()
                 
                 viewModel.setsDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.sets.value = ""
+                viewModel.setsInput.value = ""
                 
                 expect(result).to(equal(["1", ""]))
             }
             
             it("should display a valid number for resistance even with bad inputs") {
-                viewModel.resistance.value = "1"
+                viewModel.resistanceInput.value = "1"
                 var result = [String]()
                 
                 viewModel.resistanceDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.resistance.value = "1a"
-                viewModel.resistance.value = "1."
-                viewModel.resistance.value = "1.2"
+                viewModel.resistanceInput.value = "1a"
+                viewModel.resistanceInput.value = "1."
+                viewModel.resistanceInput.value = "1.2"
                 
                 expect(result).to(equal(["1", "1", "1.", "1.2"]))
             }
             
             it("should be able to clear the resistance input") {
-                viewModel.sets.value = "1"
+                viewModel.resistanceInput.value = "1"
                 var result = [String]()
                 
-                viewModel.setsDisplay.startWithNext { next in
+                viewModel.resistanceDisplay.startWithNext { next in
                     result.append(next)
                 }
                 
-                viewModel.sets.value = ""
+                viewModel.resistanceInput.value = ""
                 
                 expect(result).to(equal(["1", ""]))
             }
