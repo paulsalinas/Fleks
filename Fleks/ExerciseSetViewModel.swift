@@ -72,8 +72,8 @@ class ExerciseSetViewModel {
         isValid <~ _sets.signal.map { $0 != nil }
         isValid <~ _resistance.signal.map { $0 != nil }
         
-        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil ? prev : next }
-        setsDisplay <~ sets.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil ? prev : next }
-        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil ? prev : next }
+        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+        setsDisplay <~ sets.signal.scan(String(_setsVal)) { (prev, next) in Int(next) == nil && next != "" ? prev : next }
+        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil && next != "" ? prev : next }
     }
 }
