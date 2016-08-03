@@ -15,20 +15,52 @@ import ReactiveCocoa
 
 class ExerciseSetViewModelSpec: QuickSpec {
     override func spec() {
-        describe("Input validation") {
+        describe("ExerciseSetViewModel") {
             var viewModel: ExerciseSetViewModel!
             
             beforeEach {
                 viewModel = ExerciseSetViewModel()
             }
             
-            it("initially valid") {
+            it("should initially be valid") {
                 expect(viewModel.isValid.value).to(equal(true))
             }
             
-            it("invalid when a reps input is not a number") {
-                viewModel.sets.value = "invalid input"
+            it("should be valid when reps is a valid number") {
+                viewModel.reps.value = "2"
+                expect(viewModel.isValid.value).to(equal(true))
+            }
+            
+            it("should be invalid when a reps input is not a number") {
+                viewModel.reps.value = "invalid input"
                 expect(viewModel.isValid.value).to(equal(false))
+            }
+            
+            it("should display a valid number for reps even with bad inputs") {
+                viewModel.reps.value = "1"
+                expect(viewModel.repsDisplay.value).to(equal("1"))
+                viewModel.reps.value = "1a"
+                expect(viewModel.repsDisplay.value).to(equal("1"))
+                viewModel.reps.value = "1."
+                expect(viewModel.repsDisplay.value).to(equal("1"))
+            }
+            
+            it("should display a valid number for sets even with bad inputs") {
+                viewModel.sets.value = "1"
+                expect(viewModel.setsDisplay.value).to(equal("1"))
+                viewModel.sets.value = "1a"
+                expect(viewModel.setsDisplay.value).to(equal("1"))
+                viewModel.sets.value = "1."
+                expect(viewModel.setsDisplay.value).to(equal("1"))
+            }
+            
+            it("should display a valid number for resistance even with bad inputs") {
+                viewModel.resistance.value = "1"
+                expect(viewModel.resistanceDisplay.value).to(equal("1"))
+                viewModel.resistance.value = "1a"
+                expect(viewModel.resistanceDisplay.value).to(equal("1"))
+                viewModel.resistance.value = "1."
+                expect(viewModel.resistanceDisplay.value).to(equal("1."))
             }
         }
     }

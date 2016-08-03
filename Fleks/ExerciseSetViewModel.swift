@@ -9,16 +9,18 @@
 import Foundation
 import ReactiveCocoa
 
-enum ExerciseSetFormError: ErrorType {
-    case InvalidSet
-    case InvalidRep
-    case InvalidResistance
-}
+
 
 // requirements:
 // 1) resistance can accept 1 decimal, no decimals, this: "1." as a valid input
 // 2) reps, resistance, sets need to be non-zero
 class ExerciseSetViewModel {
+    
+    enum ExerciseSetFormError: ErrorType {
+        case InvalidSet
+        case InvalidRep
+        case InvalidResistance
+    }
     
     private let _repsVal = 10
     private let _setsVal = 4
@@ -32,7 +34,9 @@ class ExerciseSetViewModel {
     var sets: MutableProperty<String>
     var resistance: MutableProperty<String>
     
-    var repsProducer: SignalProducer<String, ExerciseSetFormError>!
+    var repsDisplay: MutableProperty<String>
+    var setsDisplay: MutableProperty<String>
+    var resistanceDisplay: MutableProperty<String>
     
     var isValid: MutableProperty<Bool> = MutableProperty(true)
     
@@ -42,6 +46,10 @@ class ExerciseSetViewModel {
     
     init() {
         
+        // bind:
+        // input -> display
+        // input -> backing value
+        
         _reps = MutableProperty(_repsVal)
         _sets = MutableProperty(_setsVal)
         _resistance = MutableProperty(_resistanceVal)
@@ -50,18 +58,22 @@ class ExerciseSetViewModel {
         sets = MutableProperty(String(_setsVal))
         resistance = MutableProperty(String(_resistanceVal))
         
-        _reps <~ reps.map { Int($0) }
-        _sets <~ sets.map { Int($0) }
-        _resistance <~ resistance.map { Double($0) }
+        repsDisplay = MutableProperty(String(_repsVal))
+        setsDisplay = MutableProperty(String(_setsVal))
+        resistanceDisplay = MutableProperty(String(_resistanceVal))
         
-        combineLatest(_reps.signal, _sets.signal, _resistance.signal)
-            .observeNext { reps, sets, resistance in
-                if reps == nil || sets == nil || resistance == nil {
-                    self.isValid.value = false
-                } else {
-                    self.isValid.value = true
-                }
-            }
-
+        _reps <~ reps.signal.map { Int($0) }
+        _sets <~ sets.signal.map { Int($0) }
+        _resistance <~ resistance.signal.map { Double($0) }
+        
+        
+        // states where private value is invalid
+        isValid <~ _reps.signal.map { $0 != nil }
+        isValid <~ _sets.signal.map { $0 != nil }
+        isValid <~ _resistance.signal.map { $0 != nil }
+        
+        repsDisplay <~ reps.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil ? prev : next }
+        setsDisplay <~ sets.signal.scan(String(_repsVal)) { (prev, next) in Int(next) == nil ? prev : next }
+        resistanceDisplay <~ resistance.signal.scan(String(_resistanceVal)) { (prev, next) in Double(next) == nil ? prev : next }
     }
 }
