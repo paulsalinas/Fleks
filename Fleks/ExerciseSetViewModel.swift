@@ -62,6 +62,7 @@ class ExerciseSetViewModel {
                         sets != nil && sets != 0 &&
                         resistance != nil && resistance != 0
                 }
+                .skipRepeats(==)
         }
     }
     
