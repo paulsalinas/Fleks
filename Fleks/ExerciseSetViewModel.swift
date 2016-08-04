@@ -58,9 +58,9 @@ class ExerciseSetViewModel {
         get {
             return combineLatest(_reps.producer, _sets.producer, _resistance.producer)
                 .map { (reps, sets, resistance) in
-                    return reps != nil &&
-                        sets != nil &&
-                        resistance != nil 
+                    return reps != nil && reps != 0 &&
+                        sets != nil && sets != 0 &&
+                        resistance != nil && resistance != 0
                 }
         }
     }

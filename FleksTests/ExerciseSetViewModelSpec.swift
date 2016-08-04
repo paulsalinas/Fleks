@@ -49,6 +49,15 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal([false]))
             }
             
+            it("should be invalid when a reps input is a zero") {
+                viewModel.repsInput.value = "0"
+                var result = [Bool]()
+                viewModel.isValidProducer.startWithNext { next in
+                    result.append(next)
+                }
+                expect(result).to(equal([false]))
+            }
+            
             it("should display a valid number for reps even with bad inputs") {
                 viewModel.repsInput.value = "1"
                 var result = [String]()
