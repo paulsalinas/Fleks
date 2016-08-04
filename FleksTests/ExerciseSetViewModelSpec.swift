@@ -31,31 +31,50 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal([true]))
             }
 
-            it("should be valid when reps is a valid number") {
+            it("should be valid when reps is a valid number with no repeats and flip when invalid") {
                 viewModel.repsInput.value = "2"
                 var result = [Bool]()
                 viewModel.isValidProducer.startWithNext { next in
                     result.append(next)
                 }
+                
+                viewModel.repsInput.value = "22"
                 expect(result).to(equal([true]))
+                
+                viewModel.repsInput.value = "invalid"
+                expect(result).to(equal([true, false]))
             }
             
-            it("should be invalid when a reps input is not a number") {
+            it("should be invalid when a reps input is not a number with no repeats and flip when valid") {
                 viewModel.repsInput.value = "invalid input"
                 var result = [Bool]()
                 viewModel.isValidProducer.startWithNext { next in
                     result.append(next)
                 }
+                
                 expect(result).to(equal([false]))
+                
+                viewModel.repsInput.value = "more invalid input"
+                expect(result).to(equal([false]))
+                
+                viewModel.repsInput.value = "2"
+                expect(result).to(equal([false, true]))
             }
             
-            it("should be invalid when a reps input is a zero") {
+            it("should be invalid when a reps input is a zero with no repeats and flip when valid") {
                 viewModel.repsInput.value = "0"
                 var result = [Bool]()
                 viewModel.isValidProducer.startWithNext { next in
                     result.append(next)
                 }
+                
                 expect(result).to(equal([false]))
+                
+                viewModel.repsInput.value = "0"
+                expect(result).to(equal([false]))
+                
+                viewModel.repsInput.value = "2"
+                expect(result).to(equal([false, true]))
             }
             
             it("should display a valid number for reps even with bad inputs") {
