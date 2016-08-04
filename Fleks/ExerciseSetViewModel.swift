@@ -10,13 +10,14 @@ import Foundation
 import ReactiveCocoa
 import Result
 
+enum ExerciseSetFormError {
+    case InvalidSet
+    case InvalidRep
+    case InvalidResistance
+    case None
+}
+
 class ExerciseSetViewModel {
-    
-    enum ExerciseSetFormError: ErrorType {
-        case InvalidSet
-        case InvalidRep
-        case InvalidResistance
-    }
     
     private let exercise: Exercise
     
@@ -54,13 +55,20 @@ class ExerciseSetViewModel {
         }
     }
     
-    var isValidProducer: SignalProducer<Bool, NoError> {
+    var isValidProducer: SignalProducer<ExerciseSetFormError, NoError> {
         get {
             return combineLatest(_reps.producer, _sets.producer, _resistance.producer)
                 .map { (reps, sets, resistance) in
-                    return reps != nil && reps != 0 &&
-                        sets != nil && sets != 0 &&
-                        resistance != nil && resistance != 0
+
+                    if reps == nil || reps == 0  {
+                        return ExerciseSetFormError.InvalidRep
+                    } else if sets == nil || sets == 0 {
+                        return ExerciseSetFormError.InvalidSet
+                    } else if resistance == nil || resistance == 0 {
+                        return ExerciseSetFormError.InvalidResistance
+                    } else {
+                        return ExerciseSetFormError.None
+                    }
                 }
                 .skipRepeats(==)
         }
