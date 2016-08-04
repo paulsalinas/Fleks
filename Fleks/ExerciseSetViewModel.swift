@@ -31,7 +31,7 @@ class ExerciseSetViewModel {
     var resistanceInput: MutableProperty<String>
     
     // used for proper display of values
-    var repsDisplay: SignalProducer<String, NoError> {
+    var repsDisplayProducer: SignalProducer<String, NoError> {
         get {
             return repsInput
                 .producer
@@ -39,14 +39,14 @@ class ExerciseSetViewModel {
         }
     }
     
-    var setsDisplay: SignalProducer<String, NoError> {
+    var setsDisplayProducer: SignalProducer<String, NoError> {
         get {
             return setsInput
                 .producer
                 .scan("") { (prev, next) in Int(next) == nil && next != "" ? prev : next }
         }
     }
-    var resistanceDisplay: SignalProducer<String, NoError> {
+    var resistanceDisplayProducer: SignalProducer<String, NoError> {
         get {
             return resistanceInput
                 .producer
@@ -60,9 +60,9 @@ class ExerciseSetViewModel {
         
         self.exercise = exercise
         
-        _reps = MutableProperty(_repsVal)
-        _sets = MutableProperty(_setsVal)
-        _resistance = MutableProperty(_resistanceVal)
+        _reps = MutableProperty(nil)
+        _sets = MutableProperty(nil)
+        _resistance = MutableProperty(nil)
         
         // these will be the default values
         repsInput = MutableProperty(String(10))
@@ -77,5 +77,6 @@ class ExerciseSetViewModel {
         isValid <~ _reps.signal.map { $0 != nil }
         isValid <~ _sets.signal.map { $0 != nil }
         isValid <~ _resistance.signal.map { $0 != nil }
+        
     }
 }

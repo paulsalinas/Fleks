@@ -19,7 +19,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
             var viewModel: ExerciseSetViewModel!
             
             beforeEach {
-                viewModel = ExerciseSetViewModel()
+                viewModel = ExerciseSetViewModel(exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()))
             }
             
             it("should initially be valid") {
@@ -40,7 +40,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 viewModel.repsInput.value = "1"
                 var result = [String]()
                 
-                viewModel.repsDisplay.startWithNext { next in
+                viewModel.repsDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -54,7 +54,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 viewModel.repsInput.value = "1"
                 var result = [String]()
                 
-                viewModel.repsDisplay.startWithNext { next in
+                viewModel.repsDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -67,7 +67,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 viewModel.setsInput.value = "1"
                 var result = [String]()
                 
-                viewModel.setsDisplay.startWithNext { next in
+                viewModel.setsDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -81,7 +81,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 viewModel.setsInput.value = "1"
                 var result = [String]()
                 
-                viewModel.setsDisplay.startWithNext { next in
+                viewModel.setsDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -90,11 +90,11 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal(["1", ""]))
             }
             
-            it("should display a valid number for resistance even with bad inputs") {
+            it("should DisplayProducer a valid number for resistance even with bad inputs") {
                 viewModel.resistanceInput.value = "1"
                 var result = [String]()
                 
-                viewModel.resistanceDisplay.startWithNext { next in
+                viewModel.resistanceDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -109,7 +109,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 viewModel.resistanceInput.value = "1"
                 var result = [String]()
                 
-                viewModel.resistanceDisplay.startWithNext { next in
+                viewModel.resistanceDisplayProducer.startWithNext { next in
                     result.append(next)
                 }
                 

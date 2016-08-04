@@ -32,19 +32,19 @@ class ExerciseSetFormViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.repsDisplay
+        viewModel.repsDisplayProducer
             .startWithNext { next in
                 self.repsTextField.text = next
                 self.repsStepper.value = Double(next) ?? 0
             }
         
-        viewModel.setsDisplay
+        viewModel.setsDisplayProducer
             .startWithNext { next in
                 self.setsTextField.text = next
                 self.setsStepper.value = Double(next) ?? 0
             }
         
-        viewModel.resistanceDisplay
+        viewModel.resistanceDisplayProducer
             .startWithNext { next in
                 self.resistanceTextField.text = next
                 self.resistanceStepper.value = Double(next) ?? 0
