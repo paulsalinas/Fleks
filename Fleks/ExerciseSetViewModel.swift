@@ -10,10 +10,6 @@ import Foundation
 import ReactiveCocoa
 import Result
 
-
-// requirements:
-// 1) resistance can accept 1 decimal, no decimals, this: "1." as a valid input
-// 2) reps, resistance, sets need to be non-zero
 class ExerciseSetViewModel {
     
     enum ExerciseSetFormError: ErrorType {
@@ -22,20 +18,19 @@ class ExerciseSetViewModel {
         case InvalidResistance
     }
     
-    private let _repsVal = 10
-    private let _setsVal = 4
-    private let _resistanceVal = 20.0
+    private let exercise: Exercise
     
+    // backing values
     private var _reps: MutableProperty<Int?>
     private var _sets: MutableProperty<Int?>
     private var _resistance: MutableProperty<Double?>
-    
-    
-    // bound to inp
+
+    // properties that are 'bind-able'
     var repsInput: MutableProperty<String>
     var setsInput: MutableProperty<String>
     var resistanceInput: MutableProperty<String>
     
+    // used for proper display of values
     var repsDisplay: SignalProducer<String, NoError> {
         get {
             return repsInput
@@ -65,14 +60,18 @@ class ExerciseSetViewModel {
     let setsStepValue = 1
     let resistanceStepValue = 2.5
     
-    init() {
+    init(exercise: Exercise) {
+        
+        self.exercise = exercise
+        
         _reps = MutableProperty(_repsVal)
         _sets = MutableProperty(_setsVal)
         _resistance = MutableProperty(_resistanceVal)
         
-        repsInput = MutableProperty(String(_repsVal))
-        setsInput = MutableProperty(String(_setsVal))
-        resistanceInput = MutableProperty(String(_resistanceVal))
+        // these will be the default values
+        repsInput = MutableProperty(String(10))
+        setsInput = MutableProperty(String(4))
+        resistanceInput = MutableProperty(String(20))
         
         _reps <~ repsInput.signal.map { Int($0) }
         _sets <~ setsInput.signal.map { Int($0) }

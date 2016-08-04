@@ -24,7 +24,9 @@ class ExerciseSetFormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ExerciseSetViewModel()
+        
+        // TODO: need to inject this dependency somewhere else
+        viewModel = ExerciseSetViewModel(exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()))
     }
     
     override func viewWillAppear(animated: Bool) {
