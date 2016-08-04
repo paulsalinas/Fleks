@@ -23,17 +23,30 @@ class ExerciseSetViewModelSpec: QuickSpec {
             }
             
             it("should initially be valid") {
-                expect(viewModel.isValid.value).to(equal(true))
+                var result = [Bool]()
+                viewModel.isValidProducer.startWithNext { next in
+                    print(next)
+                    result.append(next)
+                }
+                expect(result).to(equal([true]))
             }
-            
+
             it("should be valid when reps is a valid number") {
                 viewModel.repsInput.value = "2"
-                expect(viewModel.isValid.value).to(equal(true))
+                var result = [Bool]()
+                viewModel.isValidProducer.startWithNext { next in
+                    result.append(next)
+                }
+                expect(result).to(equal([true]))
             }
             
             it("should be invalid when a reps input is not a number") {
                 viewModel.repsInput.value = "invalid input"
-                expect(viewModel.isValid.value).to(equal(false))
+                var result = [Bool]()
+                viewModel.isValidProducer.startWithNext { next in
+                    result.append(next)
+                }
+                expect(result).to(equal([false]))
             }
             
             it("should display a valid number for reps even with bad inputs") {

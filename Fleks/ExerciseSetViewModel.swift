@@ -54,7 +54,16 @@ class ExerciseSetViewModel {
         }
     }
     
-    var isValid: MutableProperty<Bool> = MutableProperty(true)
+    var isValidProducer: SignalProducer<Bool, NoError> {
+        get {
+            return combineLatest(_reps.producer, _sets.producer, _resistance.producer)
+                .map { (reps, sets, resistance) in
+                    return reps != nil &&
+                        sets != nil &&
+                        resistance != nil 
+                }
+        }
+    }
     
     init(exercise: Exercise) {
         
@@ -69,14 +78,8 @@ class ExerciseSetViewModel {
         setsInput = MutableProperty(String(4))
         resistanceInput = MutableProperty(String(20))
         
-        _reps <~ repsInput.signal.map { Int($0) }
-        _sets <~ setsInput.signal.map { Int($0) }
-        _resistance <~ resistanceInput.signal.map { Double($0) }
-        
-        // states where private value is invalid
-        isValid <~ _reps.signal.map { $0 != nil }
-        isValid <~ _sets.signal.map { $0 != nil }
-        isValid <~ _resistance.signal.map { $0 != nil }
-        
+        _reps <~ repsInput.producer.map { Int($0) }
+        _sets <~ setsInput.producer.map { Int($0) }
+        _resistance <~ resistanceInput.producer.map { Double($0) }
     }
 }
