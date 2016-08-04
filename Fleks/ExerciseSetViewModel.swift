@@ -56,10 +56,6 @@ class ExerciseSetViewModel {
     
     var isValid: MutableProperty<Bool> = MutableProperty(true)
     
-    let repsStepValue = 1
-    let setsStepValue = 1
-    let resistanceStepValue = 2.5
-    
     init(exercise: Exercise) {
         
         self.exercise = exercise
