@@ -48,9 +48,9 @@
 		3CFEBB741CC98F55007E7817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFEBB731CC98F55007E7817 /* Assets.xcassets */; };
 		3CFEBB771CC98F55007E7817 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFEBB751CC98F55007E7817 /* LaunchScreen.storyboard */; };
 		3CFEBB8D1CC98F55007E7817 /* FleksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB8C1CC98F55007E7817 /* FleksUITests.swift */; };
-		3F88EE65156C4AFD534B84CF /* Pods_FleksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437E2DB22794BB3E0E517E12 /* Pods_FleksUITests.framework */; };
-		575CA0D6090C0F4D45D6854E /* Pods_FleksTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FBEC7CF3BB67DD58F03F76 /* Pods_FleksTests.framework */; };
-		9399C0DF3AA73AB91E6CB21D /* Pods_Fleks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F9F74104E30A4FE8CADEB5 /* Pods_Fleks.framework */; };
+		4BA0CA9C55B43FB33E9F79B0 /* Pods_FleksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69AAE7C65394F4BCDB0C39A1 /* Pods_FleksUITests.framework */; };
+		51B83616F2B1472C78A1A4DA /* Pods_Fleks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06316E99135F3D1924D21E37 /* Pods_Fleks.framework */; };
+		B4C4587FD4BF62993B810B01 /* Pods_FleksTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC4EC081F4FB529E4DEBAD3 /* Pods_FleksTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		39B36075706B4BF38F88654B /* Pods-Fleks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fleks/Pods-Fleks.release.xcconfig"; sourceTree = "<group>"; };
+		06316E99135F3D1924D21E37 /* Pods_Fleks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fleks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CC4EC081F4FB529E4DEBAD3 /* Pods_FleksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C036AC31CCEFADF00E9F8C1 /* ExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewController.swift; sourceTree = "<group>"; };
 		3C036AC51CCF06BA00E9F8C1 /* ExerciseDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDataSource.swift; sourceTree = "<group>"; };
 		3C036AC71CCF10D500E9F8C1 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
@@ -119,14 +120,13 @@
 		3CFEBB881CC98F55007E7817 /* FleksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FleksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFEBB8C1CC98F55007E7817 /* FleksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FleksUITests.swift; sourceTree = "<group>"; };
 		3CFEBB8E1CC98F55007E7817 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		437E2DB22794BB3E0E517E12 /* Pods_FleksUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleksUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53E790551C4A1C24D88C89A0 /* Pods-FleksUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FleksUITests/Pods-FleksUITests.release.xcconfig"; sourceTree = "<group>"; };
-		55F9F74104E30A4FE8CADEB5 /* Pods_Fleks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fleks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA192474D631402D778E2F30 /* Pods-FleksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FleksTests/Pods-FleksTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C4F6CA2B319426188674BF2F /* Pods-FleksTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FleksTests/Pods-FleksTests.release.xcconfig"; sourceTree = "<group>"; };
-		C7380879E56C33D964A02A48 /* Pods-Fleks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fleks/Pods-Fleks.debug.xcconfig"; sourceTree = "<group>"; };
-		D9FBEC7CF3BB67DD58F03F76 /* Pods_FleksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCDD190B429D3001F85349B4 /* Pods-FleksUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FleksUITests/Pods-FleksUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		69AAE7C65394F4BCDB0C39A1 /* Pods_FleksUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FleksUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		805C53AE05B56BA06926554C /* Pods-FleksUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FleksUITests/Pods-FleksUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		94AC3634807C60B870429C17 /* Pods-FleksTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FleksTests/Pods-FleksTests.release.xcconfig"; sourceTree = "<group>"; };
+		ABDEC5FE0D8D797FD7EE7733 /* Pods-Fleks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fleks/Pods-Fleks.debug.xcconfig"; sourceTree = "<group>"; };
+		B2C459B062D7A134B3ACEB5E /* Pods-Fleks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fleks/Pods-Fleks.release.xcconfig"; sourceTree = "<group>"; };
+		C89C79DB24B8E0698299BB85 /* Pods-FleksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FleksTests/Pods-FleksTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E12207052F119B05B9BD7857 /* Pods-FleksUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FleksUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FleksUITests/Pods-FleksUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9399C0DF3AA73AB91E6CB21D /* Pods_Fleks.framework in Frameworks */,
+				51B83616F2B1472C78A1A4DA /* Pods_Fleks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				575CA0D6090C0F4D45D6854E /* Pods_FleksTests.framework in Frameworks */,
+				B4C4587FD4BF62993B810B01 /* Pods_FleksTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F88EE65156C4AFD534B84CF /* Pods_FleksUITests.framework in Frameworks */,
+				4BA0CA9C55B43FB33E9F79B0 /* Pods_FleksUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,8 +242,8 @@
 				3CFEBB801CC98F55007E7817 /* FleksTests */,
 				3CFEBB8B1CC98F55007E7817 /* FleksUITests */,
 				3CFEBB6A1CC98F55007E7817 /* Products */,
-				DF8C076CDD70800BD1A37AB9 /* Pods */,
-				F0CD83CFAA97B55AD93A7398 /* Frameworks */,
+				EF19ECAEB1861031F8271248 /* Pods */,
+				EC37C617D4CE4E0A2BEDA836 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -300,27 +300,27 @@
 			path = FleksUITests;
 			sourceTree = "<group>";
 		};
-		DF8C076CDD70800BD1A37AB9 /* Pods */ = {
+		EC37C617D4CE4E0A2BEDA836 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C7380879E56C33D964A02A48 /* Pods-Fleks.debug.xcconfig */,
-				39B36075706B4BF38F88654B /* Pods-Fleks.release.xcconfig */,
-				AA192474D631402D778E2F30 /* Pods-FleksTests.debug.xcconfig */,
-				C4F6CA2B319426188674BF2F /* Pods-FleksTests.release.xcconfig */,
-				DCDD190B429D3001F85349B4 /* Pods-FleksUITests.debug.xcconfig */,
-				53E790551C4A1C24D88C89A0 /* Pods-FleksUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F0CD83CFAA97B55AD93A7398 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				55F9F74104E30A4FE8CADEB5 /* Pods_Fleks.framework */,
-				D9FBEC7CF3BB67DD58F03F76 /* Pods_FleksTests.framework */,
-				437E2DB22794BB3E0E517E12 /* Pods_FleksUITests.framework */,
+				06316E99135F3D1924D21E37 /* Pods_Fleks.framework */,
+				2CC4EC081F4FB529E4DEBAD3 /* Pods_FleksTests.framework */,
+				69AAE7C65394F4BCDB0C39A1 /* Pods_FleksUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF19ECAEB1861031F8271248 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABDEC5FE0D8D797FD7EE7733 /* Pods-Fleks.debug.xcconfig */,
+				B2C459B062D7A134B3ACEB5E /* Pods-Fleks.release.xcconfig */,
+				C89C79DB24B8E0698299BB85 /* Pods-FleksTests.debug.xcconfig */,
+				94AC3634807C60B870429C17 /* Pods-FleksTests.release.xcconfig */,
+				805C53AE05B56BA06926554C /* Pods-FleksUITests.debug.xcconfig */,
+				E12207052F119B05B9BD7857 /* Pods-FleksUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -760,7 +760,7 @@
 		};
 		3CFEBB921CC98F55007E7817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7380879E56C33D964A02A48 /* Pods-Fleks.debug.xcconfig */;
+			baseConfigurationReference = ABDEC5FE0D8D797FD7EE7733 /* Pods-Fleks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEFINES_MODULE = YES;
@@ -792,7 +792,7 @@
 		};
 		3CFEBB931CC98F55007E7817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39B36075706B4BF38F88654B /* Pods-Fleks.release.xcconfig */;
+			baseConfigurationReference = B2C459B062D7A134B3ACEB5E /* Pods-Fleks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEFINES_MODULE = YES;
@@ -805,7 +805,7 @@
 		};
 		3CFEBB951CC98F55007E7817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA192474D631402D778E2F30 /* Pods-FleksTests.debug.xcconfig */;
+			baseConfigurationReference = C89C79DB24B8E0698299BB85 /* Pods-FleksTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -814,7 +814,10 @@
 					"\"$CONFIGURATION_BUILD_DIR/Quick\"",
 					"\"${PODS_ROOT}/Firebase\"",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Pods/**",
+				);
 				INFOPLIST_FILE = FleksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.FleksTests;
@@ -825,10 +828,13 @@
 		};
 		3CFEBB961CC98F55007E7817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F6CA2B319426188674BF2F /* Pods-FleksTests.release.xcconfig */;
+			baseConfigurationReference = 94AC3634807C60B870429C17 /* Pods-FleksTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Pods/**",
+				);
 				INFOPLIST_FILE = FleksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.udacity.FleksTests;
@@ -839,7 +845,7 @@
 		};
 		3CFEBB981CC98F55007E7817 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCDD190B429D3001F85349B4 /* Pods-FleksUITests.debug.xcconfig */;
+			baseConfigurationReference = 805C53AE05B56BA06926554C /* Pods-FleksUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FleksUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -851,7 +857,7 @@
 		};
 		3CFEBB991CC98F55007E7817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53E790551C4A1C24D88C89A0 /* Pods-FleksUITests.release.xcconfig */;
+			baseConfigurationReference = E12207052F119B05B9BD7857 /* Pods-FleksUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FleksUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

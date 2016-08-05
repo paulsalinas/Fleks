@@ -6,10 +6,10 @@
 //  Copyright © 2016 Paul Salinas. All rights reserved.
 //
 
-import Quick
-import Nimble
 import Result
 import ReactiveCocoa
+import Nimble
+import Quick
 
 @testable import Fleks
 
@@ -17,6 +17,9 @@ class ExerciseSetViewModelSpec: QuickSpec {
     override func spec() {
         describe("ExerciseSetViewModel") {
             var viewModel: ExerciseSetViewModel!
+            let repsErrorMsg = "Reps must be a number greater than 0"
+            let setsErrorMsg = "Sets must be a number greater than 0"
+            let resistanceErrorMsg = "Resistance must be a number greater than 0"
             
             beforeEach {
                 viewModel = ExerciseSetViewModel(exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()))
@@ -24,7 +27,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
             
             it("should initially be valid") {
                 var result = [ExerciseSetFormError]()
-                viewModel.isValidProducer.startWithNext { next in
+                viewModel.isValidationErrorProducer.startWithNext { next in
                     print(next)
                     result.append(next)
                 }
@@ -34,7 +37,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
             it("should be valid when reps is a valid number with no repeats and flip when invalid") {
                 viewModel.repsInput.value = "2"
                 var result = [ExerciseSetFormError]()
-                viewModel.isValidProducer.startWithNext { next in
+                viewModel.isValidationErrorProducer.startWithNext { next in
                     result.append(next)
                 }
                 
@@ -42,39 +45,40 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal([ExerciseSetFormError.None]))
                 
                 viewModel.repsInput.value = "invalid"
-                expect(result).to(equal([ExerciseSetFormError.None, ExerciseSetFormError.InvalidRep]))
+                expect(result).to(equal([ExerciseSetFormError.None, ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                
             }
             
             it("should be invalid when a reps input is not a number with no repeats and flip when valid") {
                 viewModel.repsInput.value = "invalid input"
                 var result = [ExerciseSetFormError]()
-                viewModel.isValidProducer.startWithNext { next in
+                viewModel.isValidationErrorProducer.startWithNext { next in
                     result.append(next)
                 }
                 
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep]))
+                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
                 
                 viewModel.repsInput.value = "more invalid input"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep]))
+                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
                 
                 viewModel.repsInput.value = "2"
-                expect(result).to(equal([ ExerciseSetFormError.InvalidRep, ExerciseSetFormError.None,]))
+                expect(result).to(equal([ ExerciseSetFormError.InvalidRep(repsErrorMsg), ExerciseSetFormError.None,]))
             }
             
             it("should be invalid when a reps input is a zero with no repeats and flip when valid") {
                 viewModel.repsInput.value = "0"
                 var result = [ExerciseSetFormError]()
-                viewModel.isValidProducer.startWithNext { next in
+                viewModel.isValidationErrorProducer.startWithNext { next in
                     result.append(next)
                 }
                 
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep]))
+                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
                 
                 viewModel.repsInput.value = "0"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep]))
+                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
                 
                 viewModel.repsInput.value = "2"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep, ExerciseSetFormError.None]))
+                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg), ExerciseSetFormError.None]))
             }
             
             it("should display a valid number for reps even with bad inputs") {

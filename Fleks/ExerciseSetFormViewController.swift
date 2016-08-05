@@ -19,8 +19,10 @@ class ExerciseSetFormViewController: UIViewController {
     @IBOutlet weak var resistanceStepper: UIStepper!
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var viewModel: ExerciseSetViewModel!
+    let errorColor = UIColor.redColor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +60,9 @@ class ExerciseSetFormViewController: UIViewController {
             .map(removeDecimalsIfAny)
         
         viewModel.resistanceInput <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
-
+        
+        viewModel.isValidationErrorProducer
+            .startWithNext(updateStateWithError)
     }
     
     func createMergedSignalProducer(textField textField: UITextField, stepper: UIStepper) -> SignalProducer<String, NoError> {
@@ -69,4 +73,22 @@ class ExerciseSetFormViewController: UIViewController {
             .flatten(.Merge)
     }
     
+    func updateStateWithError(validationError: ExerciseSetFormError) {
+        switch (validationError) {
+            case .InvalidRep(let errMsg):
+                repsTextField.backgroundColor = errorColor
+                errorLabel.text = errMsg
+            case .InvalidResistance(let errMsg):
+                resistanceTextField.backgroundColor = errorColor
+                errorLabel.text = errMsg
+            case .InvalidSet(let errMsg):
+                setsTextField.backgroundColor = errorColor
+                errorLabel.text = errMsg
+            case .None:
+                repsTextField.backgroundColor = UIColor.whiteColor()
+                setsTextField.backgroundColor = UIColor.whiteColor()
+                resistanceTextField.backgroundColor = UIColor.whiteColor()
+                errorLabel.text = ""
+        }
+    }
 }
