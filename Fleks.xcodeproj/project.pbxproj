@@ -19,6 +19,8 @@
 		3C2C15511CE7CBED009956AF /* WorkoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */; };
 		3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */; };
 		3C2F1D611D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D601D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift */; };
+		3C2F1D641D556B47005B46E4 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D631D556B47005B46E4 /* DataStore.swift */; };
+		3C2F1D661D556CB7005B46E4 /* FirebaseDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D651D556CB7005B46E4 /* FirebaseDataStore.swift */; };
 		3C4E50231CD826FD00440D78 /* AddExerciseCompletionSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */; };
 		3C64A2D71D42FCB8005D0F69 /* ExerciseSetFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */; };
 		3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */; };
@@ -86,6 +88,8 @@
 		3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataSource.swift; sourceTree = "<group>"; };
 		3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewController.swift; sourceTree = "<group>"; };
 		3C2F1D601D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+ReactiveCocoa.swift"; sourceTree = "<group>"; };
+		3C2F1D631D556B47005B46E4 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		3C2F1D651D556CB7005B46E4 /* FirebaseDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataStore.swift; sourceTree = "<group>"; };
 		3C4E50221CD826FD00440D78 /* AddExerciseCompletionSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseCompletionSegue.swift; sourceTree = "<group>"; };
 		3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetFormViewController.swift; sourceTree = "<group>"; };
 		3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalTextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +163,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C2F1D621D556B2E005B46E4 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				3C2F1D631D556B47005B46E4 /* DataStore.swift */,
+				3C2F1D651D556CB7005B46E4 /* FirebaseDataStore.swift */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
 		3C64A2D81D43FF2D005D0F69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */,
+				3C2F1D621D556B2E005B46E4 /* Store */,
 				3C9378DC1D3ADE2100A0CA8B /* Segues */,
 				3C9378D51D35CC8400A0CA8B /* ViewModels */,
 				3C64A2D81D43FF2D005D0F69 /* Views */,
@@ -608,12 +622,14 @@
 				3CB25B081D04CEDB00756B45 /* FirebaseClient.swift in Sources */,
 				3CB25B041CFA522D00756B45 /* ExerciseDataManager.swift in Sources */,
 				3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */,
+				3C2F1D661D556CB7005B46E4 /* FirebaseDataStore.swift in Sources */,
 				3C2C15511CE7CBED009956AF /* WorkoutDataSource.swift in Sources */,
 				3C2C154D1CE7CADA009956AF /* WorkoutTableViewController.swift in Sources */,
 				3CB25B021CF536C800756B45 /* CoreDataStore.swift in Sources */,
 				3C036AC81CCF10D500E9F8C1 /* Workout.swift in Sources */,
 				3CFEBB6F1CC98F55007E7817 /* LoginViewController.swift in Sources */,
 				3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */,
+				3C2F1D641D556B47005B46E4 /* DataStore.swift in Sources */,
 				3C036AD41CD1A4A800E9F8C1 /* Checkbox.swift in Sources */,
 				3CFEBB6D1CC98F55007E7817 /* AppDelegate.swift in Sources */,
 				3C036AC61CCF06BA00E9F8C1 /* ExerciseDataSource.swift in Sources */,
