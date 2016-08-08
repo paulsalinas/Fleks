@@ -382,42 +382,11 @@
                                 <rect key="frame" x="491" y="518" width="89" height="30"/>
                                 <state key="normal" title="Add Exercise"/>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
-                                <rect key="frame" x="55" y="84" width="491" height="315"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                                <rect key="frame" x="55" y="84" width="491" height="249"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9y8-cg-maD">
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
                                         <rect key="frame" x="0.0" y="0.0" width="491" height="51"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Resistance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfw-l3-uwS">
-                                                <rect key="frame" x="0.0" y="16" width="302" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="16" width="102" height="21"/>
-                                                </variation>
-                                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="16" width="502" height="21"/>
-                                                </variation>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9t-Xa-drq">
-                                                <rect key="frame" x="312" y="11" width="75" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="75" id="v66-3O-eKY"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                                            </textField>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10000000" stepValue="2.5" translatesAutoresizingMaskIntoConstraints="NO" id="vcZ-1n-xfk">
-                                                <rect key="frame" x="397" y="11" width="94" height="29"/>
-                                            </stepper>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="uDl-Jh-9aE"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
-                                        <rect key="frame" x="0.0" y="66" width="491" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkj-PO-Tdk">
                                                 <rect key="frame" x="0.0" y="16" width="302" height="21"/>
@@ -447,8 +416,8 @@
                                             <constraint firstAttribute="height" constant="51" id="410-f4-Ao5"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="twQ-Sv-eEL">
-                                        <rect key="frame" x="0.0" y="132" width="491" height="51"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="twQ-Sv-eEL">
+                                        <rect key="frame" x="0.0" y="66" width="491" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5M-Y7-y44">
                                                 <rect key="frame" x="0.0" y="16" width="304" height="21"/>
@@ -478,14 +447,14 @@
                                             <constraint firstAttribute="height" constant="51" id="F96-DB-zgW"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
-                                        <rect key="frame" x="0.0" y="198" width="491" height="51"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
+                                        <rect key="frame" x="0.0" y="132" width="491" height="51"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1k-Cy-3eW">
-                                        <rect key="frame" x="0.0" y="264" width="491" height="51"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1k-Cy-3eW">
+                                        <rect key="frame" x="0.0" y="198" width="491" height="51"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -506,8 +475,6 @@
                         <outlet property="errorLabel" destination="V1k-Cy-3eW" id="ch0-S1-Lbr"/>
                         <outlet property="repsStepper" destination="dGl-SM-E4j" id="cbO-rm-mo4"/>
                         <outlet property="repsTextField" destination="LAB-un-o4V" id="wKZ-g0-Bsi"/>
-                        <outlet property="resistanceStepper" destination="vcZ-1n-xfk" id="z7k-U8-XIS"/>
-                        <outlet property="resistanceTextField" destination="Y9t-Xa-drq" id="Rmd-om-YDg"/>
                         <outlet property="setsStepper" destination="UNv-t5-cbd" id="6jw-ea-Q1j"/>
                         <outlet property="setsTextField" destination="YEc-sp-4a1" id="7ma-JJ-Fj8"/>
                     </connections>

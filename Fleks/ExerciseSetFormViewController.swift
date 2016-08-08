@@ -13,10 +13,8 @@ import Foundation
 
 class ExerciseSetFormViewController: UIViewController {
 
-    @IBOutlet weak var resistanceTextField: UITextField!
     @IBOutlet weak var setsTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
-    @IBOutlet weak var resistanceStepper: UIStepper!
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
     @IBOutlet weak var errorLabel: UILabel!
@@ -46,21 +44,13 @@ class ExerciseSetFormViewController: UIViewController {
                 self.setsStepper.value = Double(next) ?? 0
             }
         
-        viewModel.resistanceDisplayProducer
-            .startWithNext { next in
-                self.resistanceTextField.text = next
-                self.resistanceStepper.value = Double(next) ?? 0
-            }
-        
         let removeDecimalsIfAny: String -> String = { $0.containsString(".") ? $0.characters.split(".").map(String.init)[0] : $0 }
         
         viewModel.repsInput <~ createMergedSignalProducer(textField: repsTextField, stepper: repsStepper)
             .map(removeDecimalsIfAny)
         viewModel.setsInput <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
             .map(removeDecimalsIfAny)
-        
-        viewModel.resistanceInput <~ createMergedSignalProducer(textField: resistanceTextField, stepper: resistanceStepper)
-        
+    
         viewModel.isValidationErrorProducer
             .startWithNext(updateStateWithError)
     }
@@ -78,16 +68,12 @@ class ExerciseSetFormViewController: UIViewController {
             case .InvalidRep(let errMsg):
                 repsTextField.backgroundColor = errorColor
                 errorLabel.text = errMsg
-            case .InvalidResistance(let errMsg):
-                resistanceTextField.backgroundColor = errorColor
-                errorLabel.text = errMsg
             case .InvalidSet(let errMsg):
                 setsTextField.backgroundColor = errorColor
                 errorLabel.text = errMsg
             case .None:
                 repsTextField.backgroundColor = UIColor.whiteColor()
                 setsTextField.backgroundColor = UIColor.whiteColor()
-                resistanceTextField.backgroundColor = UIColor.whiteColor()
                 errorLabel.text = ""
         }
     }
