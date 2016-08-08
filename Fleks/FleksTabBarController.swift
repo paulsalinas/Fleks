@@ -11,11 +11,11 @@ import UIKit
 class FleksTabBarController: UITabBarController {
     
     func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, workoutViewModel: WorkoutViewModel) {
-        let navController = viewControllers![0] as! UINavigationController
+        let navController = viewControllers![1] as! UINavigationController
         let exerciseTableViewController = navController.topViewController as! ExerciseTableViewController
         exerciseTableViewController.injectDependency(exerciseViewModel)
         
-        let workoutNavController = viewControllers![1] as! UINavigationController
+        let workoutNavController = viewControllers![0] as! UINavigationController
         let workoutController = workoutNavController.topViewController as! WorkoutTableViewController
         workoutController.injectDependency(workoutViewModel)
     }
