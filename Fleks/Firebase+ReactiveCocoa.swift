@@ -13,7 +13,7 @@ import Result
 
 
 extension FIRDatabaseReference {
-    func rac_events(event: FIRDataEventType) -> SignalProducer<FIRDataSnapshot, NSError> {
+    func signalProducerForEvent(event: FIRDataEventType) -> SignalProducer<FIRDataSnapshot, NSError> {
         return SignalProducer { observer, disposable in
             let handle = self.observeEventType(event,
                 withBlock: { snapshot in
@@ -27,7 +27,7 @@ extension FIRDatabaseReference {
         }
     }
     
-    func rac_singleEvent(event: FIRDataEventType) -> SignalProducer<FIRDataSnapshot, NSError> {
+    func signalProducerForSingleEvent(event: FIRDataEventType) -> SignalProducer<FIRDataSnapshot, NSError> {
         return SignalProducer { observer, _ in
             self.observeSingleEventOfType(event, withBlock: { snapshot in
                 observer.sendNext(snapshot)
