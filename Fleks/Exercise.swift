@@ -17,7 +17,9 @@ struct Exercise: Equatable {
 }
 
 func ==(lhs: Exercise, rhs: Exercise) -> Bool {
-    return lhs.id == rhs.id 
+    return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.muscles == rhs.muscles
 }
 
 extension Exercise {
