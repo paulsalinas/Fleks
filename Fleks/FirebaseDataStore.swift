@@ -19,23 +19,26 @@ class FireBaseDataStore: DataStore {
     private let firebaseDB: FIRDatabase
     private let user: User
     
-    private var muscles: [Muscle]
     private var exercises: [Exercise]
     
-    init(firebaseDB: FIRDatabase, user: User, muscles: [Muscle]) {
+    init(firebaseDB: FIRDatabase, user: User) {
         self.firebaseDB = firebaseDB
         self.user = user
-        self.muscles = muscles
         self.exercises = [Exercise]()
         
         self.workoutsRef
             .signalProducerForEvent(.Value)
             .startWithNext { snapshot in
-                let userExercises:[Exercise] = snapshot.children.map { snap in
-                    let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
-                    return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
-                }
-                self.exercises = userExercises
+                self.musclesRef
+                    .signalProducerForSingleEvent(.Value)
+                    .startWithNext { snapshotMuscles in
+                        let muscles = snapshot.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
+                        let userExercises:[Exercise] = snapshot.children.map { snap in
+                            let exerciseMuscles = muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
+                            return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
+                        }
+                        self.exercises = userExercises
+                    }
             }
     }
     
@@ -63,7 +66,7 @@ class FireBaseDataStore: DataStore {
         }
     }
 
-    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, order: Int, toWorkout workout: Workout) throws -> SignalProducer<ExerciseSetGroup, NSError> {
+    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, order: Int, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> {
         
         return SignalProducer { observer, disposable in
             

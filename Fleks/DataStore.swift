@@ -11,5 +11,5 @@ import ReactiveCocoa
 import Result
 
 protocol DataStore {
-    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, order: Int, toWorkout workout: Workout) throws -> SignalProducer<ExerciseSetGroup, NSError> 
+    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, order: Int, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> 
 }
