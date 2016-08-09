@@ -68,7 +68,7 @@ class FireBaseDataStore: DataStore {
 
     func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> {
         
-        return SignalProducer { observer, disposable in
+        return SignalProducer { observer, _ in
             
             let ref = self.workoutsRef.child(workout.id).child("exerciseSetGroups").child(String(workout.exerciseSets.count))
             
@@ -80,8 +80,8 @@ class FireBaseDataStore: DataStore {
                     observer.sendFailed(error)
                 }
                 observer.sendNext(exerciseSetGroup)
+                observer.sendCompleted()
             })
-
         }
     }
 }
