@@ -20,15 +20,15 @@ class FirebaseDataUtilsSpec: QuickSpec {
         describe("FirebaseDataUtils") {
             it("should convert an ExerciseSetGroup group struct to the appropriate format required by firebase") {
                 let exercise = Exercise(id: "1", name: "chest press", muscles: [Muscle(id: "1", name: "chest")])
-                let exerciseSets = (1...3).map { ExerciseSet(order: $0, repetitions: 10, exercise: exercise) }
-                let exerciseSetGroup =  ExerciseSetGroup(order: 1, sets: exerciseSets, notes: "notes")
+                let exerciseSets = (1...3).map { _ in ExerciseSet(repetitions: 10, exercise: exercise) }
+                let exerciseSetGroup =  ExerciseSetGroup(sets: exerciseSets, notes: "notes")
                 
                 let expected: NSDictionary = [
                     "notes" : "notes",
                     "exerciseSets": [
+                        "0": [ "repetitions": 10, "exerciseId": "1"],
                         "1": [ "repetitions": 10, "exerciseId": "1"],
                         "2": [ "repetitions": 10, "exerciseId": "1"],
-                        "3": [ "repetitions": 10, "exerciseId": "1"],
                     ]
                 ]
                 
@@ -37,7 +37,7 @@ class FirebaseDataUtilsSpec: QuickSpec {
             }
             
             it("should convert an ExerciseSet struct to the appropriate format required by firebase") {
-                let exerciseSet = ExerciseSet(order: 1, repetitions: 10, exercise: Exercise(id: "1", name: "chest press", muscles: [Muscle(id: "1", name: "chest")]))
+                let exerciseSet = ExerciseSet(repetitions: 10, exercise: Exercise(id: "1", name: "chest press", muscles: [Muscle(id: "1", name: "chest")]))
                 
                 let expected: NSDictionary = [ "repetitions": 10, "exerciseId": "1"]
                 let result = FirebaseDataUtils.convertFirebaseData(exerciseSet)

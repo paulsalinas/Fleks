@@ -66,14 +66,14 @@ class FireBaseDataStore: DataStore {
         }
     }
 
-    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, order: Int, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> {
+    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> {
         
         return SignalProducer { observer, disposable in
             
-            let ref = self.workoutsRef.child(workout.id).child("exerciseSetGroups").child(String(order))
+            let ref = self.workoutsRef.child(workout.id).child("exerciseSetGroups").child(String(workout.exerciseSets.count))
             
-            let exerciseSets = (1...sets).map { ExerciseSet(order: $0, repetitions: repetitions, exercise: exercise) }
-            let exerciseSetGroup =  ExerciseSetGroup(order: order, sets: exerciseSets, notes: notes)
+            let exerciseSets = (1...sets).map { _ in ExerciseSet(repetitions: repetitions, exercise: exercise) }
+            let exerciseSetGroup =  ExerciseSetGroup(sets: exerciseSets, notes: notes)
             
             ref.setValue(FirebaseDataUtils.convertFirebaseData(exerciseSetGroup), withCompletionBlock: { error, _ in
                 if let error = error {

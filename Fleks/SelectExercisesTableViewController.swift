@@ -53,7 +53,7 @@ class SelectExercisesTableViewController: UITableViewController {
         if (segue.identifier == "EnterSetDetailsSegue") {
             let vc = segue.destinationViewController as! ExerciseSetFormViewController
             let tabBarController = self.tabBarController as! FleksTabBarController
-            vc.injectDependency(tabBarController.createExerciseSetViewModel(selectedExercise, order: workout.exerciseSets.count + 1, workout: workout))
+            vc.injectDependency(tabBarController.createExerciseSetViewModel(selectedExercise, workout: workout))
         }
     }
 }

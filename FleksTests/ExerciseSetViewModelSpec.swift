@@ -18,11 +18,16 @@ class ExerciseSetViewModelSpec: QuickSpec {
         describe("ExerciseSetViewModel") {
             var viewModel: ExerciseSetViewModel!
             let repsErrorMsg = "Reps must be a number greater than 0"
-            let setsErrorMsg = "Sets must be a number greater than 0"
-            let resistanceErrorMsg = "Resistance must be a number greater than 0"
+//            let setsErrorMsg = "Sets must be a number greater than 0"
+//            let resistanceErrorMsg = "Resistance must be a number greater than 0"
             
             beforeEach {
-                viewModel = ExerciseSetViewModel(exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()))
+                viewModel = ExerciseSetViewModel(
+                    exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()),
+                    order: 1,
+                    workout: Workout(id: "test", name: "test", exerciseSets: [ExerciseSetGroup]()),
+                    dataStore: FakeDataStore()
+                )
             }
             
             it("should initially be valid") {

@@ -39,6 +39,7 @@
 		3C9378DB1D35D6AC00A0CA8B /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378DA1D35D6AC00A0CA8B /* ExerciseViewModel.swift */; };
 		3C9378DE1D3AE0B800A0CA8B /* ShowTabBarSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */; };
 		3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378E11D3D9E9300A0CA8B /* WorkoutViewModel.swift */; };
+		3C99BED91D596C2B008079A3 /* FakeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99BED81D596C2B008079A3 /* FakeDataStore.swift */; };
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
 		3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */; };
@@ -109,6 +110,7 @@
 		3C9378DA1D35D6AC00A0CA8B /* ExerciseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTabBarSegue.swift; sourceTree = "<group>"; };
 		3C9378E11D3D9E9300A0CA8B /* WorkoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
+		3C99BED81D596C2B008079A3 /* FakeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDataStore.swift; sourceTree = "<group>"; };
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExercisesTableViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				3C2F1D631D556B47005B46E4 /* DataStore.swift */,
 				3C2F1D651D556CB7005B46E4 /* FirebaseDataStore.swift */,
+				3C99BED81D596C2B008079A3 /* FakeDataStore.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				3C2F1D6A1D581FF2005B46E4 /* FirebaseDataUtils.swift in Sources */,
 				3CFEBB6F1CC98F55007E7817 /* LoginViewController.swift in Sources */,
 				3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */,
+				3C99BED91D596C2B008079A3 /* FakeDataStore.swift in Sources */,
 				3C2F1D641D556B47005B46E4 /* DataStore.swift in Sources */,
 				3C036AD41CD1A4A800E9F8C1 /* Checkbox.swift in Sources */,
 				3CFEBB6D1CC98F55007E7817 /* AppDelegate.swift in Sources */,

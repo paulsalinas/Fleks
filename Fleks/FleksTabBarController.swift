@@ -24,8 +24,8 @@ class FleksTabBarController: UITabBarController {
         self.dataStore = dataStore
     }
     
-    func createExerciseSetViewModel(exercise: Exercise, order: Int, workout: Workout) -> ExerciseSetViewModel {
-        return ExerciseSetViewModel(exercise: exercise, order: order, workout: workout, dataStore: dataStore)
+    func createExerciseSetViewModel(exercise: Exercise, workout: Workout) -> ExerciseSetViewModel {
+        return ExerciseSetViewModel(exercise: exercise, workout: workout, dataStore: dataStore)
     }
     
 }

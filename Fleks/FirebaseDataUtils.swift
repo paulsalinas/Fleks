@@ -11,7 +11,8 @@ import Foundation
 struct FirebaseDataUtils {
     static func convertFirebaseData(exerciseSetGroup: ExerciseSetGroup) -> [String: AnyObject] {
         var exerciseSets = [String: AnyObject]()
-        exerciseSetGroup.sets.forEach { exerciseSets[String($0.order)] = convertFirebaseData($0) }
+        exerciseSetGroup.sets.enumerate()
+            .forEach { index, exerciseSet in  exerciseSets[String(index)] = convertFirebaseData(exerciseSet) }
         
         return  [
             "notes" : exerciseSetGroup.notes,
