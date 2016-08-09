@@ -378,14 +378,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtM-QK-ghk">
-                                <rect key="frame" x="491" y="518" width="89" height="30"/>
-                                <state key="normal" title="Add Exercise"/>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
-                                <rect key="frame" x="55" y="84" width="491" height="249"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                                <rect key="frame" x="55" y="69" width="491" height="271"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
                                         <rect key="frame" x="0.0" y="0.0" width="491" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkj-PO-Tdk">
@@ -416,8 +412,8 @@
                                             <constraint firstAttribute="height" constant="51" id="410-f4-Ao5"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="twQ-Sv-eEL">
-                                        <rect key="frame" x="0.0" y="66" width="491" height="51"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="twQ-Sv-eEL">
+                                        <rect key="frame" x="0.0" y="55" width="491" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5M-Y7-y44">
                                                 <rect key="frame" x="0.0" y="16" width="304" height="21"/>
@@ -447,32 +443,43 @@
                                             <constraint firstAttribute="height" constant="51" id="F96-DB-zgW"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
-                                        <rect key="frame" x="0.0" y="132" width="491" height="51"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
+                                        <rect key="frame" x="0.0" y="110" width="491" height="51"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1k-Cy-3eW">
-                                        <rect key="frame" x="0.0" y="198" width="491" height="51"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1k-Cy-3eW">
+                                        <rect key="frame" x="0.0" y="165" width="491" height="51"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtM-QK-ghk">
+                                        <rect key="frame" x="0.0" y="220" width="491" height="51"/>
+                                        <color key="backgroundColor" red="0.27058823529999998" green="0.52941176469999995" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Add Exercise">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="touchUpAddExerciseBtn:" destination="jcZ-Qn-JNT" eventType="touchUpInside" id="0lv-fG-O2e"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9In-0r-bw0" firstAttribute="top" secondItem="PtM-QK-ghk" secondAttribute="bottom" constant="8" id="Un8-T7-iey"/>
                             <constraint firstItem="j3h-pf-XyT" firstAttribute="leading" secondItem="DAp-xc-Uh3" secondAttribute="leadingMargin" constant="35" id="VSL-05-3v2"/>
-                            <constraint firstItem="j3h-pf-XyT" firstAttribute="top" secondItem="FNf-vP-GyY" secondAttribute="bottom" constant="20" id="g8t-wH-bL3"/>
-                            <constraint firstItem="PtM-QK-ghk" firstAttribute="trailing" secondItem="DAp-xc-Uh3" secondAttribute="trailingMargin" id="iM6-8d-cSZ"/>
+                            <constraint firstItem="j3h-pf-XyT" firstAttribute="top" secondItem="FNf-vP-GyY" secondAttribute="bottom" constant="5" id="g8t-wH-bL3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="j3h-pf-XyT" secondAttribute="trailing" constant="34" id="j0u-lp-HNP"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addExerciseBtn" destination="PtM-QK-ghk" id="0sq-Q0-FbJ"/>
                         <outlet property="errorLabel" destination="V1k-Cy-3eW" id="ch0-S1-Lbr"/>
+                        <outlet property="notesTextField" destination="9fM-Rl-o9m" id="AHT-NX-gdj"/>
                         <outlet property="repsStepper" destination="dGl-SM-E4j" id="cbO-rm-mo4"/>
                         <outlet property="repsTextField" destination="LAB-un-o4V" id="wKZ-g0-Bsi"/>
                         <outlet property="setsStepper" destination="UNv-t5-cbd" id="6jw-ea-Q1j"/>

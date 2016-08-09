@@ -18,6 +18,9 @@ class ExerciseSetFormViewController: UIViewController {
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var notesTextField: UITextView!
+    
+    @IBOutlet weak var addExerciseBtn: UIButton!
     
     var viewModel: ExerciseSetViewModel!
     let errorColor = UIColor.redColor()
@@ -51,6 +54,8 @@ class ExerciseSetFormViewController: UIViewController {
             .map(removeDecimalsIfAny)
         viewModel.setsInput <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
             .map(removeDecimalsIfAny)
+        
+        viewModel.notesInput <~ notesTextField.keyPress()
     
         viewModel.isValidationErrorProducer
             .startWithNext(updateStateWithError)
@@ -69,13 +74,22 @@ class ExerciseSetFormViewController: UIViewController {
             case .InvalidRep(let errMsg):
                 repsTextField.backgroundColor = errorColor
                 errorLabel.text = errMsg
+                addExerciseBtn.enabled = false
             case .InvalidSet(let errMsg):
                 setsTextField.backgroundColor = errorColor
                 errorLabel.text = errMsg
+                addExerciseBtn.enabled = false
             case .None:
                 repsTextField.backgroundColor = UIColor.whiteColor()
                 setsTextField.backgroundColor = UIColor.whiteColor()
                 errorLabel.text = ""
+                 addExerciseBtn.enabled = true
+        }
+    }
+    
+    @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
+        viewModel.updateExerciseSetGroup().startWithNext { _ in
+            
         }
     }
 }
