@@ -10,7 +10,9 @@ import UIKit
 
 class FleksTabBarController: UITabBarController {
     
-    func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, workoutViewModel: WorkoutViewModel) {
+    private var dataStore : DataStore!
+
+    func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, workoutViewModel: WorkoutViewModel, dataStore: DataStore) {
         let navController = viewControllers![1] as! UINavigationController
         let exerciseTableViewController = navController.topViewController as! ExerciseTableViewController
         exerciseTableViewController.injectDependency(exerciseViewModel)
@@ -18,6 +20,12 @@ class FleksTabBarController: UITabBarController {
         let workoutNavController = viewControllers![0] as! UINavigationController
         let workoutController = workoutNavController.topViewController as! WorkoutTableViewController
         workoutController.injectDependency(workoutViewModel)
+        
+        self.dataStore = dataStore
+    }
+    
+    func createExerciseSetViewModel(exercise: Exercise, order: Int, workout: Workout) -> ExerciseSetViewModel {
+        return ExerciseSetViewModel(exercise: exercise, order: order, workout: workout, dataStore: dataStore)
     }
     
 }

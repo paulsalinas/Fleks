@@ -49,7 +49,7 @@ class WorkoutViewModel {
     func createWorkout(name: String) -> Workout {
         let ref = workoutsRef.childByAutoId()
         ref.setValue(["name": name])
-        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSet]())
+        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSetGroup]())
     }
     
     func deleteWorkout(workout: Workout, onDelete: ()-> Void) {

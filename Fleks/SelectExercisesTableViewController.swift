@@ -11,6 +11,7 @@ import UIKit
 class SelectExercisesTableViewController: UITableViewController {
     private var workout: Workout!
     private var viewModel: WorkoutViewModel!
+    private var selectedExercise: Exercise!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,15 @@ class SelectExercisesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let selectedExercise = viewModel.exercises[indexPath.row]
+        selectedExercise = viewModel.exercises[indexPath.row]
         performSegueWithIdentifier("EnterSetDetailsSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "EnterSetDetailsSegue") {
+            let vc = segue.destinationViewController as! ExerciseSetFormViewController
+            let tabBarController = self.tabBarController as! FleksTabBarController
+            vc.injectDependency(tabBarController.createExerciseSetViewModel(selectedExercise, order: workout.exerciseSets.count + 1, workout: workout))
+        }
     }
 }

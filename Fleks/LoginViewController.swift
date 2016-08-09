@@ -53,10 +53,4 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         //do nothing
         return
     }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if (segue.identifier == "ShowTabBar") {
-//         //    onCompleteLoginSegue(segue: segue)
-//        }
-//    }
 }

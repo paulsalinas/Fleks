@@ -135,33 +135,6 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal(["1", ""]))
             }
             
-            it("should DisplayProducer a valid number for resistance even with bad inputs") {
-                viewModel.resistanceInput.value = "1"
-                var result = [String]()
-                
-                viewModel.resistanceDisplayProducer.startWithNext { next in
-                    result.append(next)
-                }
-                
-                viewModel.resistanceInput.value = "1a"
-                viewModel.resistanceInput.value = "1."
-                viewModel.resistanceInput.value = "1.2"
-                
-                expect(result).to(equal(["1", "1", "1.", "1.2"]))
-            }
-            
-            it("should be able to clear the resistance input") {
-                viewModel.resistanceInput.value = "1"
-                var result = [String]()
-                
-                viewModel.resistanceDisplayProducer.startWithNext { next in
-                    result.append(next)
-                }
-                
-                viewModel.resistanceInput.value = ""
-                
-                expect(result).to(equal(["1", ""]))
-            }
         }
     }
 }

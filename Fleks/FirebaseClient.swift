@@ -66,7 +66,7 @@ class FirebaseClient {
     func createWorkout(name: String) -> Workout {
         let ref = workoutRef.childByAutoId()
         ref.setValue(["name": name])
-        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSet]())
+        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSetGroup]())
     }
     
     private func setupUser(onComplete: () -> Void) {

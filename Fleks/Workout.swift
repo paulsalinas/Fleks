@@ -9,10 +9,10 @@
 import Foundation
 import Firebase
 
-struct Workout {
+struct Workout: Equatable {
     var id: String
     var name: String
-    var exerciseSets: [ExerciseSet]
+    var exerciseSets: [ExerciseSetGroup]
 }
 
 extension Workout {
@@ -21,10 +21,13 @@ extension Workout {
         self.name = (snapshot.value as! NSDictionary)["name"] as! String
         
         // TODO: need to fill exercise sets
-        self.exerciseSets = [ExerciseSet]()
+        self.exerciseSets = [ExerciseSetGroup]()
     }
 }
 
 func ==(lhs: Workout, rhs: Workout) -> Bool {
-    return lhs.id == rhs.id 
+    return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.exerciseSets == rhs.exerciseSets
+    
 }

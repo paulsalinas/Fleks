@@ -15,6 +15,7 @@ class ShowTabBarSegue: UIStoryboardSegue {
         let sourceViewController = self.sourceViewController as! LoginViewController
         let store = FIRDatabase.database()
         let user = sourceViewController.user!
+        let dataStore = FireBaseDataStore(firebaseDB: store, user: user)
         
         destinationViewController.injectDependencies(
             exerciseViewModel: ExerciseViewModel(
@@ -24,7 +25,8 @@ class ShowTabBarSegue: UIStoryboardSegue {
             workoutViewModel: WorkoutViewModel(
                 store: store,
                 user: user
-            )
+            ),
+            dataStore: dataStore
         )
         
         super.perform()

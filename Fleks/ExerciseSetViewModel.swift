@@ -32,7 +32,10 @@ func ==(lhs: ExerciseSetFormError, rhs: ExerciseSetFormError) -> Bool {
 
 class ExerciseSetViewModel {
     
-    private let exercise: Exercise
+    let exercise: Exercise
+    let dataStore: DataStore
+    let order: Int
+    let workout: Workout
     
     // backing values
     private var _reps: MutableProperty<Int?>
@@ -76,9 +79,12 @@ class ExerciseSetViewModel {
         }
     }
     
-    init(exercise: Exercise) {
+    init(exercise: Exercise, order: Int, workout: Workout, dataStore: DataStore) {
         
         self.exercise = exercise
+        self.dataStore = dataStore
+        self.order = order
+        self.workout = workout
         
         _reps = MutableProperty(nil)
         _sets = MutableProperty(nil)
@@ -89,5 +95,9 @@ class ExerciseSetViewModel {
         
         _reps <~ repsInput.producer.map { Int($0) }
         _sets <~ setsInput.producer.map { Int($0) }
+    }
+    
+    func updateExerciseSetGroup(repetitions: Int, sets: Int, notes: String) -> SignalProducer<ExerciseSetGroup, NSError>  {
+        return dataStore.addExerciseSetGroup(repetitions: repetitions, sets: sets, exercise: exercise, notes: notes, order: order, toWorkout: workout)
     }
 }
