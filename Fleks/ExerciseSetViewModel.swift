@@ -97,7 +97,7 @@ class ExerciseSetViewModel {
         _sets <~ setsInput.producer.map { Int($0) }
     }
     
-    func updateExerciseSetGroup() -> SignalProducer<ExerciseSetGroup, NSError>  {
+    func addExerciseSetGroup() -> SignalProducer<ExerciseSetGroup, NSError>  {
         return dataStore.addExerciseSetGroup(repetitions: _reps.value!, sets: _sets.value!, exercise: exercise, notes: notesInput.value, toWorkout: workout)
     }
 }

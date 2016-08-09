@@ -88,7 +88,7 @@ class ExerciseSetFormViewController: UIViewController {
     }
     
     @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
-        viewModel.updateExerciseSetGroup().startWithNext { _ in
+        viewModel.addExerciseSetGroup().startWithNext { _ in
             
         }
     }
