@@ -26,6 +26,8 @@ class FireBaseDataStore: DataStore {
         self.user = user
         self.exercises = [Exercise]()
         
+        // update exercise cache and continually listen for changes
+        // we might need to track this later for disposal
         self.workoutsRef
             .signalProducerForEvent(.Value)
             .startWithNext { snapshot in
@@ -65,23 +67,47 @@ class FireBaseDataStore: DataStore {
             return firebaseDB.reference().child("muscles")
         }
     }
+    
+    private func exerciseSetsGroupRef(workoutId: String) -> FIRDatabaseReference {
+        return self.workoutsRef.child(workoutId).child("exerciseSetGroups")
+    }
 
-    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<ExerciseSetGroup, NSError> {
-        
+    func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
+            var result = workout
             
-            let ref = self.workoutsRef.child(workout.id).child("exerciseSetGroups").child(String(workout.exerciseSets.count))
+            let ref = self.exerciseSetsGroupRef(workout.id).child(String(workout.exerciseSets.count))
             
             let exerciseSets = (1...sets).map { _ in ExerciseSet(repetitions: repetitions, exercise: exercise) }
             let exerciseSetGroup =  ExerciseSetGroup(sets: exerciseSets, notes: notes)
             
+            result.exerciseSets.append(exerciseSetGroup)
             ref.setValue(FirebaseDataUtils.convertFirebaseData(exerciseSetGroup), withCompletionBlock: { error, _ in
                 if let error = error {
                     observer.sendFailed(error)
                 }
-                observer.sendNext(exerciseSetGroup)
+                
+                observer.sendNext(result)
                 observer.sendCompleted()
             })
         }
+    }
+    
+    func exerciseSetGroupsProducer(forWorkout workout: Workout) -> SignalProducer<[ExerciseSetGroup], NSError> {
+        return exerciseSetsGroupRef(workout.id).signalProducerForEvent(.Value)
+            .map { mainSnapshot in
+                mainSnapshot.children.map { rootSnapshot in
+                     ExerciseSetGroup(
+                        snapshot: rootSnapshot as! FIRDataSnapshot,
+                        exerciseSet: (rootSnapshot as! FIRDataSnapshot).children.map { snapshot in
+                            let exerciseId =  ((snapshot as! FIRDataSnapshot).value as! NSDictionary)["exerciseId"] as! String
+                            return ExerciseSet(
+                                snapshot: (snapshot as! FIRDataSnapshot),
+                                exercise: self.exercises.filter { $0.id == exerciseId }.first!
+                            )
+                        }
+                    )
+                }
+            }
     }
 }

@@ -7,10 +7,18 @@
 //
 
 import Foundation
+import Firebase
 
 struct ExerciseSet: Equatable {
     var repetitions: Int
     var exercise: Exercise
+}
+
+extension ExerciseSet {
+    init (snapshot: FIRDataSnapshot, exercise: Exercise) {
+        self.exercise = exercise
+        self.repetitions = (snapshot.value as! NSDictionary)["repetitions"] as! Int
+    }
 }
 
 func ==(lhs: ExerciseSet, rhs: ExerciseSet) -> Bool {
@@ -21,6 +29,13 @@ func ==(lhs: ExerciseSet, rhs: ExerciseSet) -> Bool {
 struct ExerciseSetGroup: Equatable {
     var sets: [ExerciseSet]
     var notes: String
+}
+
+extension ExerciseSetGroup {
+    init (snapshot: FIRDataSnapshot, exerciseSet: [ExerciseSet]) {
+        self.sets = exerciseSet
+        self.notes  = (snapshot.value as! NSDictionary)["notes"] as! String
+    }
 }
 
 func ==(lhs: ExerciseSetGroup, rhs: ExerciseSetGroup) -> Bool {

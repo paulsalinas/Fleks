@@ -12,7 +12,7 @@ import Result
 import Foundation
 
 class ExerciseSetFormViewController: UIViewController {
-
+    
     @IBOutlet weak var setsTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var setsStepper: UIStepper!
@@ -88,8 +88,22 @@ class ExerciseSetFormViewController: UIViewController {
     }
     
     @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
-        viewModel.addExerciseSetGroup().startWithNext { _ in
+        viewModel.addExerciseSetGroup().startWithNext { workout in
             
+            // ugly. this should not be set here
+            // TODO: fix this
+            self.viewModel.workout = workout
+            
+            self.performSegueWithIdentifier("ShowExerciseSetGroups", sender: self)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowExerciseSetGroups" {
+            let vc = segue.destinationViewController as! ExerciseSetGroupTableViewController
+            let tabBar = tabBarController as! FleksTabBarController
+            vc.injectDependency(tabBar.createExerciseSetGroupViewModel(forWorkout: viewModel.workout))
+        }
+    }
+    
 }

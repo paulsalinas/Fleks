@@ -34,7 +34,7 @@ class ExerciseSetViewModel {
     
     let exercise: Exercise
     let dataStore: DataStore
-    let workout: Workout
+    var workout: Workout
     
     // backing values
     private var _reps: MutableProperty<Int?>
@@ -97,7 +97,8 @@ class ExerciseSetViewModel {
         _sets <~ setsInput.producer.map { Int($0) }
     }
     
-    func addExerciseSetGroup() -> SignalProducer<ExerciseSetGroup, NSError>  {
-        return dataStore.addExerciseSetGroup(repetitions: _reps.value!, sets: _sets.value!, exercise: exercise, notes: notesInput.value, toWorkout: workout)
+    func addExerciseSetGroup() -> SignalProducer<Workout, NSError>  {
+        return dataStore
+            .addExerciseSetGroup(repetitions: _reps.value!, sets: _sets.value!, exercise: exercise, notes: notesInput.value, toWorkout: workout)
     }
 }
