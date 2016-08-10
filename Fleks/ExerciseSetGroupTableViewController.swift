@@ -30,7 +30,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("exerciseSetGroupCell", forIndexPath: indexPath) as! ExerciseSetGroupTableViewCell
         let exerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
-         cell.viewData = ExerciseSetGroupTableViewCell.ViewData(exerciseSetGroup: exerciseSetGroup)
+        cell.viewData = ExerciseSetGroupTableViewCell.ViewData(exerciseSetGroup: exerciseSetGroup, indexPath: indexPath)
         return cell
     }
 
