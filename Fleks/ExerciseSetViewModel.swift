@@ -44,6 +44,7 @@ class ExerciseSetViewModel {
     var repsInput: MutableProperty<String>
     var setsInput: MutableProperty<String>
     var notesInput: MutableProperty<String>
+
     
     // used for proper display of values
     var repsDisplayProducer: SignalProducer<String, NoError> {
@@ -84,7 +85,6 @@ class ExerciseSetViewModel {
         self.exercise = exercise
         self.dataStore = dataStore
         self.workout = workout
-        
         _reps = MutableProperty(nil)
         _sets = MutableProperty(nil)
         
@@ -95,10 +95,14 @@ class ExerciseSetViewModel {
         
         _reps <~ repsInput.producer.map { Int($0) }
         _sets <~ setsInput.producer.map { Int($0) }
+        
     }
     
     func addExerciseSetGroup() -> SignalProducer<Workout, NSError>  {
-        return dataStore
+         return dataStore
             .addExerciseSetGroup(repetitions: _reps.value!, sets: _sets.value!, exercise: exercise, notes: notesInput.value, toWorkout: workout)
+            .on(next: { workout in
+                self.workout = workout
+            })
     }
 }

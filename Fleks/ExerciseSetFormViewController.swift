@@ -88,12 +88,7 @@ class ExerciseSetFormViewController: UIViewController {
     }
     
     @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
-        viewModel.addExerciseSetGroup().startWithNext { workout in
-            
-            // ugly. this should not be set here
-            // TODO: fix this
-            self.viewModel.workout = workout
-            
+        viewModel.addExerciseSetGroup().startWithNext { _ in
             self.performSegueWithIdentifier("ShowExerciseSetGroups", sender: self)
         }
     }
