@@ -329,7 +329,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectExerciseCell" textLabel="hzs-Zm-7PT" detailTextLabel="YC5-kD-htk" style="IBUITableViewCellStyleSubtitle" id="ycT-oF-nvn">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycT-oF-nvn" id="oyg-cc-Tlu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -491,7 +491,7 @@
             </objects>
             <point key="canvasLocation" x="5243" y="660"/>
         </scene>
-        <!--Exercise Set Group Table View Controller-->
+        <!--Exercise Sets-->
         <scene sceneID="nb0-V6-Kl0">
             <objects>
                 <tableViewController id="5Di-hN-To3" customClass="ExerciseSetGroupTableViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
@@ -501,7 +501,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupCell" rowHeight="112" id="XJC-Y8-Bfj" customClass="ExerciseSetGroupTableViewCell" customModule="Fleks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="112"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJC-Y8-Bfj" id="aab-RR-qkz">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="111.5"/>
@@ -571,10 +571,20 @@
                             <outlet property="delegate" destination="5Di-hN-To3" id="nhT-B0-kcb"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Exercise Sets" id="Vwg-zt-10Z">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cOt-GC-zDl">
+                            <connections>
+                                <action selector="addButtonTouch:" destination="5Di-hN-To3" id="Nfp-Nj-dIM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Gdo-ru-AEJ" kind="show" identifier="ShowSelectExerciseSegue" id="Vgr-gK-grP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D86-gf-82V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6007" y="660"/>
+            <point key="canvasLocation" x="4865" y="1512"/>
         </scene>
         <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
@@ -594,4 +604,7 @@
             <point key="canvasLocation" x="2072" y="669"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vgr-gK-grP"/>
+    </inferredMetricsTieBreakers>
 </document>

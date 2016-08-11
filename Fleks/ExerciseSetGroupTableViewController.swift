@@ -16,6 +16,19 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         self.viewModel = viewModel
     }
 
+    @IBAction func addButtonTouch(sender: AnyObject) {
+        performSegueWithIdentifier("ShowSelectExerciseSegue", sender: self)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowSelectExerciseSegue" {
+            let vc = segue.destinationViewController as! SelectExercisesTableViewController
+            let tabBarVC = tabBarController as! FleksTabBarController
+            vc.injectDependency(viewModel: tabBarVC.createWorkoutViewModel(), workout: viewModel.workout)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

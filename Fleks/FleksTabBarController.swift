@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class FleksTabBarController: UITabBarController {
     
-    private var dataStore : DataStore!
+    private var dataStore: DataStore!
+    
+    // TODO: remove this dependency
+    private var firebaseStore: FIRDatabase!
+    private var user: User!
 
-    func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, workoutViewModel: WorkoutViewModel, dataStore: DataStore) {
+    func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, workoutViewModel: WorkoutViewModel, dataStore: DataStore, firebaseStore: FIRDatabase, user: User) {
         let navController = viewControllers![1] as! UINavigationController
         let exerciseTableViewController = navController.topViewController as! ExerciseTableViewController
         exerciseTableViewController.injectDependency(exerciseViewModel)
@@ -22,6 +27,8 @@ class FleksTabBarController: UITabBarController {
         workoutController.injectDependency(workoutViewModel)
         
         self.dataStore = dataStore
+        self.firebaseStore = firebaseStore
+        self.user = user
     }
     
     func createExerciseSetViewModel(exercise: Exercise, workout: Workout) -> ExerciseSetViewModel {
@@ -30,5 +37,10 @@ class FleksTabBarController: UITabBarController {
     
     func createExerciseSetGroupViewModel(forWorkout workout: Workout) -> ExerciseSetGroupsViewModel {
         return ExerciseSetGroupsViewModel(dataStore: dataStore, workout: workout)
+    }
+    
+    func createWorkoutViewModel() -> WorkoutViewModel {
+        return WorkoutViewModel(store: self.firebaseStore, user: user)
+        
     }
 }

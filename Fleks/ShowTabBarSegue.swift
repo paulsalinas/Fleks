@@ -26,7 +26,9 @@ class ShowTabBarSegue: UIStoryboardSegue {
                 store: store,
                 user: user
             ),
-            dataStore: dataStore
+            dataStore: dataStore,
+            firebaseStore: store,
+            user: user
         )
         
         super.perform()
