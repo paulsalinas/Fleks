@@ -10,7 +10,7 @@ import Foundation
 
 class ExerciseSetGroupsViewModel {
     private let dataStore: DataStore
-    private let workout: Workout
+    var workout: Workout
     
     init(dataStore: DataStore, workout: Workout) {
         self.dataStore = dataStore

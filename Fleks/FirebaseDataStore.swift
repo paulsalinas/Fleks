@@ -110,4 +110,15 @@ class FireBaseDataStore: DataStore {
                 }
             }
     }
+    
+    func workoutProducer(forWorkoutId workoutId: String) -> SignalProducer<Workout, NSError> {
+        return exerciseSetsGroupRef(workoutId).signalProducerForEvent(.Value)
+            .map { mainSnapshot in
+                Workout(
+                    snapshot: mainSnapshot,
+                    exercises: self.exercises
+                )
+               
+        }
+    }
 }

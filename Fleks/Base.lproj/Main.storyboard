@@ -265,6 +265,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="5Di-hN-To3" kind="show" identifier="showWorkoutDetailSegue" id="Rhz-RL-oqt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYN-7P-Jwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -329,7 +332,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectExerciseCell" textLabel="hzs-Zm-7PT" detailTextLabel="YC5-kD-htk" style="IBUITableViewCellStyleSubtitle" id="ycT-oF-nvn">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycT-oF-nvn" id="oyg-cc-Tlu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -378,7 +381,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
                                 <rect key="frame" x="55" y="69" width="491" height="271"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
@@ -501,7 +504,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupCell" rowHeight="112" id="XJC-Y8-Bfj" customClass="ExerciseSetGroupTableViewCell" customModule="Fleks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="112"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJC-Y8-Bfj" id="aab-RR-qkz">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="111.5"/>
@@ -584,7 +587,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D86-gf-82V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4865" y="1512"/>
+            <point key="canvasLocation" x="4149" y="1508"/>
         </scene>
         <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
@@ -605,6 +608,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Rhz-RL-oqt"/>
         <segue reference="Vgr-gK-grP"/>
     </inferredMetricsTieBreakers>
 </document>

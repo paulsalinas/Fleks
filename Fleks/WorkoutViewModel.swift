@@ -61,10 +61,12 @@ class WorkoutViewModel {
     }
     
     func refreshWorkouts(onComplete: [Workout] -> Void) {
-        workoutsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-            self.workouts = snapshot.children.map { Workout(snapshot: $0 as! FIRDataSnapshot) }
-            onComplete(self.workouts)
-        })
+        self.refreshExercises { exercises in
+            self.workoutsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                self.workouts = snapshot.children.map { Workout(snapshot: $0 as! FIRDataSnapshot, exercises: exercises) }
+                onComplete(self.workouts)
+            })
+        }
     }
     
     func refreshExercises(onComplete: [Exercise] -> Void) {

@@ -23,6 +23,22 @@ extension Workout {
         // TODO: need to fill exercise sets
         self.exerciseSets = [ExerciseSetGroup]()
     }
+    
+    init(snapshot: FIRDataSnapshot, exercises: [Exercise]) {
+        self.id = snapshot.key
+        self.name = snapshot.childSnapshotForPath("name").value as! String
+        self.exerciseSets = snapshot.childSnapshotForPath("exerciseSetGroups").children
+            .map { exerciseSetGroupSnapshot in
+                ExerciseSetGroup(
+                    snapshot: exerciseSetGroupSnapshot as! FIRDataSnapshot,
+                    exerciseSet: exerciseSetGroupSnapshot.childSnapshotForPath("exerciseSets").children
+                        .map { exerciseSetSnapshot in
+                            let exercise = exercises.filter { ex in ex.id == exerciseSetSnapshot.childSnapshotForPath("exerciseId").value as! String }.first!
+                             return ExerciseSet(snapshot: exerciseSetSnapshot as! FIRDataSnapshot, exercise: exercise)
+                        }
+                )
+            }
+    }
 }
 
 func ==(lhs: Workout, rhs: Workout) -> Bool {

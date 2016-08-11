@@ -10,9 +10,16 @@ import UIKit
 
 class WorkoutTableViewController: UITableViewController {
     
+    enum SegueIdentifierTypes: String {
+        case AddWorkoutSegue = "addWorkoutSegue"
+        case ShowWorkoutDetailSegue = "showWorkoutDetailSegue"
+    }
+    
     private var dataSource: WorkoutDataSource!
     var client: FirebaseClient!
     private var viewModel: WorkoutViewModel!
+    
+    var selectedWorkout: Workout?
     
     func injectDependency(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
@@ -22,16 +29,28 @@ class WorkoutTableViewController: UITableViewController {
         dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell", viewModel: viewModel, tableView: tableView)
         tableView.dataSource = dataSource
         super.viewDidLoad()
-        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedWorkout = viewModel.workouts[indexPath.row]
+        performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addWorkoutSegue" {
-            if let destinationController = segue.destinationViewController as? EnterWorkoutNameViewController {
-                destinationController.injectDependency(viewModel)
-            }
+        guard let id = SegueIdentifierTypes(rawValue: segue.identifier!) else {
+            return
+        }
+        
+        switch(id) {
+            case .AddWorkoutSegue:
+                if let destinationController = segue.destinationViewController as? EnterWorkoutNameViewController {
+                    destinationController.injectDependency(viewModel)
+                }
+            case .ShowWorkoutDetailSegue:
+                if let destinationController = segue.destinationViewController as? ExerciseSetGroupTableViewController, let selectedWorkout = selectedWorkout {
+                    let tabBarVC = tabBarController as! FleksTabBarController
+                    destinationController.injectDependency(tabBarVC.createExerciseSetGroupViewModel(forWorkout: selectedWorkout))
+                }
         }
     }
-    
-    
 }
