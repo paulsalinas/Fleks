@@ -31,6 +31,13 @@ class WorkoutTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        viewModel.refreshWorkouts { _ in
+            self.tableView.reloadData()
+        }
+        super.viewWillAppear(animated)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedWorkout = viewModel.workouts[indexPath.row]
         performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
