@@ -6,8 +6,6 @@
 //  Copyright © 2016 Paul Salinas. All rights reserved.
 //
 
-import Result
-import ReactiveCocoa
 import Nimble
 import Quick
 import Foundation
@@ -44,6 +42,45 @@ class FirebaseDataUtilsSpec: QuickSpec {
                 
                 expect(result).to(equal(expected))
             }
+            
+            it("should convert a workout struct to the appropriate format required by firebase") {
+                let exerciseSet1 = ExerciseSet(repetitions: 10, exercise: Exercise(id: "1", name: "chest press", muscles: [Muscle(id: "1", name: "chest")]))
+                let exerciseSet2 = ExerciseSet(repetitions: 10, exercise: Exercise(id: "2", name: "leg press", muscles: [Muscle(id: "2", name: "quad")]))
+                let exerciseSetGroup =  ExerciseSetGroup(sets: [exerciseSet1, exerciseSet2], notes: "notes")
+                
+                let exerciseSet3 = ExerciseSet(repetitions: 10, exercise: Exercise(id: "3", name: "barbell chest press", muscles: [Muscle(id: "1", name: "chest")]))
+                let exerciseSet4 = ExerciseSet(repetitions: 10, exercise: Exercise(id: "4", name: "squat", muscles: [Muscle(id: "2", name: "quad")]))
+                let exerciseSetGroup2 =  ExerciseSetGroup(sets: [exerciseSet3, exerciseSet4], notes: "more notes")
+                
+                let workout = Workout(id: "test", name: "testName", exerciseSets: [exerciseSetGroup, exerciseSetGroup2])
+                
+                let expected: NSDictionary = [
+                    "name": "testName",
+                    "exerciseSetGroups": [
+                        "0": [
+                            "exerciseSets": [
+                                "0": [ "repetitions": 10, "exerciseId": "1"],
+                                "1": [ "repetitions": 10, "exerciseId": "2"]
+                            ],
+                            "notes": "notes"
+                        ],
+                        "1": [
+                            "exerciseSets": [
+                                "0": [ "repetitions": 10, "exerciseId": "3"],
+                                "1": [ "repetitions": 10, "exerciseId": "4"]
+                            ],
+                            "notes": "more notes"
+                        ]
+                    ]
+                    
+                ]
+                
+                let result = FirebaseDataUtils.convertFirebaseData(workout)
+                
+                expect(result).to(equal(expected))
+            }
+            
+            it("zzz"){}
         }
     }
 }

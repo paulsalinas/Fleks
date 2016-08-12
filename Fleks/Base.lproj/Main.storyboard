@@ -381,7 +381,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
                                 <rect key="frame" x="55" y="69" width="491" height="271"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
@@ -583,11 +583,12 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Gdo-ru-AEJ" kind="show" identifier="ShowSelectExerciseSegue" id="Vgr-gK-grP"/>
+                        <segue destination="jcZ-Qn-JNT" kind="show" identifier="EditExerciseSetGroupSegue" id="Jzz-HR-aRd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D86-gf-82V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4149" y="1508"/>
+            <point key="canvasLocation" x="3757" y="1638"/>
         </scene>
         <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
@@ -608,7 +609,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhz-RL-oqt"/>
         <segue reference="Vgr-gK-grP"/>
+        <segue reference="Rhz-RL-oqt"/>
+        <segue reference="Jzz-HR-aRd"/>
     </inferredMetricsTieBreakers>
 </document>

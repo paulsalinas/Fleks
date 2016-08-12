@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+// right now we use the tab bar as "smart" and a "factory"
+// it knows how to create the viewmodels and is used by the other controllers
+// is used by the other controllers for this purpose.
+// Eventually, I'll probably move the factory to it's own class
 class FleksTabBarController: UITabBarController {
     
     private var dataStore: DataStore!
@@ -33,6 +37,10 @@ class FleksTabBarController: UITabBarController {
     
     func createExerciseSetViewModel(exercise: Exercise, workout: Workout) -> ExerciseSetViewModel {
         return ExerciseSetViewModel(exercise: exercise, workout: workout, dataStore: dataStore)
+    }
+    
+    func createExerciseSetViewModel(workout: Workout, order: Int) -> ExerciseSetViewModel {
+        return ExerciseSetViewModel(workout: workout, order: order, dataStore: dataStore)
     }
     
     func createExerciseSetGroupViewModel(forWorkout workout: Workout) -> ExerciseSetGroupsViewModel {

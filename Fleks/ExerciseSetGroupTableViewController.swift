@@ -10,7 +10,13 @@ import UIKit
 
 class ExerciseSetGroupTableViewController: UITableViewController {
     
+    enum SegueIdentifierTypes: String {
+        case ShowSelectExerciseSegue = "ShowSelectExerciseSegue"
+        case EditExerciseSetGroupSegue = "EditExerciseSetGroupSegue"
+    }
+    
     private var viewModel: ExerciseSetGroupsViewModel!
+    private var selectedRow: Int?
     
     func injectDependency(viewModel: ExerciseSetGroupsViewModel) {
         self.viewModel = viewModel
@@ -22,10 +28,21 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowSelectExerciseSegue" {
-            let vc = segue.destinationViewController as! SelectExercisesTableViewController
-            let tabBarVC = tabBarController as! FleksTabBarController
-            vc.injectDependency(viewModel: tabBarVC.createWorkoutViewModel(), workout: viewModel.workout)
+        guard let id = SegueIdentifierTypes(rawValue: segue.identifier!) else {
+            return
+        }
+        
+        switch(id) {
+            case .ShowSelectExerciseSegue:
+                let vc = segue.destinationViewController as! SelectExercisesTableViewController
+                let tabBarVC = tabBarController as! FleksTabBarController
+                vc.injectDependency(viewModel: tabBarVC.createWorkoutViewModel(), workout: viewModel.workout)
+            case .EditExerciseSetGroupSegue:
+                if let selectedRow = selectedRow,
+                    let vc = segue.destinationViewController as? ExerciseSetFormViewController,
+                    let tabBarController = tabBarController as? FleksTabBarController {
+                    vc.injectDependency(tabBarController.createExerciseSetViewModel(viewModel.workout, order: selectedRow))
+                }
         }
     }
     
@@ -39,12 +56,16 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         return viewModel.numberOfExerciseGroupsInSection(section)
     }
 
-
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("exerciseSetGroupCell", forIndexPath: indexPath) as! ExerciseSetGroupTableViewCell
         let exerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
         cell.viewData = ExerciseSetGroupTableViewCell.ViewData(exerciseSetGroup: exerciseSetGroup, indexPath: indexPath)
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedRow = indexPath.row
+        performSegueWithIdentifier(SegueIdentifierTypes.EditExerciseSetGroupSegue.rawValue, sender: self)
     }
 
 

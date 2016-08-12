@@ -20,6 +20,20 @@ struct FirebaseDataUtils {
         ]
     }
     
+    static func convertFirebaseData(workout: Workout) -> [String: AnyObject] {
+        return [
+            "name" : workout.name,
+            "exerciseSetGroups":
+                workout.exerciseSets.enumerate()
+                    .reduce([String: AnyObject]()) { prev, next in
+                        let (index, exerciseSetGroup) = next
+                        var new = prev
+                        new[String(index)] = convertFirebaseData(exerciseSetGroup)
+                        return new
+                    }
+        ]
+    }
+    
     static func convertFirebaseData(exerciseSet: ExerciseSet) -> [String: AnyObject] {
         return  [
             "repetitions" : exerciseSet.repetitions,

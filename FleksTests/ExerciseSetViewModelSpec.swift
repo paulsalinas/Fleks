@@ -24,7 +24,6 @@ class ExerciseSetViewModelSpec: QuickSpec {
             beforeEach {
                 viewModel = ExerciseSetViewModel(
                     exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()),
-                    order: 1,
                     workout: Workout(id: "test", name: "test", exerciseSets: [ExerciseSetGroup]()),
                     dataStore: FakeDataStore()
                 )
@@ -140,6 +139,7 @@ class ExerciseSetViewModelSpec: QuickSpec {
                 expect(result).to(equal(["1", ""]))
             }
             
+            it("zzz"){}
         }
     }
 }

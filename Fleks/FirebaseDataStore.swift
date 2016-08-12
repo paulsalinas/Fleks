@@ -93,6 +93,19 @@ class FireBaseDataStore: DataStore {
         }
     }
     
+    func updateWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
+        return SignalProducer { observer, _ in
+            self.workoutsRef.child(workout.id).setValue(FirebaseDataUtils.convertFirebaseData(workout), withCompletionBlock: { error, _ in
+                if let error = error {
+                    observer.sendFailed(error)
+                }
+                
+                observer.sendNext(workout)
+                observer.sendCompleted()
+            })
+        }
+    }
+    
     func exerciseSetGroupsProducer(forWorkout workout: Workout) -> SignalProducer<[ExerciseSetGroup], NSError> {
         return exerciseSetsGroupRef(workout.id).signalProducerForEvent(.Value)
             .map { mainSnapshot in

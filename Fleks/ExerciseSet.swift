@@ -29,6 +29,18 @@ func ==(lhs: ExerciseSet, rhs: ExerciseSet) -> Bool {
 struct ExerciseSetGroup: Equatable {
     var sets: [ExerciseSet]
     var notes: String
+
+    init(sets: [ExerciseSet], notes: String) {
+        self.sets = sets
+        self.notes = notes
+    }
+    
+    init (repetitions: Int, sets: Int, exercise: Exercise, notes: String) {
+        self.init(
+            sets: (1...sets).map { _ in ExerciseSet(repetitions: repetitions, exercise: exercise) },
+            notes: notes
+        )
+    }
 }
 
 extension ExerciseSetGroup {

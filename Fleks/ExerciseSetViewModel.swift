@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 import Result
 
-enum ExerciseSetFormError: Equatable {
+enum ExerciseSetFormError: Equatable, ErrorType {
     case InvalidSet(String)
     case InvalidRep(String)
     case None
@@ -41,6 +41,7 @@ class ExerciseSetViewModel {
     private var _sets: MutableProperty<Int?>
 
     // properties that are 'bind-able'
+    var order: MutableProperty<Int?>
     var repsInput: MutableProperty<String>
     var setsInput: MutableProperty<String>
     var notesInput: MutableProperty<String>
@@ -80,29 +81,56 @@ class ExerciseSetViewModel {
         }
     }
     
-    init(exercise: Exercise, workout: Workout, dataStore: DataStore) {
-        
+    convenience init(exercise: Exercise, workout: Workout, dataStore: DataStore) {
+        self.init(exercise: exercise, workout: workout, order: nil, dataStore: dataStore, reps: 10, sets: 4, notes: "enter notes")
+    }
+    
+    init (exercise: Exercise, workout: Workout, order: Int?, dataStore: DataStore, reps: Int, sets: Int, notes: String) {
         self.exercise = exercise
         self.dataStore = dataStore
         self.workout = workout
+        self.order = MutableProperty(order)
+        
         _reps = MutableProperty(nil)
         _sets = MutableProperty(nil)
         
         // these will be the default values
-        repsInput = MutableProperty(String(10))
-        setsInput = MutableProperty(String(4))
-        notesInput = MutableProperty("")
+        repsInput = MutableProperty(String(reps))
+        setsInput = MutableProperty(String(sets))
+        notesInput = MutableProperty(notes)
         
         _reps <~ repsInput.producer.map { Int($0) }
         _sets <~ setsInput.producer.map { Int($0) }
-        
     }
     
-    func addExerciseSetGroup() -> SignalProducer<Workout, NSError>  {
-         return dataStore
-            .addExerciseSetGroup(repetitions: _reps.value!, sets: _sets.value!, exercise: exercise, notes: notesInput.value, toWorkout: workout)
+    convenience init (workout: Workout, order: Int, dataStore: DataStore) {
+        let exerciseSetGroup = workout.exerciseSets[order]
+        let exerciseSet = exerciseSetGroup.sets.first!
+        self.init(exercise: exerciseSet.exercise, workout: workout, order: order, dataStore: dataStore, reps: exerciseSet.repetitions, sets: exerciseSetGroup.sets.count, notes: exerciseSetGroup.notes)
+    }
+    
+    func updateExerciseSetGroup() -> SignalProducer<Workout, NSError>  {
+        guard let reps = _reps.value, let sets = _sets.value else {
+            
+            // TODO: create an UI understood error to send
+            return SignalProducer(error: NSError(domain: "error", code: 1, userInfo: [:]))
+        }
+        
+        var updatedWorkout = workout
+        let updatedExerciseSet = ExerciseSetGroup(repetitions: reps, sets: sets, exercise: exercise, notes: notesInput.value)
+        if let order = order.value {
+            updatedWorkout.exerciseSets[order] = updatedExerciseSet
+        } else {
+            updatedWorkout.exerciseSets.append(updatedExerciseSet)
+        }
+        
+        return dataStore
+            .updateWorkout(updatedWorkout)
             .on(next: { workout in
-                self.workout = workout
+                self.workout = updatedWorkout
+                if self.order.value == nil {
+                    self.order.swap(self.workout.exerciseSets.count)
+                }
             })
     }
 }

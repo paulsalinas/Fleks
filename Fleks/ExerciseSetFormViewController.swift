@@ -55,10 +55,19 @@ class ExerciseSetFormViewController: UIViewController {
         viewModel.setsInput <~ createMergedSignalProducer(textField: setsTextField, stepper: setsStepper)
             .map(removeDecimalsIfAny)
         
+        notesTextField.text = viewModel.notesInput.value
         viewModel.notesInput <~ notesTextField.keyPress()
     
         viewModel.isValidationErrorProducer
             .startWithNext(updateStateWithError)
+        
+        viewModel.order.producer.startWithNext { next in
+            if next == nil {
+                self.addExerciseBtn.setTitle("Add Exercise", forState: UIControlState.Normal)
+            } else {
+                self.addExerciseBtn.setTitle("Update Exercise", forState: UIControlState.Normal)
+            }
+        }
     }
     
     func createMergedSignalProducer(textField textField: UITextField, stepper: UIStepper) -> SignalProducer<String, NoError> {
@@ -88,7 +97,7 @@ class ExerciseSetFormViewController: UIViewController {
     }
     
     @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
-        viewModel.addExerciseSetGroup().startWithNext { _ in
+        viewModel.updateExerciseSetGroup().startWithNext { _ in
             self.performSegueWithIdentifier("ShowExerciseSetGroups", sender: self)
         }
     }
