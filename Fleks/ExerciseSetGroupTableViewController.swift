@@ -34,7 +34,6 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
-            .logEvents()
             .startWithNext { _ in
                 self.tableView.reloadData()
                 
@@ -43,23 +42,23 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                     self.tableView.tableHeaderView = cell
                     self.viewModel.workoutNameInput
                         .producer
-                        .take(2)
+                        .take(1)
                         .startWithNext { next in
                             if let next = next {
                                 cell.workoutNameTextField!.text = next
                             }
-                    }
+                        }
                     
                     self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
                 }
-                
             }
+        
         super.viewWillAppear(animated)
     }
     
-    func injectDependency(dataStore: DataStore, workout: Workout) {
+    func injectDependency(dataStore: DataStore, workout: Workout?) {
         self.dataStore = dataStore
-        self.viewModel = ExerciseSetGroupsViewModel(dataStore: dataStore, workoutId: workout.id)
+        self.viewModel = ExerciseSetGroupsViewModel(dataStore: dataStore, workoutId: workout?.id)
     }
 
     @IBAction func addButtonTouch(sender: AnyObject) {
@@ -74,17 +73,16 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         switch(id) {
             case .ShowSelectExerciseModally:
                 let vc = (segue.destinationViewController as! UINavigationController).topViewController as! SelectExercisesTableViewController
-                vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                    return { _ in
-                        self.viewModel.createWorkout(
-                            self.viewModel.workoutNameInput.value!,
-                            firstExercise: selectedExercise,
-                            reps: reps,
-                            sets: sets,
-                            notes: notes
-                        ).start()
-                    }
-                })
+                
+                if viewModel.doesWorkoutExist() {
+                    vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
+                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
+                    })
+                } else {
+                    vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
+                        return { _ in self.viewModel.createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
+                    })
+                }
             
             case .EditExerciseSetGroupSegue:
                 if let selectedExerciseSetGroup = selectedExerciseSetGroup,

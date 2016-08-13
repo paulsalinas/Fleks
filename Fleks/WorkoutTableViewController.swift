@@ -11,7 +11,6 @@ import UIKit
 class WorkoutTableViewController: UITableViewController {
     
     enum SegueIdentifierTypes: String {
-        case AddWorkoutSegue = "addWorkoutSegue"
         case ShowWorkoutDetailSegue = "showWorkoutDetailSegue"
     }
     
@@ -25,6 +24,9 @@ class WorkoutTableViewController: UITableViewController {
         self.viewModel = viewModel
     }
     
+    @IBAction func addWorkoutButtonTouchUp(sender: AnyObject) {
+        performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
+    }
     override func viewDidLoad() {
         dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell", viewModel: viewModel, tableView: tableView)
         tableView.dataSource = dataSource
@@ -49,12 +51,8 @@ class WorkoutTableViewController: UITableViewController {
         }
         
         switch(id) {
-            case .AddWorkoutSegue:
-                if let destinationController = segue.destinationViewController as? EnterWorkoutNameViewController {
-                    destinationController.injectDependency(viewModel)
-                }
             case .ShowWorkoutDetailSegue:
-                if let destinationController = segue.destinationViewController as? ExerciseSetGroupTableViewController, let selectedWorkout = selectedWorkout {
+                if let destinationController = segue.destinationViewController as? ExerciseSetGroupTableViewController {
                     let tabBarVC = tabBarController as! FleksTabBarController
                     destinationController.injectDependency(tabBarVC.dataStore, workout: selectedWorkout)
                 }

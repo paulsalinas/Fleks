@@ -17,7 +17,9 @@ class ExerciseSetGroupsViewModel {
 
     let workoutNameInput: MutableProperty<String?>
     
-    let workoutId: String?
+    // TODO: I think we should be able to get rid of this and rely on the 'workout' private prop
+    // only used to initialize the workout struct from the dataSource
+    private var workoutId: String?
     
     init(dataStore: DataStore, workoutId: String?) {
         self.workoutId = workoutId
@@ -29,15 +31,14 @@ class ExerciseSetGroupsViewModel {
     
     func refreshSignalProducer() -> SignalProducer<Void, NSError> {
         guard let workoutId = workoutId else {
-            return SignalProducer<Void, NSError>.empty
+            return SignalProducer<Void, NSError>.init(value: ())
         }
-        
+
         return dataStore.workoutProducer(forWorkoutId: workoutId).on(next: { next in
             self.workout.swap(next)
             self.workoutNameInput.swap(self.workout.value?.name)
         })
         .map { _ in () }
-        
     }
     
     func numberOfSections() -> Int {
@@ -50,6 +51,10 @@ class ExerciseSetGroupsViewModel {
         } else {
             return 0
         }
+    }
+    
+    func doesWorkoutExist() -> Bool {
+        return workout.value != nil
     }
     
     func exerciseSetGroupAtIndexPath(indexPath: NSIndexPath) -> ExerciseSetGroup {
@@ -67,6 +72,15 @@ class ExerciseSetGroupsViewModel {
                 updatedWorkout.exerciseSets[index] = ExerciseSetGroup(repetitions: reps, sets: sets, exercise: exerciseSetGroup.sets.first!.exercise, notes: notes)
                 return dataStore.updateWorkout(updatedWorkout).map { _ in () }
             }
+        }
+        
+        return SignalProducer<Void, NSError>.empty
+    }
+    
+    func addExerciseSetGroup(withExercise exercise: Exercise, reps: Int, sets: Int, notes: String) -> SignalProducer<Void, NSError> {
+        if var updatedWorkout = workout.value {
+            updatedWorkout.exerciseSets.append(ExerciseSetGroup(repetitions: reps, sets: sets, exercise: exercise, notes: notes))
+            return dataStore.updateWorkout(updatedWorkout).map { _ in () }
         }
         
         return SignalProducer<Void, NSError>.empty

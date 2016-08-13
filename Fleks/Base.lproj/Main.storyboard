@@ -260,7 +260,7 @@
                     <navigationItem key="navigationItem" id="9vi-bz-Ugg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx">
                             <connections>
-                                <segue destination="uD3-N0-ngM" kind="show" identifier="addWorkoutSegue" id="Ulf-qe-18k"/>
+                                <action selector="addWorkoutButtonTouchUp:" destination="Cxy-M3-e9e" id="vhw-0j-SCF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -272,55 +272,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYN-7P-Jwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2900" y="669"/>
-        </scene>
-        <!--Enter Workout Name-->
-        <scene sceneID="DEE-jo-lRH">
-            <objects>
-                <viewController title="Enter Workout Name" id="uD3-N0-ngM" customClass="EnterWorkoutNameViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NA0-xe-rlu"/>
-                        <viewControllerLayoutGuide type="bottom" id="hIH-Yl-eGP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bLc-M1-jJ5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Enter Workout Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="npW-3O-ShU">
-                                <rect key="frame" x="20" y="164" width="560" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="dnS-Ze-DvG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dnS-Ze-DvG"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="top" secondItem="NA0-xe-rlu" secondAttribute="bottom" constant="100" id="23D-Qr-Jkz"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="leading" secondItem="bLc-M1-jJ5" secondAttribute="leadingMargin" id="E5y-PL-e3z"/>
-                            <constraint firstItem="npW-3O-ShU" firstAttribute="trailing" secondItem="bLc-M1-jJ5" secondAttribute="trailingMargin" id="iKK-Mh-fMH"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Enter Workout Name" id="kSN-uy-gXU">
-                        <barButtonItem key="backBarButtonItem" title="Name" id="Elq-gp-0hj"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="amA-Be-FQK">
-                            <connections>
-                                <segue destination="Gdo-ru-AEJ" kind="show" identifier="showSelectExercise" id="iTe-aH-MXa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="nameTextField" destination="npW-3O-ShU" id="DQu-bd-Fa2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kxv-4Z-hJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4525" y="64"/>
         </scene>
         <!--Select Exercises-->
         <scene sceneID="RZ5-3I-upU">
@@ -374,7 +325,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhn-Kp-ZHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5438" y="824"/>
+            <point key="canvasLocation" x="5766" y="864"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q6w-wp-NWH">
@@ -390,7 +341,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2o-GD-PbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4770" y="1709"/>
+            <point key="canvasLocation" x="4822" y="893"/>
         </scene>
         <!--Exercise Set Form View Controller-->
         <scene sceneID="cvx-yI-A0c">
@@ -510,12 +461,11 @@
                         <outlet property="repsTextField" destination="LAB-un-o4V" id="wKZ-g0-Bsi"/>
                         <outlet property="setsStepper" destination="UNv-t5-cbd" id="6jw-ea-Q1j"/>
                         <outlet property="setsTextField" destination="YEc-sp-4a1" id="7ma-JJ-Fj8"/>
-                        <segue destination="5Di-hN-To3" kind="show" identifier="ShowExerciseSetGroups" id="COw-WN-Kne"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOg-8n-IT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6287" y="824"/>
+            <point key="canvasLocation" x="6775" y="852"/>
         </scene>
         <!--Exercise Sets-->
         <scene sceneID="nb0-V6-Kl0">
@@ -527,13 +477,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupTableHeader" rowHeight="60" id="l44-iL-OhA" customClass="ExerciseSetGroupHeaderTableViewCell" customModule="Fleks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l44-iL-OhA" id="Ldz-eC-QtQ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuM-On-WNg">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Workout Name Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuM-On-WNg">
                                             <rect key="frame" x="8" y="8" width="584" height="51.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -552,7 +502,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupCell" rowHeight="112" id="XJC-Y8-Bfj" customClass="ExerciseSetGroupTableViewCell" customModule="Fleks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="600" height="112"/>
+                                <rect key="frame" x="0.0" y="152" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJC-Y8-Bfj" id="aab-RR-qkz">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="111.5"/>
@@ -630,14 +580,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Gdo-ru-AEJ" kind="show" identifier="ShowSelectExerciseSegue" id="Vgr-gK-grP"/>
                         <segue destination="jcZ-Qn-JNT" kind="presentation" identifier="EditExerciseSetGroupSegue" id="Jzz-HR-aRd"/>
                         <segue destination="PaE-HG-VWh" kind="presentation" identifier="ShowSelectExerciseModally" id="Te5-0o-6un"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D86-gf-82V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3609" y="1486"/>
+            <point key="canvasLocation" x="3861" y="1714"/>
         </scene>
         <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
@@ -658,8 +607,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="COw-WN-Kne"/>
-        <segue reference="Jzz-HR-aRd"/>
-        <segue reference="eHp-Vv-css"/>
+        <segue reference="MdT-q5-aAI"/>
     </inferredMetricsTieBreakers>
 </document>
