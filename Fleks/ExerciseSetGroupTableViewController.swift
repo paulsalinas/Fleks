@@ -7,24 +7,63 @@
 //
 
 import UIKit
+import Result
+import ReactiveCocoa
+import Foundation
 
 class ExerciseSetGroupTableViewController: UITableViewController {
     
     enum SegueIdentifierTypes: String {
-        case ShowSelectExerciseSegue = "ShowSelectExerciseSegue"
         case EditExerciseSetGroupSegue = "EditExerciseSetGroupSegue"
+        case ShowSelectExerciseModally = "ShowSelectExerciseModally"
+    }
+    
+    enum CellTypes: String {
+        case Header = "exerciseSetGroupTableHeader"
+        case Normal = "exerciseSetGroupCell"
     }
     
     private var viewModel: ExerciseSetGroupsViewModel!
-    private var selectedRow: Int?
+    private var dataStore: DataStore!
+    private var workoutId: String?
+    private var selectedExerciseSetGroup: ExerciseSetGroup?
+
+    override func viewWillAppear(animated: Bool) {
+        
+        // refresh the data to make sure it's up to date
+        viewModel
+            .refreshSignalProducer()
+            .startOn(UIScheduler())
+            .logEvents()
+            .startWithNext { _ in
+                self.tableView.reloadData()
+                
+                // initialize the header with the form to edit the workout name
+                if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
+                    self.tableView.tableHeaderView = cell
+                    self.viewModel.workoutNameInput
+                        .producer
+                        .take(2)
+                        .startWithNext { next in
+                            if let next = next {
+                                cell.workoutNameTextField!.text = next
+                            }
+                    }
+                    
+                    self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
+                }
+                
+            }
+        super.viewWillAppear(animated)
+    }
     
-    func injectDependency(viewModel: ExerciseSetGroupsViewModel) {
-        self.viewModel = viewModel
+    func injectDependency(dataStore: DataStore, workout: Workout) {
+        self.dataStore = dataStore
+        self.viewModel = ExerciseSetGroupsViewModel(dataStore: dataStore, workoutId: workout.id)
     }
 
     @IBAction func addButtonTouch(sender: AnyObject) {
-        performSegueWithIdentifier("ShowSelectExerciseSegue", sender: self)
-        
+        performSegueWithIdentifier(SegueIdentifierTypes.ShowSelectExerciseModally.rawValue, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -33,15 +72,40 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         }
         
         switch(id) {
-            case .ShowSelectExerciseSegue:
-                let vc = segue.destinationViewController as! SelectExercisesTableViewController
-                let tabBarVC = tabBarController as! FleksTabBarController
-                vc.injectDependency(viewModel: tabBarVC.createWorkoutViewModel(), workout: viewModel.workout)
+            case .ShowSelectExerciseModally:
+                let vc = (segue.destinationViewController as! UINavigationController).topViewController as! SelectExercisesTableViewController
+                vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
+                    return { _ in
+                        self.viewModel.createWorkout(
+                            self.viewModel.workoutNameInput.value!,
+                            firstExercise: selectedExercise,
+                            reps: reps,
+                            sets: sets,
+                            notes: notes
+                        ).start()
+                    }
+                })
+            
             case .EditExerciseSetGroupSegue:
-                if let selectedRow = selectedRow,
-                    let vc = segue.destinationViewController as? ExerciseSetFormViewController,
-                    let tabBarController = tabBarController as? FleksTabBarController {
-                    vc.injectDependency(tabBarController.createExerciseSetViewModel(viewModel.workout, order: selectedRow))
+                if let selectedExerciseSetGroup = selectedExerciseSetGroup,
+                    let vc = segue.destinationViewController as? ExerciseSetFormViewController {
+                    let sets = selectedExerciseSetGroup.sets.count
+                    let reps = selectedExerciseSetGroup.sets.first!.repetitions
+                    vc.injectDependency(
+                        dataStore,
+                        reps: reps,
+                        sets: sets,
+                        notes: selectedExerciseSetGroup.notes, onSubmitUpdate: { reps, sets, notes in
+                            return { _ in
+                                self.viewModel.updateExerciseSetGroup(
+                                    selectedExerciseSetGroup,
+                                    withReps: reps,
+                                    withSets: sets,
+                                    withNotes: notes
+                                ).start()
+                            }
+                        }
+                    )
                 }
         }
     }
@@ -57,18 +121,17 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("exerciseSetGroupCell", forIndexPath: indexPath) as! ExerciseSetGroupTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CellTypes.Normal.rawValue, forIndexPath: indexPath) as! ExerciseSetGroupTableViewCell
         let exerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
         cell.viewData = ExerciseSetGroupTableViewCell.ViewData(exerciseSetGroup: exerciseSetGroup, indexPath: indexPath)
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedRow = indexPath.row
+        selectedExerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
         performSegueWithIdentifier(SegueIdentifierTypes.EditExerciseSetGroupSegue.rawValue, sender: self)
     }
-
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

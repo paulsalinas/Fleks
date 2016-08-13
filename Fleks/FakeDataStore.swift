@@ -42,5 +42,16 @@ class FakeDataStore: DataStore {
             observer.sendNext(workout)
         }
     }
-
+    
+    func addWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
+        return SignalProducer { observer, _ in
+            let exerciseSetGroup =  ExerciseSetGroup(sets: [ExerciseSet](), notes: "tesT")
+            let workout = Workout(id: "test", name: "test", exerciseSets: [exerciseSetGroup])
+            observer.sendNext(workout)
+        }
+    }
+    
+    func exercisesProducer() -> SignalProducer<[Exercise], NSError> {
+        return SignalProducer.init(value: [Exercise]())
+    }
 }

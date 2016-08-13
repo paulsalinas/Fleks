@@ -23,18 +23,18 @@ class EnterWorkoutNameViewController: UIViewController {
         self.viewModel = viewModel
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showSelectExercise" {
-            if let destinationController = segue.destinationViewController as? SelectExercisesTableViewController {
-                
-                if let name = nameTextField.text {
-                    workout = viewModel.createWorkout(name)
-                    destinationController.injectDependency(viewModel: viewModel, workout: workout)
-                } else {
-                    // TODO: fail with message!
-                }
-            }
-        }
-     }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "showSelectExercise" {
+//            if let destinationController = segue.destinationViewController as? SelectExercisesTableViewController {
+//                
+//                if let name = nameTextField.text {
+//                    workout = viewModel.createWorkout(name)
+//                    destinationController.injectDependency(viewModel: viewModel, workout: workout)
+//                } else {
+//                    // TODO: fail with message!
+//                }
+//            }
+//        }
+//     }
 
 }

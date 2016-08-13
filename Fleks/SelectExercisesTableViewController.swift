@@ -9,32 +9,39 @@
 import UIKit
 
 class SelectExercisesTableViewController: UITableViewController {
-    private var workout: Workout!
-    private var viewModel: WorkoutViewModel!
+    var dataStore: DataStore!
+    
+    private var viewModel: ExercisesViewModel!
     private var selectedExercise: Exercise!
+    private var onSubmitUpdate: (selectedExercise: Exercise, reps: Int, sets: Int, notes: String) -> () -> Void = { _ in  { _ in  () } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.allowsSelection = true
-        viewModel.refreshExercises { _ in
+        viewModel.refreshSignalProducer().startWithNext { _ in
             self.tableView.reloadData()
         }
     }
     
-    func injectDependency(viewModel viewModel: WorkoutViewModel, workout: Workout) {
-        self.viewModel = viewModel
-        self.workout = workout
+    @IBAction func cancelTouchUp(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func injectDependency(dataStore: DataStore, onSubmitUpdate: (selectedExercise: Exercise, reps: Int, sets: Int, notes: String) -> () -> Void) {
+        self.dataStore = dataStore
+        self.onSubmitUpdate = onSubmitUpdate
+        self.viewModel = ExercisesViewModel(dataStore: dataStore)
     }
 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.exercises.count
+        return viewModel.numberOfExercisesInSection(section)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectExerciseCell", forIndexPath: indexPath)
-        let exercise = viewModel.exercises[indexPath.row]
+        let exercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
         let muscleString = exercise.muscles
             .map { $0.name }
             .joinWithSeparator(", ")
@@ -45,15 +52,16 @@ class SelectExercisesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedExercise = viewModel.exercises[indexPath.row]
+        selectedExercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
         performSegueWithIdentifier("EnterSetDetailsSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "EnterSetDetailsSegue") {
             let vc = segue.destinationViewController as! ExerciseSetFormViewController
-            let tabBarController = self.tabBarController as! FleksTabBarController
-            vc.injectDependency(tabBarController.createExerciseSetViewModel(selectedExercise, workout: workout))
+            vc.injectDependency(dataStore, onSubmitUpdate: { reps, sets, notes in
+                self.onSubmitUpdate(selectedExercise: self.selectedExercise, reps: reps, sets: sets, notes: notes)
+            })
         }
     }
 }

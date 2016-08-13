@@ -56,7 +56,7 @@ class WorkoutTableViewController: UITableViewController {
             case .ShowWorkoutDetailSegue:
                 if let destinationController = segue.destinationViewController as? ExerciseSetGroupTableViewController, let selectedWorkout = selectedWorkout {
                     let tabBarVC = tabBarController as! FleksTabBarController
-                    destinationController.injectDependency(tabBarVC.createExerciseSetGroupViewModel(forWorkout: selectedWorkout))
+                    destinationController.injectDependency(tabBarVC.dataStore, workout: selectedWorkout)
                 }
         }
     }

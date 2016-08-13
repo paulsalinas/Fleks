@@ -15,7 +15,7 @@ import Firebase
 // Eventually, I'll probably move the factory to it's own class
 class FleksTabBarController: UITabBarController {
     
-    private var dataStore: DataStore!
+    var dataStore: DataStore!
     
     // TODO: remove this dependency
     private var firebaseStore: FIRDatabase!
@@ -34,18 +34,18 @@ class FleksTabBarController: UITabBarController {
         self.firebaseStore = firebaseStore
         self.user = user
     }
-    
-    func createExerciseSetViewModel(exercise: Exercise, workout: Workout) -> ExerciseSetViewModel {
-        return ExerciseSetViewModel(exercise: exercise, workout: workout, dataStore: dataStore)
-    }
-    
-    func createExerciseSetViewModel(workout: Workout, order: Int) -> ExerciseSetViewModel {
-        return ExerciseSetViewModel(workout: workout, order: order, dataStore: dataStore)
-    }
-    
-    func createExerciseSetGroupViewModel(forWorkout workout: Workout) -> ExerciseSetGroupsViewModel {
-        return ExerciseSetGroupsViewModel(dataStore: dataStore, workout: workout)
-    }
+//    
+//    func createExerciseSetViewModel(exercise: Exercise, workout: Workout) -> ExerciseSetViewModel {
+//        return ExerciseSetViewModel(exercise: exercise, workout: workout, dataStore: dataStore)
+//    }
+//    
+//    func createExerciseSetViewModel(workout: Workout, order: Int) -> ExerciseSetViewModel {
+//        return ExerciseSetViewModel(workout: workout, order: order, dataStore: dataStore)
+//    }
+//    
+//    func createExerciseSetGroupViewModel(forWorkout workout: Workout) -> ExerciseSetGroupsViewModel {
+//        return ExerciseSetGroupsViewModel(dataStore: dataStore, workout: workout)
+//    }
     
     func createWorkoutViewModel() -> WorkoutViewModel {
         return WorkoutViewModel(store: self.firebaseStore, user: user)

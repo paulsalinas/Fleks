@@ -320,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kxv-4Z-hJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3673" y="660"/>
+            <point key="canvasLocation" x="4525" y="64"/>
         </scene>
         <!--Select Exercises-->
         <scene sceneID="RZ5-3I-upU">
@@ -361,13 +361,36 @@
                             <outlet property="delegate" destination="Gdo-ru-AEJ" id="fK6-n1-Hav"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Select Exercise" id="oy1-Jh-Fl7">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="tlx-vC-dI2">
+                            <connections>
+                                <action selector="cancelTouchUp:" destination="Gdo-ru-AEJ" id="M3h-sJ-R2X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="jcZ-Qn-JNT" kind="show" identifier="EnterSetDetailsSegue" id="MdT-q5-aAI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhn-Kp-ZHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4466" y="660"/>
+            <point key="canvasLocation" x="5438" y="824"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q6w-wp-NWH">
+            <objects>
+                <navigationController id="PaE-HG-VWh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cTp-qH-LdW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Gdo-ru-AEJ" kind="relationship" relationship="rootViewController" id="eHp-Vv-css"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F2o-GD-PbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4770" y="1709"/>
         </scene>
         <!--Exercise Set Form View Controller-->
         <scene sceneID="cvx-yI-A0c">
@@ -381,7 +404,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
                                 <rect key="frame" x="55" y="69" width="491" height="271"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
@@ -492,7 +515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOg-8n-IT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5243" y="660"/>
+            <point key="canvasLocation" x="6287" y="824"/>
         </scene>
         <!--Exercise Sets-->
         <scene sceneID="nb0-V6-Kl0">
@@ -503,8 +526,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupTableHeader" rowHeight="60" id="l44-iL-OhA" customClass="ExerciseSetGroupHeaderTableViewCell" customModule="Fleks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l44-iL-OhA" id="Ldz-eC-QtQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuM-On-WNg">
+                                            <rect key="frame" x="8" y="8" width="584" height="51.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="UuM-On-WNg" firstAttribute="leading" secondItem="Ldz-eC-QtQ" secondAttribute="leadingMargin" id="LKz-V3-6CJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="UuM-On-WNg" secondAttribute="bottom" constant="-8" id="cOh-vo-Crk"/>
+                                        <constraint firstItem="UuM-On-WNg" firstAttribute="top" secondItem="Ldz-eC-QtQ" secondAttribute="topMargin" id="iSJ-i5-7SD"/>
+                                        <constraint firstItem="UuM-On-WNg" firstAttribute="trailing" secondItem="Ldz-eC-QtQ" secondAttribute="trailingMargin" id="tdJ-Bt-6Sg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="workoutNameTextField" destination="UuM-On-WNg" id="VPv-3Y-DX0"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseSetGroupCell" rowHeight="112" id="XJC-Y8-Bfj" customClass="ExerciseSetGroupTableViewCell" customModule="Fleks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="112"/>
+                                <rect key="frame" x="0.0" y="88" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJC-Y8-Bfj" id="aab-RR-qkz">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="111.5"/>
@@ -583,12 +631,13 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Gdo-ru-AEJ" kind="show" identifier="ShowSelectExerciseSegue" id="Vgr-gK-grP"/>
-                        <segue destination="jcZ-Qn-JNT" kind="show" identifier="EditExerciseSetGroupSegue" id="Jzz-HR-aRd"/>
+                        <segue destination="jcZ-Qn-JNT" kind="presentation" identifier="EditExerciseSetGroupSegue" id="Jzz-HR-aRd"/>
+                        <segue destination="PaE-HG-VWh" kind="presentation" identifier="ShowSelectExerciseModally" id="Te5-0o-6un"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D86-gf-82V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3757" y="1638"/>
+            <point key="canvasLocation" x="3609" y="1486"/>
         </scene>
         <!--Workout Navigation-->
         <scene sceneID="dUu-yb-QO5">
@@ -609,8 +658,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vgr-gK-grP"/>
-        <segue reference="Rhz-RL-oqt"/>
+        <segue reference="COw-WN-Kne"/>
         <segue reference="Jzz-HR-aRd"/>
+        <segue reference="eHp-Vv-css"/>
     </inferredMetricsTieBreakers>
 </document>

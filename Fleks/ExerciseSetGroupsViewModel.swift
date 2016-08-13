@@ -7,14 +7,37 @@
 //
 
 import Foundation
+import Result
+import ReactiveCocoa
 
+// TODO: rename to EditWorkoutViewModel
 class ExerciseSetGroupsViewModel {
     private let dataStore: DataStore
-    var workout: Workout
+    private var workout: MutableProperty<Workout?>
+
+    let workoutNameInput: MutableProperty<String?>
     
-    init(dataStore: DataStore, workout: Workout) {
+    let workoutId: String?
+    
+    init(dataStore: DataStore, workoutId: String?) {
+        self.workoutId = workoutId
         self.dataStore = dataStore
-        self.workout = workout
+        self.workout = MutableProperty(nil)
+        self.workoutNameInput = MutableProperty(nil)
+        self.refreshSignalProducer().take(1).start()
+    }
+    
+    func refreshSignalProducer() -> SignalProducer<Void, NSError> {
+        guard let workoutId = workoutId else {
+            return SignalProducer<Void, NSError>.empty
+        }
+        
+        return dataStore.workoutProducer(forWorkoutId: workoutId).on(next: { next in
+            self.workout.swap(next)
+            self.workoutNameInput.swap(self.workout.value?.name)
+        })
+        .map { _ in () }
+        
     }
     
     func numberOfSections() -> Int {
@@ -22,10 +45,30 @@ class ExerciseSetGroupsViewModel {
     }
     
     func numberOfExerciseGroupsInSection(section: Int) -> Int {
-        return workout.exerciseSets.count
+        if let workout = workout.value {
+            return workout.exerciseSets.count
+        } else {
+            return 0
+        }
     }
     
     func exerciseSetGroupAtIndexPath(indexPath: NSIndexPath) -> ExerciseSetGroup {
-        return workout.exerciseSets[indexPath.row]
+        return workout.value!.exerciseSets[indexPath.row]
+    }
+    
+    func createWorkout(workoutName: String, firstExercise: Exercise, reps: Int, sets: Int, notes: String) -> SignalProducer<Void, NSError> {
+        let newWorkout = Workout(id: "", name: workoutName, exerciseSets: [ExerciseSetGroup(repetitions: reps, sets: sets, exercise: firstExercise, notes: notes)])
+        return dataStore.addWorkout(newWorkout).map { _ in () }
+    }
+    
+    func updateExerciseSetGroup(exerciseSetGroup: ExerciseSetGroup, withReps reps: Int, withSets sets: Int, withNotes notes: String) -> SignalProducer<Void, NSError> {
+        if var updatedWorkout = workout.value {
+            if let index = updatedWorkout.exerciseSets.indexOf(exerciseSetGroup) {
+                updatedWorkout.exerciseSets[index] = ExerciseSetGroup(repetitions: reps, sets: sets, exercise: exerciseSetGroup.sets.first!.exercise, notes: notes)
+                return dataStore.updateWorkout(updatedWorkout).map { _ in () }
+            }
+        }
+        
+        return SignalProducer<Void, NSError>.empty
     }
 }

@@ -13,6 +13,9 @@ import Foundation
 
 class ExerciseSetFormViewController: UIViewController {
     
+    private var dataStore: DataStore!
+    private var onSubmitUpdate: (reps: Int, sets: Int, notes: String) -> () -> Void = { _ in  { _ in  () } }
+    
     @IBOutlet weak var setsTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var setsStepper: UIStepper!
@@ -25,8 +28,14 @@ class ExerciseSetFormViewController: UIViewController {
     var viewModel: ExerciseSetViewModel!
     let errorColor = UIColor.redColor()
     
-    func injectDependency(viewModel: ExerciseSetViewModel) {
-        self.viewModel = viewModel
+    func injectDependency(dataStore: DataStore, onSubmitUpdate: (reps: Int, sets: Int, notes: String) -> () -> Void ) {
+        self.onSubmitUpdate = onSubmitUpdate
+        self.viewModel = ExerciseSetViewModel(dataStore: dataStore)
+    }
+    
+    func injectDependency(dataStore: DataStore, reps: Int, sets: Int, notes: String, onSubmitUpdate: (reps: Int, sets: Int, notes: String) -> () -> Void ) {
+        self.onSubmitUpdate = onSubmitUpdate
+        self.viewModel = ExerciseSetViewModel(dataStore: dataStore, reps: reps, sets: sets, notes: notes)
     }
     
     override func viewDidLoad() {
@@ -60,14 +69,6 @@ class ExerciseSetFormViewController: UIViewController {
     
         viewModel.isValidationErrorProducer
             .startWithNext(updateStateWithError)
-        
-        viewModel.order.producer.startWithNext { next in
-            if next == nil {
-                self.addExerciseBtn.setTitle("Add Exercise", forState: UIControlState.Normal)
-            } else {
-                self.addExerciseBtn.setTitle("Update Exercise", forState: UIControlState.Normal)
-            }
-        }
     }
     
     func createMergedSignalProducer(textField textField: UITextField, stepper: UIStepper) -> SignalProducer<String, NoError> {
@@ -97,17 +98,22 @@ class ExerciseSetFormViewController: UIViewController {
     }
     
     @IBAction func touchUpAddExerciseBtn(sender: AnyObject) {
-        viewModel.updateExerciseSetGroup().startWithNext { _ in
-            self.performSegueWithIdentifier("ShowExerciseSetGroups", sender: self)
-        }
+        dismissViewControllerAnimated(
+            true,
+            completion: onSubmitUpdate(
+                reps: Int(viewModel.repsInput.value)!,
+                sets: Int(viewModel.setsInput.value)!,
+                notes: viewModel.notesInput.value
+            )
+        )
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowExerciseSetGroups" {
-            let vc = segue.destinationViewController as! ExerciseSetGroupTableViewController
-            let tabBar = tabBarController as! FleksTabBarController
-            vc.injectDependency(tabBar.createExerciseSetGroupViewModel(forWorkout: viewModel.workout))
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "ShowExerciseSetGroups" {
+//            let vc = segue.destinationViewController as! ExerciseSetGroupTableViewController
+//            let tabBar = tabBarController as! FleksTabBarController
+//            vc.injectDependency(tabBar.createExerciseSetGroupViewModel(forWorkout: viewModel.workout))
+//        }
+//    }
     
 }

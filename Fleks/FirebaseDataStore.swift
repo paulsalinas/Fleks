@@ -26,22 +26,12 @@ class FireBaseDataStore: DataStore {
         self.user = user
         self.exercises = [Exercise]()
         
+        
         // update exercise cache and continually listen for changes
         // we might need to track this later for disposal
-        self.workoutsRef
-            .signalProducerForEvent(.Value)
-            .startWithNext { snapshot in
-                self.musclesRef
-                    .signalProducerForSingleEvent(.Value)
-                    .startWithNext { snapshotMuscles in
-                        let muscles = snapshot.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
-                        let userExercises:[Exercise] = snapshot.children.map { snap in
-                            let exerciseMuscles = muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
-                            return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
-                        }
-                        self.exercises = userExercises
-                    }
-            }
+        self.exercisesProducer().startWithNext { exercises in
+            self.exercises = exercises
+        }
     }
     
     private var userDataRef: FIRDatabaseReference {
@@ -106,6 +96,18 @@ class FireBaseDataStore: DataStore {
         }
     }
     
+    func addWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
+        var updatedWorkout = workout
+        return SignalProducer { observer, _ in
+            let ref = self.workoutsRef.childByAutoId()
+            updatedWorkout.id = ref.key
+            ref.setValue(FirebaseDataUtils.convertFirebaseData(workout), withCompletionBlock: { err, _ in
+                observer.sendNext(updatedWorkout)
+                observer.sendCompleted()
+            })
+        }
+    }
+    
     func exerciseSetGroupsProducer(forWorkout workout: Workout) -> SignalProducer<[ExerciseSetGroup], NSError> {
         return exerciseSetsGroupRef(workout.id).signalProducerForEvent(.Value)
             .map { mainSnapshot in
@@ -125,13 +127,25 @@ class FireBaseDataStore: DataStore {
     }
     
     func workoutProducer(forWorkoutId workoutId: String) -> SignalProducer<Workout, NSError> {
-        return exerciseSetsGroupRef(workoutId).signalProducerForEvent(.Value)
+        return workoutsRef.child(workoutId).signalProducerForEvent(.Value)
             .map { mainSnapshot in
                 Workout(
                     snapshot: mainSnapshot,
                     exercises: self.exercises
                 )
-               
         }
+    }
+    
+    func exercisesProducer() -> SignalProducer<[Exercise], NSError> {
+        return exerciseRef.signalProducerForEvent(.Value).zipWith(musclesRef.signalProducerForEvent(.Value))
+            .map { exerciseSnap, musclesSnap in
+                let muscles = musclesSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
+                return exerciseSnap.children.map { ex in
+                    Exercise(
+                        snapshot: ex as! FIRDataSnapshot,
+                        muscles: muscles.filter { muscle in ex.childSnapshotForPath("muscles").hasChild(muscle.id) }
+                    )
+                }
+            }
     }
 }
