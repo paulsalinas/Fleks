@@ -27,7 +27,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     private var dataStore: DataStore!
     private var workoutId: String?
     private var selectedExerciseSetGroup: ExerciseSetGroup?
-
+    
     override func viewWillAppear(animated: Bool) {
         refresh()
         super.viewWillAppear(animated)
@@ -38,6 +38,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
+            .take(1)
             .startWithNext { _ in
                 self.tableView.reloadData()
                 
@@ -78,7 +79,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                 
                 if viewModel.doesWorkoutExist() {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
+                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).startWithCompleted { self.refresh() }  }
                     })
                 } else {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
@@ -106,7 +107,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                                     withReps: reps,
                                     withSets: sets,
                                     withNotes: notes
-                                ).start()
+                                ).startWithCompleted { self.refresh() }
                             }
                         }
                     )
