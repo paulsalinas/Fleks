@@ -37,6 +37,7 @@ class WorkoutTableViewController: UITableViewController {
         viewModel.refreshWorkouts { _ in
             self.tableView.reloadData()
         }
+        selectedWorkout = nil
         super.viewWillAppear(animated)
     }
     
