@@ -29,7 +29,11 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     private var selectedExerciseSetGroup: ExerciseSetGroup?
 
     override func viewWillAppear(animated: Bool) {
-        
+        refresh()
+        super.viewWillAppear(animated)
+    }
+    
+    func refresh() {
         // refresh the data to make sure it's up to date
         viewModel
             .refreshSignalProducer()
@@ -51,9 +55,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                     
                     self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
                 }
-            }
-        
-        super.viewWillAppear(animated)
+        }
     }
     
     func injectDependency(dataStore: DataStore, workout: Workout?) {
@@ -80,7 +82,11 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                     })
                 } else {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in self.viewModel.createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
+                        return { _ in
+                            self.viewModel
+                                .createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
+                                .startWithCompleted { self.refresh() } // the refresh needs to be synchronous - needs to follow exactly after workout is created
+                        }
                     })
                 }
             

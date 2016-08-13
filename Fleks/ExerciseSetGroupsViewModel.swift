@@ -63,7 +63,12 @@ class ExerciseSetGroupsViewModel {
     
     func createWorkout(workoutName: String, firstExercise: Exercise, reps: Int, sets: Int, notes: String) -> SignalProducer<Void, NSError> {
         let newWorkout = Workout(id: "", name: workoutName, exerciseSets: [ExerciseSetGroup(repetitions: reps, sets: sets, exercise: firstExercise, notes: notes)])
-        return dataStore.addWorkout(newWorkout).map { _ in () }
+        return dataStore.addWorkout(newWorkout)
+            .on(next: { addedWorkout in
+                self.workout.swap(addedWorkout)
+                self.workoutId = addedWorkout.id
+            })
+            .map { _ in () }
     }
     
     func updateExerciseSetGroup(exerciseSetGroup: ExerciseSetGroup, withReps reps: Int, withSets sets: Int, withNotes notes: String) -> SignalProducer<Void, NSError> {
