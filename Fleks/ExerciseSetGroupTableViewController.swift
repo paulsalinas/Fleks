@@ -40,14 +40,16 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
     
     func refresh() {
-        
         // refresh the data to make sure it's up to date
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
+            .startWithNext { _ in self.tableView.reloadData() }
+        
+        viewModel
+            .refreshSignalProducer()
+            .take(1)
             .startWithNext { _ in
-                self.tableView.reloadData()
-                
                 // initialize the header with the form to edit the workout name
                 if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
                     cell.contentView.backgroundColor = UIColor.lightGrayColor()
@@ -63,7 +65,9 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                     
                     self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
                 }
+                
             }
+      
     }
     
     func injectDependency(dataStore: DataStore, workout: Workout?) {

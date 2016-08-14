@@ -27,6 +27,19 @@ class ExerciseSetGroupsViewModel {
         self.workout = MutableProperty(nil)
         self.workoutNameInput = MutableProperty(nil)
         self.refreshSignalProducer().take(1).start()
+        
+        // update name as workout name changes
+        self.workoutNameInput.signal
+            .throttle(2, onScheduler: QueueScheduler.init())
+            .ignoreNil()
+            .filter { $0 != "" }
+            .skipRepeats()
+            .observeNext { next in
+                if var updatedWorkoutName = self.workout.value  {
+                    updatedWorkoutName.name = next
+                    self.dataStore.updateWorkout(updatedWorkoutName).start()
+                }
+            }
     }
     
     func refreshSignalProducer() -> SignalProducer<Void, NSError> {
