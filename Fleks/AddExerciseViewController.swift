@@ -34,7 +34,11 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func doneButtonTouch(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: onDone(name: exerciseNameTextField.text!, selectedMuscles: viewModel.getSelectedMuscles()))
+        if viewModel.isValid(exerciseNameTextField.text) {
+            dismissViewControllerAnimated(true, completion: onDone(name: exerciseNameTextField.text!, selectedMuscles: viewModel.getSelectedMuscles()))
+        } else {
+            alert("your form is incomplete! name must not be empty and you must select at least one muscle")
+        }
     }
     
     func injectDependencies(dataStore: DataStore, onDone: (name: String, selectedMuscles: [Muscle]) -> () -> Void) {

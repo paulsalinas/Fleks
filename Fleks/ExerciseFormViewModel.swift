@@ -50,4 +50,8 @@ class ExerciseFormViewModel {
     func muscleGroupAtIndexPath(indexPath: NSIndexPath) -> Muscle {
         return muscles[indexPath.row]
     }
+    
+    func isValid(name: String?) -> Bool {
+        return name != nil && name != "" && selectedMuscles.count > 0
+    }
 }
