@@ -23,8 +23,6 @@
 		3C2F1D6A1D581FF2005B46E4 /* FirebaseDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D691D581FF2005B46E4 /* FirebaseDataUtils.swift */; };
 		3C2F1D6C1D582138005B46E4 /* FirebaseDataUtilsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D6B1D582137005B46E4 /* FirebaseDataUtilsSpec.swift */; };
 		3C64A2D71D42FCB8005D0F69 /* ExerciseSetFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */; };
-		3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */; };
-		3C64A2DC1D44017E005D0F69 /* IntegerTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */; };
 		3C64A2E01D443508005D0F69 /* ExerciseSetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */; };
 		3C64A2E21D4973A7005D0F69 /* UIKit+ReactiveCococa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */; };
 		3C64A2E41D501800005D0F69 /* ExerciseSetViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */; };
@@ -99,8 +97,6 @@
 		3C2F1D691D581FF2005B46E4 /* FirebaseDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataUtils.swift; sourceTree = "<group>"; };
 		3C2F1D6B1D582137005B46E4 /* FirebaseDataUtilsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataUtilsSpec.swift; sourceTree = "<group>"; };
 		3C64A2D61D42FCB8005D0F69 /* ExerciseSetFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetFormViewController.swift; sourceTree = "<group>"; };
-		3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalTextFieldDelegate.swift; sourceTree = "<group>"; };
-		3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTextViewDelegate.swift; sourceTree = "<group>"; };
 		3C64A2DF1D443508005D0F69 /* ExerciseSetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewModel.swift; sourceTree = "<group>"; };
 		3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+ReactiveCococa.swift"; sourceTree = "<group>"; };
 		3C64A2E31D5017FF005D0F69 /* ExerciseSetViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetViewModelSpec.swift; sourceTree = "<group>"; };
@@ -190,9 +186,7 @@
 		3C64A2D81D43FF2D005D0F69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3C64A2D91D43FF71005D0F69 /* DecimalTextFieldDelegate.swift */,
 				3C036AD11CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift */,
-				3C64A2DB1D44017E005D0F69 /* IntegerTextViewDelegate.swift */,
 				3C99BEDE1D5ACC81008079A3 /* ExerciseSetGroupTableViewCell.swift */,
 				3CFD37861D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift */,
 			);
@@ -625,10 +619,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C036ACA1CCF112800E9F8C1 /* ExerciseSet.swift in Sources */,
-				3C64A2DC1D44017E005D0F69 /* IntegerTextViewDelegate.swift in Sources */,
 				3C877A6F1D5E8E24005F8D99 /* ExercisesViewModel.swift in Sources */,
 				3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */,
-				3C64A2DA1D43FF71005D0F69 /* DecimalTextFieldDelegate.swift in Sources */,
 				3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */,
 				3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */,
 				3C9378D91D35D37200A0CA8B /* User.swift in Sources */,
