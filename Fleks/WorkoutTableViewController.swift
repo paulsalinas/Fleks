@@ -27,7 +27,6 @@ class WorkoutTableViewController: UITableViewController {
         performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
     }
     override func viewDidLoad() {
-        tableView.dataSource = self
         viewModel.refreshSignalProducer()
             .startWithNext { _ in self.tableView.reloadData() }
         super.viewDidLoad()
