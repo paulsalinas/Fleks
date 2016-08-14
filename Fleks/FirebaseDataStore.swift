@@ -207,4 +207,13 @@ class FireBaseDataStore: DataStore {
             }
         }
     }
+    
+    func musclesProducer() -> SignalProducer<[Muscle], NSError> {
+        return musclesRef.signalProducerForEvent(.Value)
+            .map { snap in
+                snap.children.map { childSnap in
+                    Muscle(snapshot: childSnap as! FIRDataSnapshot)
+                }
+        }
+    }
 }

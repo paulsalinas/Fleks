@@ -10,6 +10,8 @@ import Foundation
 import Result
 import ReactiveCocoa
 
+
+// For testing
 class FakeDataStore: DataStore {
      func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
@@ -81,5 +83,9 @@ class FakeDataStore: DataStore {
     
     func addExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
         return SignalProducer.init(value: Exercise(id: "test", name: "test", muscles: [Muscle]()))
+    }
+    
+    func musclesProducer() -> SignalProducer<[Muscle], NSError> {
+        return SignalProducer.init(value: [Muscle]())
     }
 }

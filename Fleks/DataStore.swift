@@ -24,4 +24,6 @@ protocol DataStore {
     func addExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError>
     func updateExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError>
     func deleteExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError>
+    
+    func musclesProducer() -> SignalProducer<[Muscle], NSError>
 }
