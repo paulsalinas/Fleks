@@ -23,10 +23,16 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         case Normal = "exerciseSetGroupCell"
     }
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     private var viewModel: ExerciseSetGroupsViewModel!
     private var dataStore: DataStore!
     private var workoutId: String?
     private var selectedExerciseSetGroup: ExerciseSetGroup?
+    
+    override func viewDidLoad() {
+        tableView.allowsMultipleSelectionDuringEditing = false;
+    }
     
     override func viewWillAppear(animated: Bool) {
         refresh()
@@ -34,6 +40,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
     
     func refresh() {
+        
         // refresh the data to make sure it's up to date
         viewModel
             .refreshSignalProducer()
@@ -44,7 +51,8 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                 
                 // initialize the header with the form to edit the workout name
                 if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
-                    self.tableView.tableHeaderView = cell
+                    cell.contentView.backgroundColor = UIColor.lightGrayColor()
+                    self.tableView.tableHeaderView = cell.contentView
                     self.viewModel.workoutNameInput
                         .producer
                         .take(1)
@@ -66,6 +74,16 @@ class ExerciseSetGroupTableViewController: UITableViewController {
 
     @IBAction func addButtonTouch(sender: AnyObject) {
         performSegueWithIdentifier(SegueIdentifierTypes.ShowSelectExerciseModally.rawValue, sender: self)
+    }
+    
+    @IBAction func editButtonTouch(sender: AnyObject) {
+        if tableView.editing {
+            editButton.title = "Edit"
+            setEditing(false, animated: true)
+        } else {
+            editButton.title = "Done"
+            setEditing(true, animated: true)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -115,6 +133,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         }
     }
     
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -137,33 +156,21 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         performSegueWithIdentifier(SegueIdentifierTypes.EditExerciseSetGroupSegue.rawValue, sender: self)
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+     
+     }
+    
+     // Override to support editing the table view.
+     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+         if editingStyle == .Delete {
+             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+         }
+     }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.Delete
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
+    
     /*
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
