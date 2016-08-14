@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login-->
@@ -355,8 +356,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
-                                <rect key="frame" x="55" y="69" width="491" height="271"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j3h-pf-XyT">
+                                <rect key="frame" x="55" y="104" width="491" height="271"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-P2-vZE">
                                         <rect key="frame" x="0.0" y="0.0" width="491" height="51"/>
@@ -436,7 +437,7 @@
                                         <rect key="frame" x="0.0" y="220" width="491" height="51"/>
                                         <color key="backgroundColor" red="0.27058823529999998" green="0.52941176469999995" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Add Exercise">
+                                        <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -449,10 +450,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="j3h-pf-XyT" firstAttribute="leading" secondItem="DAp-xc-Uh3" secondAttribute="leadingMargin" constant="35" id="VSL-05-3v2"/>
-                            <constraint firstItem="j3h-pf-XyT" firstAttribute="top" secondItem="FNf-vP-GyY" secondAttribute="bottom" constant="5" id="g8t-wH-bL3"/>
+                            <constraint firstItem="j3h-pf-XyT" firstAttribute="top" secondItem="FNf-vP-GyY" secondAttribute="bottom" constant="40" id="g8t-wH-bL3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="j3h-pf-XyT" secondAttribute="trailing" constant="34" id="j0u-lp-HNP"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addExerciseBtn" destination="PtM-QK-ghk" id="0sq-Q0-FbJ"/>
                         <outlet property="errorLabel" destination="V1k-Cy-3eW" id="ch0-S1-Lbr"/>
@@ -573,13 +576,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Exercise Sets" id="Vwg-zt-10Z">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cOt-GC-zDl">
-                            <connections>
-                                <action selector="addButtonTouch:" destination="5Di-hN-To3" id="Nfp-Nj-dIM"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="cOt-GC-zDl">
+                                <connections>
+                                    <action selector="addButtonTouch:" destination="5Di-hN-To3" id="Nfp-Nj-dIM"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="W4H-Ue-Hy2">
+                                <connections>
+                                    <action selector="editButtonTouch:" destination="5Di-hN-To3" id="Gzg-KH-tUY"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="W4H-Ue-Hy2" id="psj-67-pJc"/>
                         <segue destination="jcZ-Qn-JNT" kind="presentation" identifier="EditExerciseSetGroupSegue" id="Jzz-HR-aRd"/>
                         <segue destination="PaE-HG-VWh" kind="presentation" identifier="ShowSelectExerciseModally" id="Te5-0o-6un"/>
                     </connections>
