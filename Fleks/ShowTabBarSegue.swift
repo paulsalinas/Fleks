@@ -17,16 +17,7 @@ class ShowTabBarSegue: UIStoryboardSegue {
         let user = sourceViewController.user!
         let dataStore = FireBaseDataStore(firebaseDB: store, user: user)
         
-        destinationViewController.injectDependencies(
-            exerciseViewModel: ExerciseViewModel(
-                store: store,
-                user: user
-            ),
-            dataStore: dataStore,
-            firebaseStore: store,
-            user: user
-        )
-        
+        destinationViewController.injectDependencies(dataStore)
         super.perform()
     }
 }
