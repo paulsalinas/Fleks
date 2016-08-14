@@ -128,12 +128,13 @@ class FireBaseDataStore: DataStore {
     
     func workoutProducer(forWorkoutId workoutId: String) -> SignalProducer<Workout, NSError> {
         return workoutsRef.child(workoutId).signalProducerForEvent(.Value)
+            .takeWhile { snap in snap.children.allObjects.count > 0 } // ends the stream when the workout has been deleted
             .map { mainSnapshot in
                 Workout(
                     snapshot: mainSnapshot,
                     exercises: self.exercises
                 )
-        }
+            }
     }
     
     func exercisesProducer() -> SignalProducer<[Exercise], NSError> {
