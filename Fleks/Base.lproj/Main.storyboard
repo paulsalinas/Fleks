@@ -126,7 +126,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AvH-mk-Krs">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="iXA-Cf-C5A">
+                                    <navigationItem title="Create an Exercise" id="iXA-Cf-C5A">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="75o-I0-WWs">
                                             <connections>
                                                 <action selector="cancelButtonTouch:" destination="rjv-OW-5HL" id="CKD-mI-NLZ"/>
