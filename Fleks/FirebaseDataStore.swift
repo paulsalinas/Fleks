@@ -156,7 +156,8 @@ class FireBaseDataStore: DataStore {
     }
     
     func exercisesProducer() -> SignalProducer<[Exercise], NSError> {
-        return exerciseRef.signalProducerForEvent(.Value).zipWith(musclesRef.signalProducerForEvent(.Value))
+        return exerciseRef.signalProducerForEvent(.Value)
+            .combineLatestWith(musclesRef.signalProducerForEvent(.Value))
             .map { exerciseSnap, musclesSnap in
                 let muscles = musclesSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
                 return exerciseSnap.children.map { ex in

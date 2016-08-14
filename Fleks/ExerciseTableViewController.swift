@@ -8,34 +8,51 @@
 
 import UIKit
 
-class ExerciseTableViewController: UIViewController, UITableViewDelegate {
+class ExerciseTableViewController: UITableViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    private var viewModel: ExercisesViewModel!
+    private var dataStore: DataStore!
     
-    private var dataSource: ExerciseDataSource!
-    private var viewModel: ExerciseViewModel!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource = ExerciseDataSource(cellReuseIdentifier: "cell", viewModel: viewModel, tableView: tableView)
-        tableView.delegate = self
-        tableView.dataSource = dataSource
-        tableView.allowsSelection = false
+        self.viewModel.refreshSignalProducer()
+            .startWithNext { _ in self.tableView.reloadData() }
+        
+         super.viewDidLoad()
     }
     
-    func injectDependency(viewModel: ExerciseViewModel) {
-        self.viewModel = viewModel
+    func injectDependency(dataStore: DataStore) {
+        self.dataStore = dataStore
+        self.viewModel = ExercisesViewModel(dataStore: dataStore)
     }
     
-    @IBAction func unwindFromAddController(segue: AddExerciseCompletionSegue) {
-        viewModel.createExercise(segue.exerciseNameText, muscles: segue.selectedMuscles)
-        tableView.reloadData()
+    @IBAction func addButtonTouch(sender: AnyObject) {
+        performSegueWithIdentifier("ShowExerciseForm", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "AddExerciseSegue" ) {
+        if (segue.identifier == "ShowExerciseForm" ) {
             let addExerciseController = segue.destinationViewController as! AddExerciseViewController
-            addExerciseController.injectDependencies(viewModel)
+            addExerciseController.injectDependencies(dataStore, onDone: { name, selectedMuscles in
+                return { _ in  self.viewModel.createExercise(name, muscles: selectedMuscles).start() }
+            })
         }
+    }
+    
+    // MARK: - Table view data source
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfExercisesInSection(section)
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let exercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
+        let muscleString = exercise.muscles
+            .map { $0.name }
+            .joinWithSeparator(", ")
+        
+        cell.textLabel?.text = exercise.name
+        cell.detailTextLabel?.text = "Muscles: \(muscleString)"
+        return cell
     }
 }

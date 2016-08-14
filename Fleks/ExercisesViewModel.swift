@@ -36,4 +36,11 @@ class ExercisesViewModel {
     func exerciseSetGroupAtIndexPath(indexPath: NSIndexPath) -> Exercise {
         return self.exercises[indexPath.row]
     }
+    
+    func createExercise(name: String, muscles: [Muscle]) -> SignalProducer<Void, NSError> {
+        let newExercise = Exercise(id: "", name: name, muscles: muscles)
+        return dataStore.addExercise(newExercise)
+            .on(next: {next in self.exercises.append(next) })
+            .map { _ in () }
+    }
 }

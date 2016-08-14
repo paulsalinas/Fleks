@@ -24,7 +24,7 @@ class FleksTabBarController: UITabBarController {
     func injectDependencies(exerciseViewModel exerciseViewModel: ExerciseViewModel, dataStore: DataStore, firebaseStore: FIRDatabase, user: User) {
         let navController = viewControllers![1] as! UINavigationController
         let exerciseTableViewController = navController.topViewController as! ExerciseTableViewController
-        exerciseTableViewController.injectDependency(exerciseViewModel)
+        exerciseTableViewController.injectDependency(dataStore)
         
         let workoutNavController = viewControllers![0] as! UINavigationController
         let workoutController = workoutNavController.topViewController as! WorkoutTableViewController
