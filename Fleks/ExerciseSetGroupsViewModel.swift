@@ -34,11 +34,12 @@ class ExerciseSetGroupsViewModel {
             return SignalProducer<Void, NSError>.init(value: ())
         }
 
-        return dataStore.workoutProducer(forWorkoutId: workoutId).on(next: { next in
-            self.workout.swap(next)
-            self.workoutNameInput.swap(self.workout.value?.name)
-        })
-        .map { _ in () }
+        return dataStore.workoutProducer(forWorkoutId: workoutId)
+            .on(next: { next in
+                self.workout.swap(next)
+                self.workoutNameInput.swap(self.workout.value?.name)
+            })
+            .map { _ in () }
     }
     
     func numberOfSections() -> Int {
@@ -89,5 +90,24 @@ class ExerciseSetGroupsViewModel {
         }
         
         return SignalProducer<Void, NSError>.empty
+    }
+    
+    func deleteExerciseSetGroupAtIndexPath(indexPath: NSIndexPath) -> SignalProducer<Void, NSError> {
+        guard var updatedWorkout = workout.value else {
+            return SignalProducer<Void, NSError>.empty
+        }
+        
+        updatedWorkout.exerciseSets.removeAtIndex(indexPath.row)
+        return dataStore.updateWorkout(updatedWorkout).map { _ in () }
+    }
+    
+    func moveRowAtIndexPath(fromIndexPath:NSIndexPath, toIndexPath: NSIndexPath) -> SignalProducer<Void, NSError> {
+        guard var updatedWorkout = workout.value else {
+            return SignalProducer<Void, NSError>.empty
+        }
+        
+        let toBeMoved = updatedWorkout.exerciseSets.removeAtIndex(fromIndexPath.row)
+        updatedWorkout.exerciseSets.insert(toBeMoved, atIndex: toIndexPath.row)
+        return dataStore.updateWorkout(updatedWorkout).map { _ in () }
     }
 }

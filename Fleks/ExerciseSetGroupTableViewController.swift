@@ -155,13 +155,13 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
     
      override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
+        viewModel.moveRowAtIndexPath(fromIndexPath, toIndexPath: toIndexPath).start()
      }
     
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
          if editingStyle == .Delete {
-             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            viewModel.deleteExerciseSetGroupAtIndexPath(indexPath).start()
          }
      }
     
