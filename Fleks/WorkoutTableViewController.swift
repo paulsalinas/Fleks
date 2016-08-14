@@ -56,7 +56,7 @@ class WorkoutTableViewController: UITableViewController {
         }
     }
     
-    // MARK - DataSource
+    // MARK: - DataSource
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
