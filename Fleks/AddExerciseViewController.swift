@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ActivityOverlayable {
+class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ActivityOverlayable, Alertable {
     
     var activityOverlay: ActivityOverlay?
     
@@ -25,7 +25,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
         muscleTableView.delegate = self
         muscleTableView.dataSource = self
         viewModel.refreshSignalProducer()
-            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in self.muscleTableView.reloadData() }
     }
     

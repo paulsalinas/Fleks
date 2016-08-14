@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityOverlayable {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityOverlayable, Alertable {
     
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
@@ -32,13 +32,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityO
     
     /* facebook button delegate to handle the result from login */
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        startOverlay()
+        
         
         if error != nil {
-            print("Facebook login failed. Error \(error)")
+            self.alert("Something was wrong with your FB login!")
         } else if result.isCancelled {
-            print("Facebook login was cancelled.")
+           print("user cancelled")
         } else {
+            startOverlay()
             viewModel.loginWithFacebook(
                 FBSDKAccessToken.currentAccessToken().tokenString,
                 onComplete: { user in
@@ -47,7 +48,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityO
                     self.stopOverlay()
                 },
                 onError: { error in
-                    print("Login failed. \(error)")
+                    self.alert("Something went wrong with your login!")
                     self.stopOverlay()
                 }
             )

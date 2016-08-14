@@ -11,7 +11,7 @@ import Result
 import ReactiveCocoa
 import Foundation
 
-class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverlayable {
+class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverlayable, Alertable {
     
     var activityOverlay: ActivityOverlay?
     
@@ -64,7 +64,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
-            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithSignal { signal, _ in
                 signal.observe(tableObserver) // constantly listen for table data changes
                 signal.take(1).observe(nameInputObserver) // only initialize name text
@@ -103,7 +103,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
                         return { _ in
                             self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
+                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                 .start()
                         }
                     })
@@ -112,7 +112,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                         return { _ in
                             self.viewModel
                                 .createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
+                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                 .startWithCompleted { self.refresh() } // the refresh needs to be synchronous - needs to follow exactly after workout is created
                         }
                     })
@@ -135,7 +135,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                                     withSets: sets,
                                     withNotes: notes
                                 )
-                                    .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
+                                    .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                     .start()
                             }
                         }

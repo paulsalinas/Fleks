@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkoutTableViewController: UITableViewController, ActivityOverlayable {
+class WorkoutTableViewController: UITableViewController, ActivityOverlayable, Alertable {
     
     var activityOverlay: ActivityOverlay?
     
@@ -30,7 +30,7 @@ class WorkoutTableViewController: UITableViewController, ActivityOverlayable {
     }
     override func viewDidLoad() {
         viewModel.refreshSignalProducer()
-            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in self.tableView.reloadData() }
         super.viewDidLoad()
     }
