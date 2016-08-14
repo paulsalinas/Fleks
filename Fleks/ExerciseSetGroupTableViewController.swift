@@ -40,34 +40,32 @@ class ExerciseSetGroupTableViewController: UITableViewController {
     }
     
     func refresh() {
-        // refresh the data to make sure it's up to date
+        let tableObserver = Observer<Void, NSError>.init(next: { _ in self.tableView.reloadData() })
+        let nameInputObserver = Observer<Void, NSError>.init(next: { _ in
+            // initialize the header with the form to edit the workout name
+            if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
+                cell.contentView.backgroundColor = UIColor.lightGrayColor()
+                self.tableView.tableHeaderView = cell.contentView
+                self.viewModel.workoutNameInput
+                    .producer
+                    .take(1)
+                    .startWithNext { next in
+                        if let next = next {
+                            cell.workoutNameTextField!.text = next
+                        }
+                }
+                
+                self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
+            }
+        })
+
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
-            .startWithNext { _ in self.tableView.reloadData() }
-        
-        viewModel
-            .refreshSignalProducer()
-            .take(1)
-            .startWithNext { _ in
-                // initialize the header with the form to edit the workout name
-                if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
-                    cell.contentView.backgroundColor = UIColor.lightGrayColor()
-                    self.tableView.tableHeaderView = cell.contentView
-                    self.viewModel.workoutNameInput
-                        .producer
-                        .take(1)
-                        .startWithNext { next in
-                            if let next = next {
-                                cell.workoutNameTextField!.text = next
-                            }
-                    }
-                    
-                    self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
-                }
-                
+            .startWithSignal { signal, _ in
+                signal.observe(tableObserver) // constantly listen for table data changes
+                signal.take(1).observe(nameInputObserver) // only initialize name text
             }
-      
     }
     
     func injectDependency(dataStore: DataStore, workout: Workout?) {
