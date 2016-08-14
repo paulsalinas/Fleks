@@ -8,14 +8,16 @@
 
 import UIKit
 
-class ExerciseTableViewController: UITableViewController {
-
+class ExerciseTableViewController: UITableViewController, ActivityOverlayable {
+    var activityOverlay: ActivityOverlay?
+    
     private var viewModel: ExercisesViewModel!
     private var dataStore: DataStore!
     
     
     override func viewDidLoad() {
         self.viewModel.refreshSignalProducer()
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
             .startWithNext { _ in self.tableView.reloadData() }
         
          super.viewDidLoad()
@@ -34,7 +36,11 @@ class ExerciseTableViewController: UITableViewController {
         if (segue.identifier == "ShowExerciseForm" ) {
             let addExerciseController = segue.destinationViewController as! AddExerciseViewController
             addExerciseController.injectDependencies(dataStore, onDone: { name, selectedMuscles in
-                return { _ in  self.viewModel.createExercise(name, muscles: selectedMuscles).start() }
+                return { _ in
+                    self.viewModel.createExercise(name, muscles: selectedMuscles)
+                        .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
+                        .start()
+                }
             })
         }
     }

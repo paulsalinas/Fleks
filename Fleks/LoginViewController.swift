@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityOverlayable {
     
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     private var viewModel: LoginViewModel!
     var user: User?
+    
+    var activityOverlay: ActivityOverlay?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     /* facebook button delegate to handle the result from login */
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        startOverlay()
+        
         if error != nil {
             print("Facebook login failed. Error \(error)")
         } else if result.isCancelled {
@@ -40,9 +44,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 onComplete: { user in
                     self.user = user
                     self.performSegueWithIdentifier("ShowTabBar", sender: self)
+                    self.stopOverlay()
                 },
                 onError: { error in
                     print("Login failed. \(error)")
+                    self.stopOverlay()
                 }
             )
         }

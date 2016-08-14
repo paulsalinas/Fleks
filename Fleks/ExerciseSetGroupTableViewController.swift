@@ -11,7 +11,9 @@ import Result
 import ReactiveCocoa
 import Foundation
 
-class ExerciseSetGroupTableViewController: UITableViewController {
+class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverlayable {
+    
+    var activityOverlay: ActivityOverlay?
     
     enum SegueIdentifierTypes: String {
         case EditExerciseSetGroupSegue = "EditExerciseSetGroupSegue"
@@ -62,6 +64,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
             .startWithSignal { signal, _ in
                 signal.observe(tableObserver) // constantly listen for table data changes
                 signal.take(1).observe(nameInputObserver) // only initialize name text
@@ -98,13 +101,18 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                 
                 if viewModel.doesWorkoutExist() {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
+                        return { _ in
+                            self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
+                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
+                                .start()
+                        }
                     })
                 } else {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
                         return { _ in
                             self.viewModel
                                 .createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
+                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
                                 .startWithCompleted { self.refresh() } // the refresh needs to be synchronous - needs to follow exactly after workout is created
                         }
                     })
@@ -126,7 +134,9 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                                     withReps: reps,
                                     withSets: sets,
                                     withNotes: notes
-                                ).start()
+                                )
+                                    .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() })
+                                    .start()
                             }
                         }
                     )

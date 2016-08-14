@@ -8,7 +8,10 @@
 
 import UIKit
 
-class SelectExercisesTableViewController: UITableViewController {
+class SelectExercisesTableViewController: UITableViewController, ActivityOverlayable {
+    
+    var activityOverlay: ActivityOverlay?
+    
     var dataStore: DataStore!
     
     private var viewModel: ExercisesViewModel!
@@ -19,9 +22,11 @@ class SelectExercisesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.allowsSelection = true
-        viewModel.refreshSignalProducer().startWithNext { _ in
-            self.tableView.reloadData()
-        }
+        viewModel.refreshSignalProducer()
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
+            .startWithNext { _ in
+                self.tableView.reloadData()
+            }
     }
     
     @IBAction func cancelTouchUp(sender: AnyObject) {

@@ -8,7 +8,9 @@
 
 import UIKit
 
-class WorkoutTableViewController: UITableViewController {
+class WorkoutTableViewController: UITableViewController, ActivityOverlayable {
+    
+    var activityOverlay: ActivityOverlay?
     
     enum SegueIdentifierTypes: String {
         case ShowWorkoutDetailSegue = "showWorkoutDetailSegue"
@@ -28,6 +30,7 @@ class WorkoutTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         viewModel.refreshSignalProducer()
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
             .startWithNext { _ in self.tableView.reloadData() }
         super.viewDidLoad()
     }

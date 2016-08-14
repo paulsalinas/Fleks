@@ -8,8 +8,10 @@
 
 import UIKit
 
-class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ActivityOverlayable {
+    
+    var activityOverlay: ActivityOverlay?
+    
     @IBOutlet weak var exerciseNameTextField: UITextField!
     @IBOutlet weak var muscleTableView: UITableView!
     
@@ -23,6 +25,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
         muscleTableView.delegate = self
         muscleTableView.dataSource = self
         viewModel.refreshSignalProducer()
+            .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() })
             .startWithNext { _ in self.muscleTableView.reloadData() }
     }
     
