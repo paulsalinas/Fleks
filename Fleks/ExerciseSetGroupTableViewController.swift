@@ -45,7 +45,6 @@ class ExerciseSetGroupTableViewController: UITableViewController {
         viewModel
             .refreshSignalProducer()
             .startOn(UIScheduler())
-            .take(1)
             .startWithNext { _ in
                 self.tableView.reloadData()
                 
@@ -60,11 +59,11 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                             if let next = next {
                                 cell.workoutNameTextField!.text = next
                             }
-                        }
+                    }
                     
                     self.viewModel.workoutNameInput <~ cell.workoutNameTextField.keyPress().map { $0 as String? }
                 }
-        }
+            }
     }
     
     func injectDependency(dataStore: DataStore, workout: Workout?) {
@@ -97,7 +96,7 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                 
                 if viewModel.doesWorkoutExist() {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).startWithCompleted { self.refresh() }  }
+                        return { _ in self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes).start() }
                     })
                 } else {
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
@@ -125,14 +124,13 @@ class ExerciseSetGroupTableViewController: UITableViewController {
                                     withReps: reps,
                                     withSets: sets,
                                     withNotes: notes
-                                ).startWithCompleted { self.refresh() }
+                                ).start()
                             }
                         }
                     )
                 }
         }
     }
-    
     
     // MARK: - Table view data source
 
