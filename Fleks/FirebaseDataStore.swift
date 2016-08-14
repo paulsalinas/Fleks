@@ -96,6 +96,19 @@ class FireBaseDataStore: DataStore {
         }
     }
     
+    func deleteWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
+        return SignalProducer { observer, _ in
+            self.workoutsRef.child(workout.id).removeValueWithCompletionBlock { err, _ in
+                if let error = err {
+                    observer.sendFailed(error)
+                }
+                observer.sendNext(workout)
+                observer.sendCompleted()
+            }
+            
+        }
+    }
+    
     func addWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
         var updatedWorkout = workout
         return SignalProducer { observer, _ in
@@ -130,10 +143,16 @@ class FireBaseDataStore: DataStore {
         return workoutsRef.child(workoutId).signalProducerForEvent(.Value)
             .takeWhile { snap in snap.children.allObjects.count > 0 } // ends the stream when the workout has been deleted
             .map { mainSnapshot in
-                Workout(
-                    snapshot: mainSnapshot,
-                    exercises: self.exercises
-                )
+                Workout(snapshot: mainSnapshot, exercises: self.exercises)
+            }
+    }
+    
+    func workoutsProducer() -> SignalProducer<[Workout], NSError> {
+        return workoutsRef.signalProducerForEvent(.Value)
+            .map { snap in
+                snap.children.map { childSnap in
+                    Workout(snapshot: childSnap as! FIRDataSnapshot, exercises: self.exercises)
+                }
             }
     }
     

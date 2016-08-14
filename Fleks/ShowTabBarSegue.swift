@@ -22,10 +22,6 @@ class ShowTabBarSegue: UIStoryboardSegue {
                 store: store,
                 user: user
             ),
-            workoutViewModel: WorkoutViewModel(
-                store: store,
-                user: user
-            ),
             dataStore: dataStore,
             firebaseStore: store,
             user: user

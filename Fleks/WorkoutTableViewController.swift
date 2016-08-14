@@ -14,35 +14,32 @@ class WorkoutTableViewController: UITableViewController {
         case ShowWorkoutDetailSegue = "showWorkoutDetailSegue"
     }
     
-    private var dataSource: WorkoutDataSource!
-    var client: FirebaseClient!
+    var dataSource: DataStore!
     private var viewModel: WorkoutViewModel!
     
     var selectedWorkout: Workout?
     
-    func injectDependency(viewModel: WorkoutViewModel) {
-        self.viewModel = viewModel
+    func injectDependency(dataStore: DataStore) {
+        self.viewModel = WorkoutViewModel(dataStore: dataStore)
     }
     
     @IBAction func addWorkoutButtonTouchUp(sender: AnyObject) {
         performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
     }
     override func viewDidLoad() {
-        dataSource = WorkoutDataSource(cellReuseIdentifier: "workoutCell", viewModel: viewModel, tableView: tableView)
-        tableView.dataSource = dataSource
+        tableView.dataSource = self
+        viewModel.refreshSignalProducer()
+            .startWithNext { _ in self.tableView.reloadData() }
         super.viewDidLoad()
     }
     
     override func viewWillAppear(animated: Bool) {
-        viewModel.refreshWorkouts { _ in
-            self.tableView.reloadData()
-        }
         selectedWorkout = nil
         super.viewWillAppear(animated)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedWorkout = viewModel.workouts[indexPath.row]
+        selectedWorkout = viewModel.workoutAtIndexPath(indexPath)
         performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
     }
     
@@ -57,6 +54,26 @@ class WorkoutTableViewController: UITableViewController {
                     let tabBarVC = tabBarController as! FleksTabBarController
                     destinationController.injectDependency(tabBarVC.dataStore, workout: selectedWorkout)
                 }
+        }
+    }
+    
+    // MARK - DataSource
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfWorkoutsInSection(section)
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("workoutCell", forIndexPath: indexPath)
+        let workout = viewModel.workoutAtIndexPath(indexPath)
+        cell.textLabel?.text = workout.name
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            viewModel.removeWorkoutAtIndexPath(indexPath).start()
         }
     }
 }

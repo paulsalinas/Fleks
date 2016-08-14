@@ -35,6 +35,14 @@ class FakeDataStore: DataStore {
         }
     }
     
+    func workoutsProducer() -> SignalProducer<[Workout], NSError> {
+        return SignalProducer { observer, _ in
+            let exerciseSetGroup =  ExerciseSetGroup(sets: [ExerciseSet](), notes: "tesT")
+            let workouts = [Workout(id: "test", name: "test", exerciseSets: [exerciseSetGroup])]
+            observer.sendNext(workouts)
+        }
+    }
+    
     func updateWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
             let exerciseSetGroup =  ExerciseSetGroup(sets: [ExerciseSet](), notes: "tesT")
@@ -43,6 +51,14 @@ class FakeDataStore: DataStore {
         }
     }
     
+    func deleteWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
+        return SignalProducer { observer, _ in
+            let exerciseSetGroup =  ExerciseSetGroup(sets: [ExerciseSet](), notes: "tesT")
+            let workout = Workout(id: "test", name: "test", exerciseSets: [exerciseSetGroup])
+            observer.sendNext(workout)
+        }
+    }
+
     func addWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
             let exerciseSetGroup =  ExerciseSetGroup(sets: [ExerciseSet](), notes: "tesT")

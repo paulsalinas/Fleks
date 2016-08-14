@@ -16,7 +16,6 @@
 		3C036AD21CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C036AD11CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift */; };
 		3C036AD41CD1A4A800E9F8C1 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C036AD31CD1A4A800E9F8C1 /* Checkbox.swift */; };
 		3C2C154D1CE7CADA009956AF /* WorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C154C1CE7CADA009956AF /* WorkoutTableViewController.swift */; };
-		3C2C15511CE7CBED009956AF /* WorkoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */; };
 		3C2C15531CE7DE2B009956AF /* AddWorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */; };
 		3C2F1D611D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D601D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift */; };
 		3C2F1D641D556B47005B46E4 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F1D631D556B47005B46E4 /* DataStore.swift */; };
@@ -93,7 +92,6 @@
 		3C036AD11CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMuscleTableViewCell.swift; sourceTree = "<group>"; };
 		3C036AD31CD1A4A800E9F8C1 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		3C2C154C1CE7CADA009956AF /* WorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewController.swift; sourceTree = "<group>"; };
-		3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataSource.swift; sourceTree = "<group>"; };
 		3C2C15521CE7DE2B009956AF /* AddWorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorkoutTableViewController.swift; sourceTree = "<group>"; };
 		3C2F1D601D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+ReactiveCocoa.swift"; sourceTree = "<group>"; };
 		3C2F1D631D556B47005B46E4 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			children = (
 				3C036ACF1CD18FC900E9F8C1 /* MuscleDataSource.swift */,
 				3C036AC51CCF06BA00E9F8C1 /* ExerciseDataSource.swift */,
-				3C2C15501CE7CBED009956AF /* WorkoutDataSource.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -650,7 +647,6 @@
 				3CB25B041CFA522D00756B45 /* ExerciseDataManager.swift in Sources */,
 				3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */,
 				3C2F1D661D556CB7005B46E4 /* FirebaseDataStore.swift in Sources */,
-				3C2C15511CE7CBED009956AF /* WorkoutDataSource.swift in Sources */,
 				3C2C154D1CE7CADA009956AF /* WorkoutTableViewController.swift in Sources */,
 				3CB25B021CF536C800756B45 /* CoreDataStore.swift in Sources */,
 				3C036AC81CCF10D500E9F8C1 /* Workout.swift in Sources */,

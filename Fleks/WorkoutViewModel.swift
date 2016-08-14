@@ -7,82 +7,39 @@
 //
 
 import Foundation
-import Firebase
+import ReactiveCocoa
+import Result
 
 class WorkoutViewModel {
-    private let store: FIRDatabase
-    private let user: User
-    private var muscles: [Muscle]!
+
+    private let dataStore: DataStore
+    private var workouts = [Workout]()
     
-    var workouts =  [Workout]()
-    var exercises = [Exercise]()
-    
-    private var userDataRef: FIRDatabaseReference {
-        get {
-            return store.reference().child("users/\(user.universalId)")
-        }
+    init (dataStore: DataStore) {
+        self.dataStore = dataStore
     }
     
-    private var exerciseRef: FIRDatabaseReference {
-        get {
-            return userDataRef.child("exercises")
-        }
+    func refreshSignalProducer() -> SignalProducer<Void, NSError> {
+        return dataStore.workoutsProducer()
+            .on(next: { next in self.workouts = next })
+            .map { _ in () }
     }
     
-    private var workoutsRef: FIRDatabaseReference {
-        get {
-            return userDataRef.child("workouts")
-        }
+    func removeWorkoutAtIndexPath(indexPath: NSIndexPath) -> SignalProducer<Void, NSError> {
+        let toBeRemoved = workouts.removeAtIndex(indexPath.row)
+        return dataStore.deleteWorkout(toBeRemoved).map { _ in () }
     }
     
-    private var muscleRef: FIRDatabaseReference {
-        get {
-            return store.reference().child("muscles")
-        }
+    func numberOfSections() -> Int {
+        return 1
     }
     
-    init (store: FIRDatabase, user: User) {
-        self.store = store
-        self.user = user
+    func numberOfWorkoutsInSection(section: Int) -> Int {
+        return workouts.count
     }
     
-    func createWorkout(name: String) -> Workout {
-        let ref = workoutsRef.childByAutoId()
-        ref.setValue(["name": name])
-        return Workout(id: ref.key, name: name, exerciseSets: [ExerciseSetGroup]())
-    }
-    
-    func deleteWorkout(workout: Workout, onDelete: ()-> Void) {
-        workoutsRef.child(workout.id).removeValueWithCompletionBlock { error, ref in
-            let index = self.workouts.indexOf { $0 == workout }
-            self.workouts.removeAtIndex(index!)
-            onDelete()
-        }
-    }
-    
-    func refreshWorkouts(onComplete: [Workout] -> Void) {
-        self.refreshExercises { exercises in
-            self.workoutsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                self.workouts = snapshot.children.map { Workout(snapshot: $0 as! FIRDataSnapshot, exercises: exercises) }
-                onComplete(self.workouts)
-            })
-        }
-    }
-    
-    func refreshExercises(onComplete: [Exercise] -> Void) {
-        muscleRef.observeSingleEventOfType(.Value, withBlock: { muscleSnap in
-            self.muscles = muscleSnap.children.map { Muscle(snapshot: $0 as! FIRDataSnapshot) }
-            
-            self.exerciseRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                let userExercises:[Exercise] = snapshot.children.map { snap in
-                    let exerciseMuscles = self.muscles.filter { snap.childSnapshotForPath("muscles").hasChild($0.id) }
-                    return Exercise(snapshot: snap as! FIRDataSnapshot, muscles: exerciseMuscles)
-                }
-                self.exercises = userExercises
-                onComplete(self.exercises)
-            })
-            
-        })
+    func workoutAtIndexPath(indexPath: NSIndexPath) -> Workout {
+        return workouts[indexPath.row]
     }
 
 }
