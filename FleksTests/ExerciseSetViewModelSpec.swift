@@ -17,72 +17,109 @@ class ExerciseSetViewModelSpec: QuickSpec {
     override func spec() {
         describe("ExerciseSetViewModel") {
             var viewModel: ExerciseSetViewModel!
-            let repsErrorMsg = "Reps must be a number greater than 0"
-//            let setsErrorMsg = "Sets must be a number greater than 0"
-//            let resistanceErrorMsg = "Resistance must be a number greater than 0"
+            let repsErrorMsg = "Reps must be greater than 0"
+            let setsErrorMsg = "Sets must be greater than 0"
             
             beforeEach {
                 viewModel = ExerciseSetViewModel(
-                    exercise: Exercise(id: "test", name: "test", muscles: [Muscle]()),
-                    workout: Workout(id: "test", name: "test", exerciseSets: [ExerciseSetGroup]()),
                     dataStore: FakeDataStore()
                 )
             }
             
             it("should initially be valid") {
-                var result = [ExerciseSetFormError]()
-                viewModel.isValidationErrorProducer.startWithNext { next in
-                    print(next)
-                    result.append(next)
+                var result = [InvalidInputError]()
+                viewModel.isValidationErrorProducer.startWithNext { (repsError, setsError) in
+                    result.append(repsError)
+                    result.append(setsError)
                 }
-                expect(result).to(equal([ExerciseSetFormError.None]))
+                
+                let expected = [InvalidInputError.None, InvalidInputError.None]
+                expect(result).to(equal(expected))
             }
 
             it("should be valid when reps is a valid number with no repeats and flip when invalid") {
                 viewModel.repsInput.value = "2"
-                var result = [ExerciseSetFormError]()
-                viewModel.isValidationErrorProducer.startWithNext { next in
-                    result.append(next)
+                var result = [InvalidInputError]()
+                viewModel.isValidationErrorProducer.startWithNext { (repsError, setsError) in
+                    result.append(repsError)
+                    result.append(setsError)
                 }
                 
                 viewModel.repsInput.value = "22"
-                expect(result).to(equal([ExerciseSetFormError.None]))
+                expect(result).to(equal([InvalidInputError.None, InvalidInputError.None]))
                 
                 viewModel.repsInput.value = "invalid"
-                expect(result).to(equal([ExerciseSetFormError.None, ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                expect(result).to(equal([InvalidInputError.None, InvalidInputError.None, InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.None]))
                 
             }
-            
+
             it("should be invalid when a reps input is not a number with no repeats and flip when valid") {
                 viewModel.repsInput.value = "invalid input"
-                var result = [ExerciseSetFormError]()
-                viewModel.isValidationErrorProducer.startWithNext { next in
-                    result.append(next)
+                var result = [InvalidInputError]()
+                viewModel.isValidationErrorProducer.startWithNext { (repsError, setsError) in
+                    result.append(repsError)
+                    result.append(setsError)
                 }
                 
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                expect(result).to(equal([InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.None ]))
                 
                 viewModel.repsInput.value = "more invalid input"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                expect(result).to(equal([InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.None ]))
+                
+                viewModel.repsInput.value = "0"
+                expect(result).to(equal([InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.None ]))
                 
                 viewModel.repsInput.value = "2"
-                expect(result).to(equal([ ExerciseSetFormError.InvalidRep(repsErrorMsg), ExerciseSetFormError.None,]))
+                expect(result).to(equal([InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.None, InvalidInputError.None, InvalidInputError.None ]))
             }
             
-            it("should be invalid when a reps input is a zero with no repeats and flip when valid") {
-                viewModel.repsInput.value = "0"
-                var result = [ExerciseSetFormError]()
-                viewModel.isValidationErrorProducer.startWithNext { next in
-                    result.append(next)
+            it("should be invalid when a sets input is not a number with no repeats and flip when valid") {
+                viewModel.setsInput.value = "invalid input"
+                var result = [InvalidInputError]()
+                viewModel.isValidationErrorProducer.startWithNext { (repsError, setsError) in
+                    result.append(repsError)
+                    result.append(setsError)
                 }
                 
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                expect(result).to(equal([ InvalidInputError.None, InvalidInputError.Invalid(setsErrorMsg)]))
                 
+                viewModel.setsInput.value = "more invalid input"
+                expect(result).to(equal([ InvalidInputError.None, InvalidInputError.Invalid(setsErrorMsg)]))
+                
+                viewModel.setsInput.value = "0"
+                expect(result).to(equal([ InvalidInputError.None, InvalidInputError.Invalid(setsErrorMsg)]))
+                
+                viewModel.setsInput.value = "2"
+                expect(result).to(equal([InvalidInputError.None, InvalidInputError.Invalid(setsErrorMsg), InvalidInputError.None, InvalidInputError.None ]))
+            }
+            
+            
+            it("should both be an error when both sets and reps are invalid with no repeats and flip when valid") {
+                viewModel.repsInput.value = "invalid input"
+                viewModel.setsInput.value = "invalid input"
+                var result = [InvalidInputError]()
+                viewModel.isValidationErrorProducer.startWithNext { (repsError, setsError) in
+                    result.append(repsError)
+                    result.append(setsError)
+                }
+                
+                expect(result).to(equal([ InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.Invalid(setsErrorMsg)]))
+                
+                viewModel.setsInput.value = "more invalid input"
+                viewModel.repsInput.value = "more invalid input"
+                expect(result).to(equal([ InvalidInputError.Invalid(repsErrorMsg), InvalidInputError.Invalid(setsErrorMsg)]))
+                
+                viewModel.setsInput.value = "0"
                 viewModel.repsInput.value = "0"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg)]))
+                expect(result).to(equal([ InvalidInputError.Invalid(repsErrorMsg),  InvalidInputError.Invalid(setsErrorMsg)]))
                 
-                viewModel.repsInput.value = "2"
-                expect(result).to(equal([ExerciseSetFormError.InvalidRep(repsErrorMsg), ExerciseSetFormError.None]))
+                viewModel.setsInput.value = "2"
+                viewModel.repsInput.value = "3"
+                expect(result).to(equal([
+                    .Invalid(repsErrorMsg),  .Invalid(setsErrorMsg),
+                    .Invalid(repsErrorMsg), .None,
+                    .None, .None
+                ]))
             }
             
             it("should display a valid number for reps even with bad inputs") {

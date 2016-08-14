@@ -79,21 +79,35 @@ class ExerciseSetFormViewController: UIViewController {
             .flatten(.Merge)
     }
     
-    func updateStateWithError(validationError: ExerciseSetFormError) {
-        switch (validationError) {
-            case .InvalidRep(let errMsg):
+    func updateStateWithError(validationError: (InvalidInputError, InvalidInputError)) {
+        let (invalidReps, invalidSets) = validationError
+        
+        var combinedErrMsg = ""
+        
+        switch (invalidReps) {
+            case .Invalid(let errMsg):
+                combinedErrMsg = combinedErrMsg + errMsg + "\n"
                 repsTextField.backgroundColor = errorColor
-                errorLabel.text = errMsg
-                addExerciseBtn.enabled = false
-            case .InvalidSet(let errMsg):
-                setsTextField.backgroundColor = errorColor
-                errorLabel.text = errMsg
-                addExerciseBtn.enabled = false
             case .None:
                 repsTextField.backgroundColor = UIColor.whiteColor()
+                break
+        }
+        
+        switch (invalidSets) {
+            case .Invalid(let errMsg):
+                combinedErrMsg = combinedErrMsg + errMsg
+                setsTextField.backgroundColor = errorColor
+            case .None:
                 setsTextField.backgroundColor = UIColor.whiteColor()
-                errorLabel.text = ""
-                 addExerciseBtn.enabled = true
+                break
+        }
+        
+        if combinedErrMsg != "" {
+            errorLabel.text = combinedErrMsg
+            addExerciseBtn.enabled = false
+        } else {
+            errorLabel.text = ""
+            addExerciseBtn.enabled = true
         }
     }
     
@@ -107,13 +121,4 @@ class ExerciseSetFormViewController: UIViewController {
             )
         )
     }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "ShowExerciseSetGroups" {
-//            let vc = segue.destinationViewController as! ExerciseSetGroupTableViewController
-//            let tabBar = tabBarController as! FleksTabBarController
-//            vc.injectDependency(tabBar.createExerciseSetGroupViewModel(forWorkout: viewModel.workout))
-//        }
-//    }
-    
 }
