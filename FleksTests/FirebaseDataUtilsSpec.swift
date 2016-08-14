@@ -80,6 +80,20 @@ class FirebaseDataUtilsSpec: QuickSpec {
                 expect(result).to(equal(expected))
             }
             
+            it("should convert an Exercise struct to the appropriate format required by firebase") {
+                let exercise = Exercise(id: "1", name: "chest press", muscles: [Muscle(id: "1", name: "chest")])
+           
+                let expected: NSDictionary = [
+                    "name" : "chest press",
+                    "muscles": [
+                        "1": true
+                    ]
+                ]
+                
+                let result = FirebaseDataUtils.convertFirebaseData(exercise)
+                expect(result).to(equal(expected))
+            }
+            
             it("zzz"){}
         }
     }

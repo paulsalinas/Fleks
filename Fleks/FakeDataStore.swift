@@ -70,4 +70,16 @@ class FakeDataStore: DataStore {
     func exercisesProducer() -> SignalProducer<[Exercise], NSError> {
         return SignalProducer.init(value: [Exercise]())
     }
+    
+    func updateExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+         return SignalProducer.init(value: Exercise(id: "test", name: "test", muscles: [Muscle]()))
+    }
+    
+    func deleteExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+        return SignalProducer.init(value: Exercise(id: "test", name: "test", muscles: [Muscle]()))
+    }
+    
+    func addExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+        return SignalProducer.init(value: Exercise(id: "test", name: "test", muscles: [Muscle]()))
+    }
 }

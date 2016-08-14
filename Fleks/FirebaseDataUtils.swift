@@ -40,4 +40,16 @@ struct FirebaseDataUtils {
             "exerciseId": exerciseSet.exercise.id
         ]
     }
+    
+    static func convertFirebaseData(exercise: Exercise) -> [String: AnyObject] {
+        
+        return [
+            "name": exercise.name,
+            "muscles": exercise.muscles.reduce([String: AnyObject](), combine: { prev, next in
+                var newDict = prev
+                newDict["\(next.id)"] = true
+                return newDict
+            })
+        ]
+    }
 }

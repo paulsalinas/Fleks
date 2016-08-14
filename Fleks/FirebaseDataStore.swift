@@ -26,7 +26,6 @@ class FireBaseDataStore: DataStore {
         self.user = user
         self.exercises = [Exercise]()
         
-        
         // update exercise cache and continually listen for changes
         // we might need to track this later for disposal
         self.exercisesProducer().startWithNext { exercises in
@@ -167,5 +166,45 @@ class FireBaseDataStore: DataStore {
                     )
                 }
             }
+    }
+    
+    func addExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+        return SignalProducer { observer, _ in
+            var newExercise = exercise
+            let ref = self.exerciseRef.childByAutoId()
+            newExercise.id = ref.key
+            ref.setValue(FirebaseDataUtils.convertFirebaseData(newExercise), withCompletionBlock: { err, _ in
+                if let error = err {
+                    observer.sendFailed(error)
+                }
+                observer.sendNext(newExercise)
+                observer.sendCompleted()
+            })
+        }
+    }
+    
+    func updateExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+        return SignalProducer { observer, _ in
+            self.exerciseRef.child("\(exercise.id)").setValue(FirebaseDataUtils.convertFirebaseData(exercise), withCompletionBlock: { err, _ in
+                if let error = err {
+                    observer.sendFailed(error)
+                }
+                observer.sendNext(exercise)
+                observer.sendCompleted()
+                
+            })
+        }
+    }
+    
+    func deleteExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
+        return SignalProducer { observer, _ in
+            self.exerciseRef.child("\(exercise.id)").removeValueWithCompletionBlock { err, _ in
+                if let error = err {
+                    observer.sendFailed(error)
+                }
+                observer.sendNext(exercise)
+                observer.sendCompleted()
+            }
+        }
     }
 }
