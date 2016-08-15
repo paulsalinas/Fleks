@@ -22,3 +22,25 @@ Test were made using Quick and Nimble. Run tests and in test runner
 
 ## How to Use
 ### Login
+#### Login via Facebook
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Login.png" width="400"/>
+
+## Tab Interface
+#### The main UI are two tabs 
+1. Workouts - create, delete, and edit your workouts here! 
+2. Exercises - create new exercises here!
+
+
+## Exercise Tab
+####  List of Exercises 
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercises%20Table.png" width="400"/>
+
+####  Add new exercises!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20a%20Exercise.png" width="400"/>
+
+## Workout Tab
+####  List of Workouts 
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
+
+
+
