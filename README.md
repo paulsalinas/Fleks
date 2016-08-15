@@ -15,10 +15,9 @@ From a database of canned exercises plus exercises you create yourself, you can 
 8. Quick and Nimbe for some unit tests
 
 ## Build, Run, and Use
-1. pod install
-2. open Fleks.xcworkspace
-3. Play in XCode
-4. login with your Facebook account
+1. open Fleks.xcworkspace
+2. Play in XCode
+3. login with your Facebook account
 
 ## Tests
 Test were made using Quick and Nimble. Run tests in test navigator.
