@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Result
+import ReactiveCocoa
 
 class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ActivityOverlayable, Alertable {
     
@@ -25,6 +27,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
         muscleTableView.delegate = self
         muscleTableView.dataSource = self
         viewModel.refreshSignalProducer()
+            .startOn(UIScheduler())
             .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in self.muscleTableView.reloadData() }
     }

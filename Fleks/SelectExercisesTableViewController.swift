@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Result
+import ReactiveCocoa
 
 class SelectExercisesTableViewController: UITableViewController, ActivityOverlayable, Alertable {
     
@@ -23,6 +25,7 @@ class SelectExercisesTableViewController: UITableViewController, ActivityOverlay
         
         self.tableView.allowsSelection = true
         viewModel.refreshSignalProducer()
+            .startOn(UIScheduler())
             .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in
                 self.tableView.reloadData()

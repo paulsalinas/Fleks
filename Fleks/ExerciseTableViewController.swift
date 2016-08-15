@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Result
+import ReactiveCocoa
 
 class ExerciseTableViewController: UITableViewController, ActivityOverlayable, Alertable {
     var activityOverlay: ActivityOverlay?
@@ -17,6 +19,7 @@ class ExerciseTableViewController: UITableViewController, ActivityOverlayable, A
     
     override func viewDidLoad() {
         self.viewModel.refreshSignalProducer()
+            .startOn(UIScheduler())
             .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in self.tableView.reloadData() }
         
