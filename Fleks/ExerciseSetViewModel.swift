@@ -38,7 +38,7 @@ class ExerciseSetViewModel {
     // properties that are 'bind-able'
     var repsInput: MutableProperty<String>
     var setsInput: MutableProperty<String>
-    var notesInput: MutableProperty<String>
+    var notesInput: MutableProperty<String?>
 
     
     // used for proper display of values
@@ -71,10 +71,10 @@ class ExerciseSetViewModel {
     }
     
     convenience init (dataStore: DataStore) {
-        self.init(dataStore: dataStore, reps: 12, sets: 3, notes: "Enter Notes Here")
+        self.init(dataStore: dataStore, reps: 12, sets: 3, notes: nil)
     }
     
-    init (dataStore: DataStore, reps: Int, sets: Int, notes: String) {
+    init (dataStore: DataStore, reps: Int, sets: Int, notes: String?) {
         self.dataStore = dataStore
         
         _reps = MutableProperty(nil)

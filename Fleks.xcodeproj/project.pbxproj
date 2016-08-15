@@ -31,7 +31,6 @@
 		3C877A711D60EB27005F8D99 /* ExerciseFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C877A701D60EB27005F8D99 /* ExerciseFormViewModel.swift */; };
 		3C9378D71D35CD3000A0CA8B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378D61D35CD3000A0CA8B /* LoginViewModel.swift */; };
 		3C9378D91D35D37200A0CA8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378D81D35D37200A0CA8B /* User.swift */; };
-		3C9378DE1D3AE0B800A0CA8B /* ShowTabBarSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */; };
 		3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9378E11D3D9E9300A0CA8B /* WorkoutViewModel.swift */; };
 		3C99BED91D596C2B008079A3 /* FakeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99BED81D596C2B008079A3 /* FakeDataStore.swift */; };
 		3C99BEDB1D597357008079A3 /* ExerciseSetGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99BEDA1D597357008079A3 /* ExerciseSetGroupsViewModel.swift */; };
@@ -100,7 +99,6 @@
 		3C877A701D60EB27005F8D99 /* ExerciseFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseFormViewModel.swift; sourceTree = "<group>"; };
 		3C9378D61D35CD3000A0CA8B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3C9378D81D35D37200A0CA8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTabBarSegue.swift; sourceTree = "<group>"; };
 		3C9378E11D3D9E9300A0CA8B /* WorkoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		3C99BED81D596C2B008079A3 /* FakeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDataStore.swift; sourceTree = "<group>"; };
 		3C99BEDA1D597357008079A3 /* ExerciseSetGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupsViewModel.swift; sourceTree = "<group>"; };
@@ -196,14 +194,6 @@
 			name = ViewModels;
 			sourceTree = "<group>";
 		};
-		3C9378DC1D3ADE2100A0CA8B /* Segues */ = {
-			isa = PBXGroup;
-			children = (
-				3C9378DD1D3AE0B800A0CA8B /* ShowTabBarSegue.swift */,
-			);
-			name = Segues;
-			sourceTree = "<group>";
-		};
 		3CB25AFA1CF3C0E400756B45 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,7 +248,6 @@
 			children = (
 				3C8124F71D0CE2D20038A018 /* GoogleService-Info.plist */,
 				3C2F1D621D556B2E005B46E4 /* Store */,
-				3C9378DC1D3ADE2100A0CA8B /* Segues */,
 				3C9378D51D35CC8400A0CA8B /* ViewModels */,
 				3C64A2D81D43FF2D005D0F69 /* Views */,
 				3CB25AFB1CF3C10500756B45 /* Models */,
@@ -592,7 +581,6 @@
 				3C8124FA1D12266B0038A018 /* FleksTabBarController.swift in Sources */,
 				3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */,
 				3C9378D91D35D37200A0CA8B /* User.swift in Sources */,
-				3C9378DE1D3AE0B800A0CA8B /* ShowTabBarSegue.swift in Sources */,
 				3C036AC41CCEFADF00E9F8C1 /* ExerciseTableViewController.swift in Sources */,
 				3C036AD21CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift in Sources */,
 				3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */,

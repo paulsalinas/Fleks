@@ -467,12 +467,11 @@
                                             <constraint firstAttribute="height" constant="51" id="F96-DB-zgW"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add Additional notes for the set here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-Rl-o9m">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Notes Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CLR-ed-RHj">
                                         <rect key="frame" x="0.0" y="110" width="491" height="51"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1k-Cy-3eW">
                                         <rect key="frame" x="0.0" y="165" width="491" height="51"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -505,7 +504,7 @@
                     <connections>
                         <outlet property="addExerciseBtn" destination="PtM-QK-ghk" id="0sq-Q0-FbJ"/>
                         <outlet property="errorLabel" destination="V1k-Cy-3eW" id="ch0-S1-Lbr"/>
-                        <outlet property="notesTextField" destination="9fM-Rl-o9m" id="AHT-NX-gdj"/>
+                        <outlet property="notesTextField" destination="CLR-ed-RHj" id="EFN-6k-GrG"/>
                         <outlet property="repsStepper" destination="dGl-SM-E4j" id="cbO-rm-mo4"/>
                         <outlet property="repsTextField" destination="LAB-un-o4V" id="wKZ-g0-Bsi"/>
                         <outlet property="setsStepper" destination="UNv-t5-cbd" id="6jw-ea-Q1j"/>

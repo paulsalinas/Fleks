@@ -21,7 +21,7 @@ class ExerciseSetFormViewController: UIViewController {
     @IBOutlet weak var setsStepper: UIStepper!
     @IBOutlet weak var repsStepper: UIStepper!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var notesTextField: UITextView!
+    @IBOutlet weak var notesTextField: UITextField!
     
     @IBOutlet weak var addExerciseBtn: UIButton!
     
@@ -36,10 +36,6 @@ class ExerciseSetFormViewController: UIViewController {
     func injectDependency(dataStore: DataStore, reps: Int, sets: Int, notes: String, onSubmitUpdate: (reps: Int, sets: Int, notes: String) -> () -> Void ) {
         self.onSubmitUpdate = onSubmitUpdate
         self.viewModel = ExerciseSetViewModel(dataStore: dataStore, reps: reps, sets: sets, notes: notes)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +61,7 @@ class ExerciseSetFormViewController: UIViewController {
             .map(removeDecimalsIfAny)
         
         notesTextField.text = viewModel.notesInput.value
-        viewModel.notesInput <~ notesTextField.keyPress()
+        viewModel.notesInput <~ notesTextField.keyPress().map { $0 as String? }
     
         viewModel.isValidationErrorProducer
             .startWithNext(updateStateWithError)
@@ -117,7 +113,7 @@ class ExerciseSetFormViewController: UIViewController {
             completion: onSubmitUpdate(
                 reps: Int(viewModel.repsInput.value)!,
                 sets: Int(viewModel.setsInput.value)!,
-                notes: viewModel.notesInput.value
+                notes: viewModel.notesInput.value ?? ""
             )
         )
     }
