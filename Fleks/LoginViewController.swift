@@ -39,19 +39,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityO
         } else if result.isCancelled {
            print("user cancelled")
         } else {
-            startOverlay()
-            viewModel.loginWithFacebook(
-                FBSDKAccessToken.currentAccessToken().tokenString,
-                onComplete: { user in
-                    self.user = user
-                    self.performSegueWithIdentifier("ShowTabBar", sender: self)
-                    self.stopOverlay()
-                },
-                onError: { error in
-                    self.alert("Something went wrong with your login!")
-                    self.stopOverlay()
-                }
-            )
+            viewModel.loginWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
+                .on(
+                    started: { self.startOverlay() },
+                    failed: { _ in
+                        self.alert("Something went wrong with your login!")
+                        self.stopOverlay()
+                    },
+                    next: { user in
+                        self.user = user
+                        self.performSegueWithIdentifier("ShowTabBar", sender: self)
+                    },
+                    completed: { self.stopOverlay() })
+                .start()
         }
     }
     

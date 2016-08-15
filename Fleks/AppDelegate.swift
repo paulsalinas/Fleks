@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         // offline mode
-        FIRDatabase.database().persistenceEnabled = true
+         // FIRDatabase.database().persistenceEnabled = true
         
         let loginViewController = window?.rootViewController as! LoginViewController
         loginViewController.injectDependencies(LoginViewModel(store: FIRDatabase.database()))
