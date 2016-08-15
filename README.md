@@ -1,5 +1,7 @@
 # Fleks
-Fleks is a workout builder app for iOS. From a database of canned exercise plus exercises you create yourself, you can create custom workouts with different rep/sets schemes and variations that you can use when you're at the gym. This was built for my Udacity iOS NanoDegree
+Fleks is a workout builder app for iOS. 
+
+From a database of canned exercises plus exercises you create yourself, you can create custom workouts with different rep/sets schemes and variations that you can use when you're at the gym. This was built for my Udacity iOS NanoDegree.
 
 ## Tools 
 #### Built Using
@@ -18,7 +20,7 @@ Fleks is a workout builder app for iOS. From a database of canned exercise plus 
 3. login with your Facebook account
 
 ## Tests
-Test were made using Quick and Nimble. Run tests and in test runner
+Test were made using Quick and Nimble. Run tests in test navigator.
 
 ## How to Use
 ### Login
@@ -35,14 +37,14 @@ Test were made using Quick and Nimble. Run tests and in test runner
 ####  List of Exercises 
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercises%20Table.png" width="400"/>
 
-####  Add new exercises!
+####  Add new exercises by entering a name and selecting the muscles it targets!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20a%20Exercise.png" width="400"/>
 
 ## Workout Tab
 ####  List of Workouts 
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
 
-#### Create a Workout - Enter a Name! 
+#### Create a Workout - Enter a name and touch '+' to add your first exercise!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20Workout%20Form.png" width="400"/>
 
 #### Select your first exercise 
@@ -53,3 +55,10 @@ Test were made using Quick and Nimble. Run tests and in test runner
 
 #### Cool there's validation!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Validation.png" width="400"/>
+#### you can keep entering exercises if you would like!
+
+#### This workout was too hard, let's delete it!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Delete%20Workout.png" width="400"/>
+
+#### Ooh I can re-order my exercise order or delete by pressing 'Edit'!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Edit%20Workout.png" width="400"/>
