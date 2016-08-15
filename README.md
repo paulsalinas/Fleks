@@ -1,5 +1,5 @@
 # Fleks
-Fleks is a workout builder app for iOS. From a database of canned exercise plus exercises you can create yourself, you can create custom workouts with different rep/sets schemes and variations that you can refer to when you're at the gym. This was build for my Udacity iOS NanoDegree
+Fleks is a workout builder app for iOS. From a database of canned exercise plus exercises you create yourself, you can create custom workouts with different rep/sets schemes and variations that you can use when you're at the gym. This was built for my Udacity iOS NanoDegree
 
 ## Tools 
 #### Built Using
@@ -42,5 +42,14 @@ Test were made using Quick and Nimble. Run tests and in test runner
 ####  List of Workouts 
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
 
+#### Create a Workout - Enter a Name! 
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20Workout%20Form.png" width="400"/>
 
+#### Select your first exercise 
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Select%20Exercise.png" width="400"/>
 
+#### Enter the number of reps and sets plus any special notes or instructions 
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercise%20Form.png" width="400"/>
+
+#### Cool there's validation!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Validation.png" width="400"/>
