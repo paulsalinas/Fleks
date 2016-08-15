@@ -17,15 +17,14 @@ struct Muscle: Equatable {
         self.id = id
         self.name = name
     }
-    
-    init(snapshot: FIRDataSnapshot) {
-        self.id = snapshot.key 
-        self.name = (snapshot.value as! NSDictionary)["name"] as! String
-    }
-
 }
 
-
+extension Muscle {
+    init(snapshot: FIRDataSnapshot) {
+        self.id = snapshot.key
+        self.name = (snapshot.value as! NSDictionary)["name"] as! String
+    }
+}
 
 func ==(lhs: Muscle, rhs: Muscle) -> Bool {
     return lhs.id == rhs.id && lhs.name == rhs.name
