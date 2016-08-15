@@ -35,6 +35,12 @@ class ExerciseTableViewController: UITableViewController, ActivityOverlayable, A
         performSegueWithIdentifier("ShowExerciseForm", sender: self)
     }
     
+
+    @IBAction func signOutButtonTouch(sender: AnyObject) {
+        if let tabBarVc = tabBarController as? FleksTabBarController {
+            tabBarVc.onSignOut()
+        }
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "ShowExerciseForm" ) {
             let addExerciseController = segue.destinationViewController as! AddExerciseViewController

@@ -20,8 +20,10 @@ class FleksTabBarController: UITabBarController {
     // TODO: remove this dependency
     private var firebaseStore: FIRDatabase!
     private var user: User!
+    
+    var onSignOut: () -> Void =  { _ in () }
 
-    func injectDependencies(dataStore: DataStore) {
+    func injectDependencies(dataStore: DataStore, onSignOut: () -> Void) {
         let navController = viewControllers![1] as! UINavigationController
         let exerciseTableViewController = navController.topViewController as! ExerciseTableViewController
         exerciseTableViewController.injectDependency(dataStore)
@@ -31,5 +33,8 @@ class FleksTabBarController: UITabBarController {
         workoutController.injectDependency(dataStore)
         
         self.dataStore = dataStore
+        self.onSignOut = { _ in
+            self.dismissViewControllerAnimated(true, completion: onSignOut)
+        }
     }
 }

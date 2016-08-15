@@ -60,4 +60,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityO
         //do nothing
         return
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowTabBar" {
+            if let vc = segue.destinationViewController as? FleksTabBarController, user = user {
+                let store = FIRDatabase.database()
+                let dataStore = FireBaseDataStore(firebaseDB: store, user: user)
+                vc.injectDependencies(dataStore, onSignOut: {
+                    self.viewModel.logout()
+                    FBSDKLoginManager().logOut()
+                })
+            }
+        }
+    }
 }

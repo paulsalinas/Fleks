@@ -9,15 +9,15 @@
 import UIKit
 import Firebase
 
-class ShowTabBarSegue: UIStoryboardSegue {
-    override func perform() {
-        let destinationViewController = self.destinationViewController as! FleksTabBarController
-        let sourceViewController = self.sourceViewController as! LoginViewController
-        let store = FIRDatabase.database()
-        let user = sourceViewController.user!
-        let dataStore = FireBaseDataStore(firebaseDB: store, user: user)
-        
-        destinationViewController.injectDependencies(dataStore)
-        super.perform()
-    }
-}
+//class ShowTabBarSegue: UIStoryboardSegue {
+//    override func perform() {
+//        let destinationViewController = self.destinationViewController as! FleksTabBarController
+//        let sourceViewController = self.sourceViewController as! LoginViewController
+//        let store = FIRDatabase.database()
+//        let user = sourceViewController.user!
+//        let dataStore = FireBaseDataStore(firebaseDB: store, user: user)
+//        
+//        destinationViewController.injectDependencies(dataStore)
+//        super.perform()
+//    }
+//}

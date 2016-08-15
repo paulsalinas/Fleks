@@ -33,6 +33,10 @@ public class LoginViewModel {
             }
         }
     }
+    
+    func logout() {
+        try! FIRAuth.auth()!.signOut()
+    }
 
     private func setupUser(onComplete: User -> Void) {
         let userMapping = FIRDatabase.database().reference().child("user_mappings")

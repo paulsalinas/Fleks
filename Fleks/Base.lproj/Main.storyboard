@@ -55,7 +55,7 @@
                     <navigationItem key="navigationItem" id="Thj-Cb-F9a"/>
                     <connections>
                         <outlet property="fbLoginButton" destination="f2Z-Uq-mlJ" id="m9n-2a-3AY"/>
-                        <segue destination="Hez-kE-mC5" kind="presentation" identifier="ShowTabBar" customClass="ShowTabBarSegue" customModule="Fleks" customModuleProvider="target" id="DlG-4R-0FB"/>
+                        <segue destination="Hez-kE-mC5" kind="presentation" identifier="ShowTabBar" id="DlG-4R-0FB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -119,6 +119,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Exercises" id="eRy-Du-aL9">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="BHe-49-JNU">
+                            <connections>
+                                <action selector="signOutButtonTouch:" destination="YpM-HU-SjF" id="5Sg-ir-kg6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aq3-me-xda">
                             <connections>
                                 <action selector="addButtonTouch:" destination="YpM-HU-SjF" id="utz-Ua-Xtp"/>
@@ -289,6 +294,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9vi-bz-Ugg">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="a56-mY-eaW">
+                            <connections>
+                                <action selector="signOutButtonTouch:" destination="Cxy-M3-e9e" id="pOX-3V-ZIe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2MA-PV-jhx">
                             <connections>
                                 <action selector="addWorkoutButtonTouchUp:" destination="Cxy-M3-e9e" id="vhw-0j-SCF"/>

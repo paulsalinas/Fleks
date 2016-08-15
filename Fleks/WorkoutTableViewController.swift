@@ -30,6 +30,11 @@ class WorkoutTableViewController: UITableViewController, ActivityOverlayable, Al
     @IBAction func addWorkoutButtonTouchUp(sender: AnyObject) {
         performSegueWithIdentifier(SegueIdentifierTypes.ShowWorkoutDetailSegue.rawValue, sender: self)
     }
+    @IBAction func signOutButtonTouch(sender: AnyObject) {
+        if let tabBarVC = tabBarController as? FleksTabBarController {
+            tabBarVC.onSignOut()
+        }
+    }
     override func viewDidLoad() {
         viewModel.refreshSignalProducer()
             .startOn(UIScheduler())
