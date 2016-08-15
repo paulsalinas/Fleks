@@ -30,6 +30,8 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
             .startOn(UIScheduler())
             .on(started:{ _ in self.startOverlay() }, next: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
             .startWithNext { _ in self.muscleTableView.reloadData() }
+        
+        viewModel.exerciseNameInput <~ exerciseNameTextField.keyPress()
     }
     
     @IBAction func cancelButtonTouch(sender: AnyObject) {
@@ -37,7 +39,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func doneButtonTouch(sender: AnyObject) {
-        if viewModel.isValid(exerciseNameTextField.text) {
+        if viewModel.isValid() {
             dismissViewControllerAnimated(true, completion: onDone(name: exerciseNameTextField.text!, selectedMuscles: viewModel.getSelectedMuscles()))
         } else {
             alert("your form is incomplete! name must not be empty and you must select at least one muscle")

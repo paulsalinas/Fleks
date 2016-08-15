@@ -19,6 +19,8 @@ class ExerciseFormViewModel {
         self.dataStore = dataStore
     }
     
+    var exerciseNameInput = MutableProperty("")
+    
     func refreshSignalProducer() -> SignalProducer<Void, NSError> {
         return dataStore.musclesProducer()
             .on (next: { next in self.muscles = next })
@@ -51,7 +53,7 @@ class ExerciseFormViewModel {
         return muscles[indexPath.row]
     }
     
-    func isValid(name: String?) -> Bool {
-        return name != nil && name != "" && selectedMuscles.count > 0
+    func isValid() -> Bool {
+        return  exerciseNameInput.value != "" && selectedMuscles.count > 0
     }
 }
