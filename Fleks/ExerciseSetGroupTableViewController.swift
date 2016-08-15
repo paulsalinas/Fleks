@@ -44,9 +44,10 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     func refresh() {
         let tableObserver = Observer<Void, NSError>.init(next: { _ in self.tableView.reloadData() })
         let nameInputObserver = Observer<Void, NSError>.init(next: { _ in
+            
             // initialize the header with the form to edit the workout name
             if let cell = self.tableView.dequeueReusableCellWithIdentifier(CellTypes.Header.rawValue) as? ExerciseSetGroupHeaderTableViewCell {
-                cell.contentView.backgroundColor = UIColor.lightGrayColor()
+                cell.contentView.backgroundColor = UIColor.clearColor()
                 self.tableView.tableHeaderView = cell.contentView
                 self.viewModel.workoutNameInput
                     .producer
@@ -77,6 +78,11 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     }
 
     @IBAction func addButtonTouch(sender: AnyObject) {
+        if viewModel.workoutNameInput.value == nil || viewModel.workoutNameInput.value == "" {
+            alert("your workout needs a name!")
+            return
+        }
+        
         performSegueWithIdentifier(SegueIdentifierTypes.ShowSelectExerciseModally.rawValue, sender: self)
     }
     
