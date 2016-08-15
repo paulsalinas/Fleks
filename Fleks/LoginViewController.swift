@@ -32,8 +32,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, ActivityO
     
     /* facebook button delegate to handle the result from login */
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        
-        
         if error != nil {
             self.alert("Something was wrong with your FB login!")
         } else if result.isCancelled {
