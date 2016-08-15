@@ -15,6 +15,8 @@ enum FirebaseError: ErrorType {
     case NotLoggedIn
 }
 
+// Firebase data store class. Abstracts common network calls and returns 
+// domain related data such as workouts, exerices etc.
 class FireBaseDataStore: DataStore {
     private let firebaseDB: FIRDatabase
     private let user: User
