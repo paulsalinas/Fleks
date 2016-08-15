@@ -38,7 +38,7 @@ Test were made using Quick and Nimble. Run tests in test navigator.
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercises%20Table.png" width="400"/>
 
 ####  Add new exercises by entering a name and selecting the muscles it targets!
-<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20a%20Exercise.png" width="400"/>
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercise%20Form%20Selected.png" width="400"/>
 
 ## Workout Tab
 ####  List of Workouts 
@@ -62,3 +62,7 @@ Test were made using Quick and Nimble. Run tests in test navigator.
 
 #### Ooh I can re-order my exercise order or delete by pressing 'Edit'!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Edit%20Workout.png" width="400"/>
+
+#### Selecting an exercise set allows you to edit it!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Edit%20Exercise%20Set.png" width="400"/>
+
