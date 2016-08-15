@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
         
+        // offline mode
+        FIRDatabase.database().persistenceEnabled = true
+        
         let loginViewController = window?.rootViewController as! LoginViewController
         loginViewController.injectDependencies(LoginViewModel(store: FIRDatabase.database()))
         
