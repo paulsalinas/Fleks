@@ -136,11 +136,11 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                         notes: selectedExerciseSetGroup.notes, onSubmitUpdate: { reps, sets, notes in
                             return { _ in
                                 self.viewModel.updateExerciseSetGroup(
-                                    selectedExerciseSetGroup,
-                                    withReps: reps,
-                                    withSets: sets,
-                                    withNotes: notes
-                                )
+                                        selectedExerciseSetGroup,
+                                        withReps: reps,
+                                        withSets: sets,
+                                        withNotes: notes
+                                    )
                                     .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                     .start()
                             }
