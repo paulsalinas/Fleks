@@ -88,4 +88,6 @@ class FakeDataStore: DataStore {
     func musclesProducer() -> SignalProducer<[Muscle], NSError> {
         return SignalProducer.init(value: [Muscle]())
     }
+    
+    var isOnline = MutableProperty(true)
 }

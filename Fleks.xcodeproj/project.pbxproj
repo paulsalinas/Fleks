@@ -39,8 +39,6 @@
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
 		3CB25AFD1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */; };
-		3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */; };
-		3CB25B021CF536C800756B45 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB25B011CF536C800756B45 /* CoreDataStore.swift */; };
 		3CFD37851D5D456C00379310 /* ExerciseSetGroupSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD37841D5D456C00379310 /* ExerciseSetGroupSpec.swift */; };
 		3CFD37871D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD37861D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift */; };
 		3CFEBB6D1CC98F55007E7817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB6C1CC98F55007E7817 /* AppDelegate.swift */; };
@@ -106,8 +104,6 @@
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		3CB25AFC1CF3C4ED00756B45 /* SelectExercisesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExercisesTableViewController.swift; sourceTree = "<group>"; };
-		3CB25AFF1CF3C57B00756B45 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		3CB25B011CF536C800756B45 /* CoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		3CFD37841D5D456C00379310 /* ExerciseSetGroupSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupSpec.swift; sourceTree = "<group>"; };
 		3CFD37861D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		3CFEBB691CC98F55007E7817 /* Fleks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,8 +252,6 @@
 				3CFEBB751CC98F55007E7817 /* LaunchScreen.storyboard */,
 				3CFEBB781CC98F55007E7817 /* Info.plist */,
 				3C036AD31CD1A4A800E9F8C1 /* Checkbox.swift */,
-				3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */,
-				3CB25B011CF536C800756B45 /* CoreDataStore.swift */,
 				3C64A2E11D4973A7005D0F69 /* UIKit+ReactiveCococa.swift */,
 				3C2F1D601D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift */,
 				3C2F1D691D581FF2005B46E4 /* FirebaseDataUtils.swift */,
@@ -580,7 +574,6 @@
 				3C9378D91D35D37200A0CA8B /* User.swift in Sources */,
 				3C036AC41CCEFADF00E9F8C1 /* ExerciseTableViewController.swift in Sources */,
 				3C036AD21CD197B000E9F8C1 /* SelectMuscleTableViewCell.swift in Sources */,
-				3CB25B001CF3C57B00756B45 /* Model.xcdatamodeld in Sources */,
 				3C2F1D611D555BFD005B46E4 /* Firebase+ReactiveCocoa.swift in Sources */,
 				3C99BEDF1D5ACC81008079A3 /* ExerciseSetGroupTableViewCell.swift in Sources */,
 				3C64A2E01D443508005D0F69 /* ExerciseSetViewModel.swift in Sources */,
@@ -591,7 +584,6 @@
 				3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */,
 				3C2F1D661D556CB7005B46E4 /* FirebaseDataStore.swift in Sources */,
 				3C2C154D1CE7CADA009956AF /* WorkoutTableViewController.swift in Sources */,
-				3CB25B021CF536C800756B45 /* CoreDataStore.swift in Sources */,
 				3C036AC81CCF10D500E9F8C1 /* Workout.swift in Sources */,
 				3C877A711D60EB27005F8D99 /* ExerciseFormViewModel.swift in Sources */,
 				3C2F1D6A1D581FF2005B46E4 /* FirebaseDataUtils.swift in Sources */,
@@ -895,19 +887,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3CB25AFE1CF3C57B00756B45 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3CB25AFF1CF3C57B00756B45 /* Model.xcdatamodel */,
-			);
-			currentVersion = 3CB25AFF1CF3C57B00756B45 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 3CFEBB611CC98F55007E7817 /* Project object */;
 }

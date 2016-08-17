@@ -11,18 +11,20 @@ import UIKit
 struct ActivityOverlay {
     
     let overlayView: UIView
-    let activityIndicator: UIActivityIndicatorView
+    var activityIndicator: UIActivityIndicatorView
     
     init (alpha: CGFloat, activityIndicatorColor: UIColor, overlayColor: UIColor) {
-        overlayView = UIView()
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        activityIndicator.startAnimating()
-        activityIndicator.color = activityIndicatorColor
-        overlayView.alpha = alpha
-        overlayView.backgroundColor = overlayColor
-        overlayView.addSubview(activityIndicator)
+        self.overlayView = UIView()
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        
+        dispatch_async(dispatch_get_main_queue()){
+            self.activityIndicator.startAnimating()
+            self.activityIndicator.color = activityIndicatorColor
+            self.overlayView.alpha = alpha
+            self.overlayView.backgroundColor = overlayColor
+            self.overlayView.addSubview(self.activityIndicator)
+        }
     }
-    
     
     func overlay(viewToOverlay: UIView) {
         overlayView.frame = viewToOverlay.bounds

@@ -13,7 +13,7 @@ import Firebase
 // it knows how to create the viewmodels and is used by the other controllers
 // is used by the other controllers for this purpose.
 // Eventually, I'll probably move the factory to it's own class
-class FleksTabBarController: UITabBarController {
+class FleksTabBarController: UITabBarController, Alertable {
     
     var dataStore: DataStore!
     
@@ -35,6 +35,14 @@ class FleksTabBarController: UITabBarController {
         self.dataStore = dataStore
         self.onSignOut = { _ in
             self.dismissViewControllerAnimated(true, completion: onSignOut)
+        }
+    }
+    
+    override func viewDidLoad() {
+        dataStore.isOnline.producer.startWithNext { isOnline in
+            if !isOnline {
+                self.alert("you're offline! you can continue to make edits but make sure to go back online to save your data. If you close your app before going back online, your new edits will be lost!")
+            }
         }
     }
 }

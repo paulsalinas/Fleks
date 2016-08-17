@@ -26,4 +26,5 @@ protocol DataStore {
     func deleteExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError>
     
     func musclesProducer() -> SignalProducer<[Muscle], NSError>
+    var isOnline: MutableProperty<Bool> { get }
 }

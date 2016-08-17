@@ -109,7 +109,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                     vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
                         return { _ in
                             self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
+                                .on( failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                 .start()
                         }
                     })
@@ -118,7 +118,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                         return { _ in
                             self.viewModel
                                 .createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
+                                .on(failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
                                 .startWithCompleted { self.refresh() } // the refresh needs to be synchronous - needs to follow exactly after workout is created
                         }
                     })
@@ -141,7 +141,8 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                                         withSets: sets,
                                         withNotes: notes
                                     )
-                                    .on(started:{ _ in self.startOverlay() }, completed: { _ in self.stopOverlay() }, failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
+                                    .on(failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!")
+                                        })
                                     .start()
                             }
                         }

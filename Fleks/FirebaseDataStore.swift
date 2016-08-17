@@ -21,12 +21,16 @@ class FireBaseDataStore: DataStore {
     private let firebaseDB: FIRDatabase
     private let user: User
     
+    var isOnline: MutableProperty<Bool>
     private var exercises: [Exercise]
     
     init(firebaseDB: FIRDatabase, user: User) {
         self.firebaseDB = firebaseDB
         self.user = user
         self.exercises = [Exercise]()
+        
+        self.isOnline = MutableProperty(false)
+        self.isOnline <~ isConnectedSignalProducer()
         
         // update exercise cache and continually listen for changes
         // we might need to track this later for disposal
@@ -59,9 +63,25 @@ class FireBaseDataStore: DataStore {
         }
     }
     
+    private var connectedRef: FIRDatabaseReference {
+        get {
+            return firebaseDB.referenceWithPath(".info/connected")
+        }
+    }
+    
+    
     private func exerciseSetsGroupRef(workoutId: String) -> FIRDatabaseReference {
         return self.workoutsRef.child(workoutId).child("exerciseSetGroups")
     }
+    
+    private func isConnectedSignalProducer() -> SignalProducer<Bool, NoError> {
+        return connectedRef.signalProducerForEvent(.Value)
+            .logEvents()
+            .map { $0.value as! Bool }
+            .logEvents()
+            .flatMapError { _ in SignalProducer<Bool, NoError>.empty}
+    }
+    
 
     func addExerciseSetGroup(repetitions repetitions: Int, sets: Int, exercise: Exercise, notes: String, toWorkout workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
@@ -73,40 +93,25 @@ class FireBaseDataStore: DataStore {
             let exerciseSetGroup =  ExerciseSetGroup(sets: exerciseSets, notes: notes)
             
             result.exerciseSets.append(exerciseSetGroup)
-            ref.setValue(FirebaseDataUtils.convertFirebaseData(exerciseSetGroup), withCompletionBlock: { error, _ in
-                if let error = error {
-                    observer.sendFailed(error)
-                }
-                
-                observer.sendNext(result)
-                observer.sendCompleted()
-            })
+            ref.setValue(FirebaseDataUtils.convertFirebaseData(exerciseSetGroup))
+            observer.sendNext(result)
+            observer.sendCompleted()
         }
     }
     
     func updateWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
-            self.workoutsRef.child(workout.id).setValue(FirebaseDataUtils.convertFirebaseData(workout), withCompletionBlock: { error, _ in
-                if let error = error {
-                    observer.sendFailed(error)
-                }
-                
-                observer.sendNext(workout)
-                observer.sendCompleted()
-            })
+            self.workoutsRef.child(workout.id).setValue(FirebaseDataUtils.convertFirebaseData(workout))
+            observer.sendNext(workout)
+            observer.sendCompleted()
         }
     }
     
     func deleteWorkout(workout: Workout) -> SignalProducer<Workout, NSError> {
         return SignalProducer { observer, _ in
-            self.workoutsRef.child(workout.id).removeValueWithCompletionBlock { err, _ in
-                if let error = err {
-                    observer.sendFailed(error)
-                }
-                observer.sendNext(workout)
-                observer.sendCompleted()
-            }
-            
+            self.workoutsRef.child(workout.id).removeValue()
+            observer.sendNext(workout)
+            observer.sendCompleted()
         }
     }
     
@@ -114,11 +119,11 @@ class FireBaseDataStore: DataStore {
         var updatedWorkout = workout
         return SignalProducer { observer, _ in
             let ref = self.workoutsRef.childByAutoId()
+            
             updatedWorkout.id = ref.key
-            ref.setValue(FirebaseDataUtils.convertFirebaseData(workout), withCompletionBlock: { err, _ in
-                observer.sendNext(updatedWorkout)
-                observer.sendCompleted()
-            })
+            ref.setValue(FirebaseDataUtils.convertFirebaseData(workout))
+            observer.sendNext(updatedWorkout)
+            observer.sendCompleted()
         }
     }
     
@@ -176,38 +181,25 @@ class FireBaseDataStore: DataStore {
             var newExercise = exercise
             let ref = self.exerciseRef.childByAutoId()
             newExercise.id = ref.key
-            ref.setValue(FirebaseDataUtils.convertFirebaseData(newExercise), withCompletionBlock: { err, _ in
-                if let error = err {
-                    observer.sendFailed(error)
-                }
-                observer.sendNext(newExercise)
-                observer.sendCompleted()
-            })
+            ref.setValue(FirebaseDataUtils.convertFirebaseData(newExercise))
+            observer.sendNext(newExercise)
+            observer.sendCompleted()
         }
     }
     
     func updateExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
         return SignalProducer { observer, _ in
-            self.exerciseRef.child("\(exercise.id)").setValue(FirebaseDataUtils.convertFirebaseData(exercise), withCompletionBlock: { err, _ in
-                if let error = err {
-                    observer.sendFailed(error)
-                }
-                observer.sendNext(exercise)
-                observer.sendCompleted()
-                
-            })
+            self.exerciseRef.child("\(exercise.id)").setValue(FirebaseDataUtils.convertFirebaseData(exercise))
+            observer.sendNext(exercise)
+            observer.sendCompleted()
         }
     }
     
     func deleteExercise(exercise: Exercise) -> SignalProducer<Exercise, NSError> {
         return SignalProducer { observer, _ in
-            self.exerciseRef.child("\(exercise.id)").removeValueWithCompletionBlock { err, _ in
-                if let error = err {
-                    observer.sendFailed(error)
-                }
-                observer.sendNext(exercise)
-                observer.sendCompleted()
-            }
+            self.exerciseRef.child("\(exercise.id)").removeValue()
+            observer.sendNext(exercise)
+            observer.sendCompleted()
         }
     }
     

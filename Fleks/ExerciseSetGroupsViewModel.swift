@@ -111,13 +111,15 @@ class ExerciseSetGroupsViewModel {
         }
         
         updatedWorkout.exerciseSets.removeAtIndex(indexPath.row)
-        return dataStore.updateWorkout(updatedWorkout).map { _ in () }
+        return dataStore.updateWorkout(updatedWorkout)
+            .map { _ in () }
     }
     
     func moveRowAtIndexPath(fromIndexPath:NSIndexPath, toIndexPath: NSIndexPath) -> SignalProducer<Void, NSError> {
         guard var updatedWorkout = workout.value else {
             return SignalProducer<Void, NSError>.empty
         }
+        
         
         let toBeMoved = updatedWorkout.exerciseSets.removeAtIndex(fromIndexPath.row)
         updatedWorkout.exerciseSets.insert(toBeMoved, atIndex: toIndexPath.row)
