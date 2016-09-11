@@ -16,18 +16,25 @@ class ExerciseSetGroupTableViewCell: UITableViewCell {
     @IBOutlet weak var orderLabel: UILabel!
     
     struct ViewData {
-        let reps: Int
-        let sets: Int
-        let exerciseName: String
+        let sets: [ExerciseSetType]
         let notes: String
         let order: Int
     }
     
     var viewData: ViewData? {
         didSet {
-            exerciseNameLabel.text = viewData!.exerciseName
+            let exerciseNames = viewData!.sets.reduce([String](), combine: { prev, next in
+                switch (next) {
+                case .Simple(let set):
+                    return prev + [set.exercise.name]
+                case .Super(let exerciseSets):
+                    return prev + exerciseSets.map { $0.exercise.name }
+                }
+            })
+            
+            exerciseNameLabel.text = Set(exerciseNames).joinWithSeparator("/")
+            repsSetsLabel.text = "Sets: \(String(viewData!.sets.count))"
             notesLabel.text = viewData!.notes
-            repsSetsLabel.text = "Reps: \(viewData!.reps) Sets: \(viewData!.sets)"
             orderLabel.text = String(viewData!.order)
         }
     }
@@ -35,10 +42,7 @@ class ExerciseSetGroupTableViewCell: UITableViewCell {
 
 extension ExerciseSetGroupTableViewCell.ViewData {
     init(exerciseSetGroup: ExerciseSetGroup, indexPath: NSIndexPath) {
-        let set = exerciseSetGroup.sets.first!
-        self.exerciseName = set.exercise.name
-        self.reps = set.repetitions
-        self.sets = exerciseSetGroup.sets.count
+        self.sets = exerciseSetGroup.sets
         self.notes = exerciseSetGroup.notes
         self.order = indexPath.row + 1
     }

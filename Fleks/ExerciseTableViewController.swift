@@ -61,7 +61,7 @@ class ExerciseTableViewController: UITableViewController, ActivityOverlayable, A
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let exercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
+        let exercise = viewModel.exerciseAtIndexPath(indexPath)
         let muscleString = exercise.muscles
             .map { $0.name }
             .joinWithSeparator(", ")

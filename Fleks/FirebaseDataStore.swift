@@ -89,7 +89,7 @@ class FireBaseDataStore: DataStore {
             
             let ref = self.exerciseSetsGroupRef(workout.id).child(String(workout.exerciseSets.count))
             
-            let exerciseSets = (1...sets).map { _ in ExerciseSet(repetitions: repetitions, exercise: exercise) }
+            let exerciseSets = (1...sets).map { _ in return ExerciseSetType.Simple(ExerciseSet(repetitions: repetitions, exercise: exercise)) }
             let exerciseSetGroup =  ExerciseSetGroup(sets: exerciseSets, notes: notes)
             
             result.exerciseSets.append(exerciseSetGroup)
@@ -133,12 +133,15 @@ class FireBaseDataStore: DataStore {
                 mainSnapshot.children.map { rootSnapshot in
                      ExerciseSetGroup(
                         snapshot: rootSnapshot as! FIRDataSnapshot,
-                        exerciseSet: (rootSnapshot as! FIRDataSnapshot).children.map { snapshot in
+                        sets: (rootSnapshot as! FIRDataSnapshot).children.map { snapshot in
                             let exerciseId =  ((snapshot as! FIRDataSnapshot).value as! NSDictionary)["exerciseId"] as! String
-                            return ExerciseSet(
-                                snapshot: (snapshot as! FIRDataSnapshot),
-                                exercise: self.exercises.filter { $0.id == exerciseId }.first!
-                            )
+                            return
+
+                                ExerciseSet(
+                                    snapshot: (snapshot as! FIRDataSnapshot),
+                                    exercise: self.exercises.filter { $0.id == exerciseId }.first!
+                                )
+
                         }
                     )
                 }

@@ -21,8 +21,8 @@ class ExerciseSetGroupSpec: QuickSpec {
                 let result = ExerciseSetGroup(repetitions: 10, sets:2, exercise: exercise, notes: "heyyy" )
                 let expected = ExerciseSetGroup(
                     sets: [
-                        ExerciseSet(repetitions: 10, exercise: exercise),
-                        ExerciseSet(repetitions: 10, exercise: exercise)
+                        .Simple(ExerciseSet(repetitions: 10, exercise: exercise)),
+                        .Simple(ExerciseSet(repetitions: 10, exercise: exercise))
                     ],
                     notes: "heyyy"
                 )

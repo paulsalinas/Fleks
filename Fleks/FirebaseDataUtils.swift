@@ -15,15 +15,15 @@ struct FirebaseDataUtils {
             .forEach { index, exerciseSet in  exerciseSets[String(index)] = convertFirebaseData(exerciseSet) }
         
         return  [
-            "notes" : exerciseSetGroup.notes,
-            "exerciseSets" : exerciseSets
+            ExerciseSetGroup.Keys.NOTES : exerciseSetGroup.notes,
+            ExerciseSetGroup.Keys.EXERCISE_SETS : exerciseSets
         ]
     }
     
     static func convertFirebaseData(workout: Workout) -> [String: AnyObject] {
         return [
-            "name" : workout.name,
-            "exerciseSetGroups":
+            Workout.Keys.NAME : workout.name,
+            Workout.Keys.EXERCISE_SET_GROUPS :
                 workout.exerciseSets.enumerate()
                     .reduce([String: AnyObject]()) { prev, next in
                         let (index, exerciseSetGroup) = next
@@ -36,20 +36,32 @@ struct FirebaseDataUtils {
     
     static func convertFirebaseData(exerciseSet: ExerciseSet) -> [String: AnyObject] {
         return  [
-            "repetitions" : exerciseSet.repetitions,
-            "exerciseId": exerciseSet.exercise.id
+            ExerciseSet.Keys.REPETITIONS : exerciseSet.repetitions,
+            ExerciseSet.Keys.EXERCISE_ID : exerciseSet.exercise.id
         ]
     }
     
     static func convertFirebaseData(exercise: Exercise) -> [String: AnyObject] {
         
         return [
-            "name": exercise.name,
-            "muscles": exercise.muscles.reduce([String: AnyObject](), combine: { prev, next in
+            Exercise.Keys.NAME : exercise.name,
+            Exercise.Keys.MUSCLES : exercise.muscles.reduce([String: AnyObject](), combine: { prev, next in
                 var newDict = prev
                 newDict["\(next.id)"] = true
                 return newDict
             })
         ]
+    }
+    
+    static func convertFirebaseData(exerciseSetType: ExerciseSetType) -> [String: AnyObject] {
+        switch (exerciseSetType) {
+        case let .Simple(set):
+            return convertFirebaseData(set)
+        case let .Super(sets):
+            var val = [String: AnyObject]()
+            sets.enumerate()
+                .forEach { index, set in val[String(index)] = convertFirebaseData(set) }
+            return val
+        }
     }
 }

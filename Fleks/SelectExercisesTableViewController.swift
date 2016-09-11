@@ -49,7 +49,7 @@ class SelectExercisesTableViewController: UITableViewController, ActivityOverlay
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectExerciseCell", forIndexPath: indexPath)
-        let exercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
+        let exercise = viewModel.exerciseAtIndexPath(indexPath)
         let muscleString = exercise.muscles
             .map { $0.name }
             .joinWithSeparator(", ")
@@ -60,7 +60,7 @@ class SelectExercisesTableViewController: UITableViewController, ActivityOverlay
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedExercise = viewModel.exerciseSetGroupAtIndexPath(indexPath)
+        selectedExercise = viewModel.exerciseAtIndexPath(indexPath)
         performSegueWithIdentifier("EnterSetDetailsSegue", sender: self)
     }
     

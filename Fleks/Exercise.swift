@@ -23,17 +23,25 @@ func ==(lhs: Exercise, rhs: Exercise) -> Bool {
 }
 
 extension Exercise {
+    struct Keys {
+        static let ID = "id"
+        static let NAME = "name"
+        static let MUSCLES = "muscles"
+    }
+}
+
+extension Exercise {
     init(managedExercise: NSManagedObject) {
-        self.id = managedExercise.valueForKey("id") as! String
-        self.name = managedExercise.valueForKey("name") as! String
-        self.muscles = managedExercise.valueForKey("muscles") as! [Muscle]
+        self.id = managedExercise.valueForKey(Exercise.Keys.ID) as! String
+        self.name = managedExercise.valueForKey(Exercise.Keys.NAME) as! String
+        self.muscles = managedExercise.valueForKey(Exercise.Keys.MUSCLES) as! [Muscle]
     }
 }
 
 extension Exercise {
     init(snapshot: FIRDataSnapshot, muscles: [Muscle]) {
         self.id = snapshot.key
-        self.name = (snapshot.value as! NSDictionary)["name"] as! String
+        self.name = (snapshot.value as! NSDictionary)[Exercise.Keys.NAME] as! String
         self.muscles = muscles
     }
 }

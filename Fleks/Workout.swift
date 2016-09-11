@@ -16,9 +16,17 @@ struct Workout: Equatable {
 }
 
 extension Workout {
+    struct Keys {
+        static let NAME = "name"
+        static let EXERCISE_SET_GROUPS = "exercise_set_groups"
+        static let ID = "id"
+    }
+}
+
+extension Workout {
     init(snapshot: FIRDataSnapshot) {
         self.id = snapshot.key
-        self.name = (snapshot.value as! NSDictionary)["name"] as! String
+        self.name = (snapshot.value as! NSDictionary)[Workout.Keys.NAME] as! String
         
         // TODO: need to fill exercise sets
         self.exerciseSets = [ExerciseSetGroup]()
@@ -26,16 +34,29 @@ extension Workout {
     
     init(snapshot: FIRDataSnapshot, exercises: [Exercise]) {
         self.id = snapshot.key
-        self.name = snapshot.childSnapshotForPath("name").value as! String
-        self.exerciseSets = snapshot.childSnapshotForPath("exerciseSetGroups").children
+        self.name = snapshot.childSnapshotForPath(Workout.Keys.NAME).value as! String
+        self.exerciseSets = snapshot.childSnapshotForPath(Workout.Keys.EXERCISE_SET_GROUPS).children
             .map { exerciseSetGroupSnapshot in
                 ExerciseSetGroup(
                     snapshot: exerciseSetGroupSnapshot as! FIRDataSnapshot,
-                    exerciseSet: exerciseSetGroupSnapshot.childSnapshotForPath("exerciseSets").children
-                        .map { exerciseSetSnapshot in
-                            let exercise = exercises.filter { ex in ex.id == exerciseSetSnapshot.childSnapshotForPath("exerciseId").value as! String }.first!
-                             return ExerciseSet(snapshot: exerciseSetSnapshot as! FIRDataSnapshot, exercise: exercise)
-                        }
+                    setTypes:
+                        exerciseSetGroupSnapshot
+                            .childSnapshotForPath(ExerciseSetGroup.Keys.EXERCISE_SETS)
+                            .children
+                            .map { exerciseSetSnapshot in
+                                if  exerciseSetSnapshot.childSnapshotForPath(ExerciseSet.Keys.EXERCISE_ID).value as? String == nil, let superSets = exerciseSetSnapshot.children {
+                                    return ExerciseSetType.Super(
+                                        superSets.map { superSetSnap in
+                                            let exercise = exercises.filter { ex in ex.id == superSetSnap.childSnapshotForPath(ExerciseSet.Keys.EXERCISE_ID).value as! String }.first!
+                                            return ExerciseSet(snapshot: (superSetSnap as! FIRDataSnapshot), exercise: exercise)
+                                        }
+                                    )
+                                } else {
+                                    let exercise = exercises.filter { ex in ex.id == exerciseSetSnapshot.childSnapshotForPath(ExerciseSet.Keys.EXERCISE_ID).value as! String }.first!
+                                    return ExerciseSetType.Simple(ExerciseSet(snapshot: exerciseSetSnapshot as! FIRDataSnapshot, exercise: exercise))
+                                }
+
+                            }
                 )
             }
     }

@@ -20,9 +20,15 @@ struct Muscle: Equatable {
 }
 
 extension Muscle {
+    struct Keys {
+        static let NAME = "name"
+    }
+}
+
+extension Muscle {
     init(snapshot: FIRDataSnapshot) {
         self.id = snapshot.key
-        self.name = (snapshot.value as! NSDictionary)["name"] as! String
+        self.name = (snapshot.value as! NSDictionary)[Muscle.Keys.NAME] as! String
     }
 }
 

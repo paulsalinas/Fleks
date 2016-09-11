@@ -16,8 +16,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     var activityOverlay: ActivityOverlay?
     
     enum SegueIdentifierTypes: String {
-        case EditExerciseSetGroupSegue = "EditExerciseSetGroupSegue"
-        case ShowSelectExerciseModally = "ShowSelectExerciseModally"
+        case ShowExerciseSetForm = "ShowExerciseSetForm"
     }
     
     enum CellTypes: String {
@@ -30,7 +29,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     private var viewModel: ExerciseSetGroupsViewModel!
     private var dataStore: DataStore!
     private var workoutId: String?
-    private var selectedExerciseSetGroup: ExerciseSetGroup?
+    private var selectedIndexPath: NSIndexPath!
     
     override func viewDidLoad() {
         tableView.allowsMultipleSelectionDuringEditing = false;
@@ -82,8 +81,8 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
             alert("your workout needs a name!")
             return
         }
-        
-        performSegueWithIdentifier(SegueIdentifierTypes.ShowSelectExerciseModally.rawValue, sender: self)
+        selectedIndexPath = nil
+        performSegueWithIdentifier(SegueIdentifierTypes.ShowExerciseSetForm.rawValue, sender: self)
     }
     
     @IBAction func editButtonTouch(sender: AnyObject) {
@@ -97,56 +96,65 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let id = SegueIdentifierTypes(rawValue: segue.identifier!) else {
+        guard let segueIdentifierType = SegueIdentifierTypes(rawValue: segue.identifier!) else {
             return
         }
         
-        switch(id) {
-            case .ShowSelectExerciseModally:
-                let vc = (segue.destinationViewController as! UINavigationController).topViewController as! SelectExercisesTableViewController
-                
-                if viewModel.doesWorkoutExist() {
-                    vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in
-                            self.viewModel.addExerciseSetGroup(withExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on( failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
-                                .start()
-                        }
-                    })
-                } else {
-                    vc.injectDependency(dataStore, onSubmitUpdate: { selectedExercise, reps, sets, notes in
-                        return { _ in
-                            self.viewModel
-                                .createWorkout(self.viewModel.workoutNameInput.value!, firstExercise: selectedExercise, reps: reps, sets: sets, notes: notes)
-                                .on(failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!") })
-                                .startWithCompleted { self.refresh() } // the refresh needs to be synchronous - needs to follow exactly after workout is created
-                        }
-                    })
+        switch(segueIdentifierType) {
+            case .ShowExerciseSetForm:
+                guard let vc = (segue.destinationViewController as? UINavigationController)?.topViewController as? NewExerciseSetTableViewController else  {
+                    break
                 }
-            
-            case .EditExerciseSetGroupSegue:
-                if let selectedExerciseSetGroup = selectedExerciseSetGroup,
-                    let vc = segue.destinationViewController as? ExerciseSetFormViewController {
-                    let sets = selectedExerciseSetGroup.sets.count
-                    let reps = selectedExerciseSetGroup.sets.first!.repetitions
-                    vc.injectDependency(
-                        dataStore,
-                        reps: reps,
-                        sets: sets,
-                        notes: selectedExerciseSetGroup.notes, onSubmitUpdate: { reps, sets, notes in
-                            return { _ in
-                                self.viewModel.updateExerciseSetGroup(
-                                        selectedExerciseSetGroup,
-                                        withReps: reps,
-                                        withSets: sets,
-                                        withNotes: notes
-                                    )
-                                    .on(failed: { _ in self.alert("Sorry! it's seems like there's an issue getting your data!")
-                                        })
-                                    .start()
-                            }
-                        }
-                    )
+                
+                let onCancel = { vc.dismissViewControllerAnimated(true, completion: nil) }
+                let exercisesViewModel = ExercisesViewModel(dataStore: dataStore)
+                
+                if viewModel.doesWorkoutExist(), let indexPath = selectedIndexPath {
+                    let exerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
+                    vc.injectDependency(NewExerciseFormViewModel(sets: exerciseSetGroup.sets, notes: exerciseSetGroup.notes) { sets, notes in
+                        self.viewModel.updateExerciseSetGroup(indexPath.row, sets: sets, notes: notes)
+                            .on(
+                                started: {
+                                    self.startOverlay()
+                                    vc.dismissViewControllerAnimated(true, completion: nil)
+                                },
+                                completed: {
+                                    self.stopOverlay()
+                            }).start()
+                        
+                    },
+                    exercisesViewModel: exercisesViewModel,
+                    onCancel: onCancel)
+                }
+                else if viewModel.doesWorkoutExist() {
+                     vc.injectDependency(NewExerciseFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
+                        self.viewModel.addExerciseSetGroup(sets, notes: notes)
+                            .on(
+                                started: {
+                                    self.startOverlay()
+                                    vc.dismissViewControllerAnimated(true, completion: nil)
+                                },
+                                completed: {
+                                    self.stopOverlay()
+                            }).start()
+                    },
+                    exercisesViewModel: exercisesViewModel,
+                    onCancel: onCancel)
+                }
+                else {
+                    vc.injectDependency(NewExerciseFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
+                        self.viewModel.createWorkout(firstSet: sets, notes: notes)
+                            .on(
+                                started: {
+                                    self.startOverlay()
+                                    vc.dismissViewControllerAnimated(true, completion: nil)
+                                },
+                                completed: {
+                                    self.stopOverlay()
+                            }).start()
+                    },
+                    exercisesViewModel: exercisesViewModel,
+                    onCancel: onCancel)
                 }
         }
     }
@@ -169,8 +177,8 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedExerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
-        performSegueWithIdentifier(SegueIdentifierTypes.EditExerciseSetGroupSegue.rawValue, sender: self)
+        selectedIndexPath = indexPath
+        performSegueWithIdentifier(SegueIdentifierTypes.ShowExerciseSetForm.rawValue, sender: self)
     }
     
      override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {

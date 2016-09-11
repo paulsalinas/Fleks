@@ -33,7 +33,7 @@ class ExercisesViewModel {
        return self.exercises.count
     }
     
-    func exerciseSetGroupAtIndexPath(indexPath: NSIndexPath) -> Exercise {
+    func exerciseAtIndexPath(indexPath: NSIndexPath) -> Exercise {
         return self.exercises[indexPath.row]
     }
     
