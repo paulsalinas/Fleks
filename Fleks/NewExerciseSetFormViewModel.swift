@@ -53,6 +53,10 @@ class NewExerciseFormViewModel {
         })
     }
     
+    convenience init () {
+        self.init(sets: [ExerciseSetType](), notes: "", onComplete: {_,_ in Void() })
+    }
+    
     func addExercise(exercise: Exercise, withReps reps: Int) {
         exerciseSets.modify({ oldValue in
             

@@ -76,14 +76,3 @@ func ==(lhs: ExerciseSetGroup, rhs: ExerciseSetGroup) -> Bool {
     return lhs.sets == rhs.sets &&
         lhs.notes == rhs.notes
 }
-
-// placeholder struct that will eventually replace the normal 'ExerciseSetGroup'
-struct NewExerciseSetGroup: Equatable {
-    var sets: [ExerciseSetType]
-    var notes: String
-}
-
-func ==(lhs: NewExerciseSetGroup, rhs: NewExerciseSetGroup) -> Bool {
-    return lhs.sets == rhs.sets &&
-        lhs.notes == rhs.notes
-}
