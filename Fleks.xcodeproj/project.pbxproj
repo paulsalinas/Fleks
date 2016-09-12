@@ -40,7 +40,7 @@
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
 		3CBB169E1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB169D1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift */; };
-		3CDF47CA1D7A521F009EAB2A /* NewExerciseSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47C91D7A521F009EAB2A /* NewExerciseSetTableViewController.swift */; };
+		3CDF47CA1D7A521F009EAB2A /* ExerciseSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47C91D7A521F009EAB2A /* ExerciseSetTableViewController.swift */; };
 		3CDF47CC1D7A71B6009EAB2A /* InputSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CB1D7A71B6009EAB2A /* InputSetTableViewCell.swift */; };
 		3CDF47CE1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CD1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift */; };
 		3CDF47D01D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CF1D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift */; };
@@ -110,7 +110,7 @@
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		3CBB169D1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExerciseFormViewModelSpec.swift; sourceTree = "<group>"; };
-		3CDF47C91D7A521F009EAB2A /* NewExerciseSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExerciseSetTableViewController.swift; sourceTree = "<group>"; };
+		3CDF47C91D7A521F009EAB2A /* ExerciseSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewController.swift; sourceTree = "<group>"; };
 		3CDF47CB1D7A71B6009EAB2A /* InputSetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSetTableViewCell.swift; sourceTree = "<group>"; };
 		3CDF47CD1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExerciseTableViewController.swift; sourceTree = "<group>"; };
 		3CDF47CF1D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExerciseSetFormViewModel.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				3CFEBB6E1CC98F55007E7817 /* LoginViewController.swift */,
 				3C8124F91D12266B0038A018 /* FleksTabBarController.swift */,
 				3C99BEDC1D5ACAEB008079A3 /* ExerciseSetGroupTableViewController.swift */,
-				3CDF47C91D7A521F009EAB2A /* NewExerciseSetTableViewController.swift */,
+				3CDF47C91D7A521F009EAB2A /* ExerciseSetTableViewController.swift */,
 				3CDF47CD1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift */,
 				3C5EF8741D7E4037006432BA /* SelectRepsViewController.swift */,
 			);
@@ -611,7 +611,7 @@
 				3CFEBB6F1CC98F55007E7817 /* LoginViewController.swift in Sources */,
 				3C99BED91D596C2B008079A3 /* FakeDataStore.swift in Sources */,
 				3C2F1D641D556B47005B46E4 /* DataStore.swift in Sources */,
-				3CDF47CA1D7A521F009EAB2A /* NewExerciseSetTableViewController.swift in Sources */,
+				3CDF47CA1D7A521F009EAB2A /* ExerciseSetTableViewController.swift in Sources */,
 				3C036AD41CD1A4A800E9F8C1 /* Checkbox.swift in Sources */,
 				3C7A4EE11D6129C00051505E /* Alertable.swift in Sources */,
 				3C99BEDD1D5ACAEB008079A3 /* ExerciseSetGroupTableViewController.swift in Sources */,

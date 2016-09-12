@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveCocoa
 
-class NewExerciseSetTableViewController: UITableViewController {
+class ExerciseSetTableViewController: UITableViewController {
     
     private enum TableCellTypes: String {
         case AddExerciseCell

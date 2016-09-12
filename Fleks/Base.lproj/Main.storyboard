@@ -458,10 +458,10 @@
             </objects>
             <point key="canvasLocation" x="3861" y="1714"/>
         </scene>
-        <!--New Exercise Set Table View Controller-->
+        <!--Exercise Set Table View Controller-->
         <scene sceneID="ley-LK-0dd">
             <objects>
-                <tableViewController id="nJj-aN-IH5" customClass="NewExerciseSetTableViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nJj-aN-IH5" customClass="ExerciseSetTableViewController" customModule="Fleks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3mp-sA-5NV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

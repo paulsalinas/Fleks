@@ -102,7 +102,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
         
         switch(segueIdentifierType) {
             case .ShowExerciseSetForm:
-                guard let vc = (segue.destinationViewController as? UINavigationController)?.topViewController as? NewExerciseSetTableViewController else  {
+                guard let vc = (segue.destinationViewController as? UINavigationController)?.topViewController as? ExerciseSetTableViewController else  {
                     break
                 }
                 
