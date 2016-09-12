@@ -16,10 +16,10 @@ import Quick
 class NewExerciseFormViewModelSpec: QuickSpec {
     override func spec() {
         describe("ExerciseSetViewModel") {
-            var viewModel: NewExerciseFormViewModel!
+            var viewModel: ExerciseSetFormViewModel!
             
             beforeEach {
-                viewModel = NewExerciseFormViewModel()
+                viewModel = ExerciseSetFormViewModel()
             }
             
             it("doesn't increase the number of sets when there's no exercise yet selected") {

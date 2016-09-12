@@ -39,11 +39,11 @@
 		3C99BEDF1D5ACC81008079A3 /* ExerciseSetGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C99BEDE1D5ACC81008079A3 /* ExerciseSetGroupTableViewCell.swift */; };
 		3CA884BE1CCEE83300AAE58C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BD1CCEE83300AAE58C /* Exercise.swift */; };
 		3CA884C01CCEE88B00AAE58C /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA884BF1CCEE88B00AAE58C /* Muscle.swift */; };
-		3CBB169E1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB169D1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift */; };
+		3CBB169E1D7D228700F35462 /* ExerciseFormViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB169D1D7D228700F35462 /* ExerciseFormViewModelSpec.swift */; };
 		3CDF47CA1D7A521F009EAB2A /* ExerciseSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47C91D7A521F009EAB2A /* ExerciseSetTableViewController.swift */; };
 		3CDF47CC1D7A71B6009EAB2A /* InputSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CB1D7A71B6009EAB2A /* InputSetTableViewCell.swift */; };
 		3CDF47CE1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CD1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift */; };
-		3CDF47D01D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CF1D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift */; };
+		3CDF47D01D7D0243009EAB2A /* ExerciseSetFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF47CF1D7D0243009EAB2A /* ExerciseSetFormViewModel.swift */; };
 		3CFD37851D5D456C00379310 /* ExerciseSetGroupSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD37841D5D456C00379310 /* ExerciseSetGroupSpec.swift */; };
 		3CFD37871D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD37861D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift */; };
 		3CFEBB6D1CC98F55007E7817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEBB6C1CC98F55007E7817 /* AppDelegate.swift */; };
@@ -109,11 +109,11 @@
 		3C99BEDE1D5ACC81008079A3 /* ExerciseSetGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupTableViewCell.swift; sourceTree = "<group>"; };
 		3CA884BD1CCEE83300AAE58C /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		3CA884BF1CCEE88B00AAE58C /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
-		3CBB169D1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExerciseFormViewModelSpec.swift; sourceTree = "<group>"; };
+		3CBB169D1D7D228700F35462 /* ExerciseFormViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseFormViewModelSpec.swift; sourceTree = "<group>"; };
 		3CDF47C91D7A521F009EAB2A /* ExerciseSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewController.swift; sourceTree = "<group>"; };
 		3CDF47CB1D7A71B6009EAB2A /* InputSetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSetTableViewCell.swift; sourceTree = "<group>"; };
 		3CDF47CD1D7CA60F009EAB2A /* SelectExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectExerciseTableViewController.swift; sourceTree = "<group>"; };
-		3CDF47CF1D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewExerciseSetFormViewModel.swift; sourceTree = "<group>"; };
+		3CDF47CF1D7D0243009EAB2A /* ExerciseSetFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetFormViewModel.swift; sourceTree = "<group>"; };
 		3CFD37841D5D456C00379310 /* ExerciseSetGroupSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupSpec.swift; sourceTree = "<group>"; };
 		3CFD37861D5D720E00379310 /* ExerciseSetGroupHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseSetGroupHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		3CFEBB691CC98F55007E7817 /* Fleks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,7 +195,7 @@
 				3C99BEDA1D597357008079A3 /* ExerciseSetGroupsViewModel.swift */,
 				3C877A6E1D5E8E24005F8D99 /* ExercisesViewModel.swift */,
 				3C877A701D60EB27005F8D99 /* ExerciseFormViewModel.swift */,
-				3CDF47CF1D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift */,
+				3CDF47CF1D7D0243009EAB2A /* ExerciseSetFormViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 		3CFEBB801CC98F55007E7817 /* FleksTests */ = {
 			isa = PBXGroup;
 			children = (
-				3CBB169D1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift */,
+				3CBB169D1D7D228700F35462 /* ExerciseFormViewModelSpec.swift */,
 				3C2F1D6B1D582137005B46E4 /* FirebaseDataUtilsSpec.swift */,
 				3CFD37841D5D456C00379310 /* ExerciseSetGroupSpec.swift */,
 				3CFEBB831CC98F55007E7817 /* Info.plist */,
@@ -603,7 +603,7 @@
 				3C9378E21D3D9E9300A0CA8B /* WorkoutViewModel.swift in Sources */,
 				3C2F1D661D556CB7005B46E4 /* FirebaseDataStore.swift in Sources */,
 				3C2C154D1CE7CADA009956AF /* WorkoutTableViewController.swift in Sources */,
-				3CDF47D01D7D0243009EAB2A /* NewExerciseSetFormViewModel.swift in Sources */,
+				3CDF47D01D7D0243009EAB2A /* ExerciseSetFormViewModel.swift in Sources */,
 				3C036AC81CCF10D500E9F8C1 /* Workout.swift in Sources */,
 				3C877A711D60EB27005F8D99 /* ExerciseFormViewModel.swift in Sources */,
 				3C2F1D6A1D581FF2005B46E4 /* FirebaseDataUtils.swift in Sources */,
@@ -628,7 +628,7 @@
 			files = (
 				3C2F1D6C1D582138005B46E4 /* FirebaseDataUtilsSpec.swift in Sources */,
 				3CFD37851D5D456C00379310 /* ExerciseSetGroupSpec.swift in Sources */,
-				3CBB169E1D7D228700F35462 /* NewExerciseFormViewModelSpec.swift in Sources */,
+				3CBB169E1D7D228700F35462 /* ExerciseFormViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
