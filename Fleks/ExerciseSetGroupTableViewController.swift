@@ -111,7 +111,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                 
                 if viewModel.doesWorkoutExist(), let indexPath = selectedIndexPath {
                     let exerciseSetGroup = viewModel.exerciseSetGroupAtIndexPath(indexPath)
-                    vc.injectDependency(NewExerciseFormViewModel(sets: exerciseSetGroup.sets, notes: exerciseSetGroup.notes) { sets, notes in
+                    vc.injectDependency(ExerciseSetFormViewModel(sets: exerciseSetGroup.sets, notes: exerciseSetGroup.notes) { sets, notes in
                         self.viewModel.updateExerciseSetGroup(indexPath.row, sets: sets, notes: notes)
                             .on(
                                 started: {
@@ -127,7 +127,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                     onCancel: onCancel)
                 }
                 else if viewModel.doesWorkoutExist() {
-                     vc.injectDependency(NewExerciseFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
+                     vc.injectDependency(ExerciseSetFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
                         self.viewModel.addExerciseSetGroup(sets, notes: notes)
                             .on(
                                 started: {
@@ -142,7 +142,7 @@ class ExerciseSetGroupTableViewController: UITableViewController, ActivityOverla
                     onCancel: onCancel)
                 }
                 else {
-                    vc.injectDependency(NewExerciseFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
+                    vc.injectDependency(ExerciseSetFormViewModel(sets: [ExerciseSetType](), notes: "") { sets, notes in
                         self.viewModel.createWorkout(firstSet: sets, notes: notes)
                             .on(
                                 started: {

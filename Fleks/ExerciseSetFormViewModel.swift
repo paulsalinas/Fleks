@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 import Result
 
-class NewExerciseFormViewModel {
+class ExerciseSetFormViewModel {
     
     var numberOfSets: MutableProperty<Int> = MutableProperty(1)
     var notes: MutableProperty<String> = MutableProperty("")
@@ -32,6 +32,7 @@ class NewExerciseFormViewModel {
         self.exerciseSets.swap(sets)
         self.notes.swap(notes)
         self.onComplete = onComplete
+        self.numberOfSets.swap(sets.count)
         
         numberOfSets.signal.observeNext({ next in
             
@@ -118,7 +119,7 @@ class NewExerciseFormViewModel {
     }
     
     func sectionTitle(section: Int) -> String {
-        return NewExerciseFormViewModel.generateLabel(section)
+        return ExerciseSetFormViewModel.generateLabel(section)
     }
     
     func Complete() {
@@ -127,7 +128,7 @@ class NewExerciseFormViewModel {
 }
 
 // static pure funcs to help with some computation within the view
-extension NewExerciseFormViewModel  {
+extension ExerciseSetFormViewModel  {
     private static func generateLabel(section: Int) -> String {
         let startingCode = 65 + section
         return "Set " + String(Character(UnicodeScalar(startingCode)))

@@ -20,12 +20,12 @@ class ExerciseSetTableViewController: UITableViewController {
     
     @IBOutlet weak var notesTextField: UITextField!
     
-    private var viewModel: NewExerciseFormViewModel!
+    private var viewModel: ExerciseSetFormViewModel!
     private var exercisesViewModel: ExercisesViewModel!
     private var selectedIndexPath: NSIndexPath!
     private var onCancel: () -> Void = { Void() }
     
-    func injectDependency(viewModel: NewExerciseFormViewModel, exercisesViewModel: ExercisesViewModel, onCancel: () -> Void) {
+    func injectDependency(viewModel: ExerciseSetFormViewModel, exercisesViewModel: ExercisesViewModel, onCancel: () -> Void) {
         self.viewModel = viewModel
         self.exercisesViewModel = exercisesViewModel
         self.onCancel = onCancel
