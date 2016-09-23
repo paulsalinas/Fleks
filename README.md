@@ -56,17 +56,17 @@ Test were made using Quick and Nimble. Run tests in test navigator.
 #### Enter the number of reps!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Choose%20Reps.png" width="400"/>
 
-### Here's what your set looks like and it seems like you've added notes! don't forget to hold at the bottom!
+#### Here's what your set looks like and it seems like you've added notes! don't forget to hold at the bottom!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/View%20Set%20and%20Add%20Notes.png" width="400"/>
 
-### You can modify the reps for a particular set. Wow 20 reps on your last set?!
+#### You can modify the reps for a particular set. Wow 20 reps on your last set?!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Modify%20reps%20for%20Exercise.png" width="400"/>
 
-### You can even make super sets by adding another exercise!
+#### You can even make super sets by adding another exercise!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Add%20another%20exercise%20-%20Super.png" width="400"/>
 
-#### You can go and build hard workouts!
-<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
+#### You can go and build hard workouts now!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercise%20Set%20Table.png" width="400"/>
 
 #### This workout was too hard, let's delete it!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Delete%20Workout.png" width="400"/>
