@@ -44,18 +44,29 @@ Test were made using Quick and Nimble. Run tests in test navigator.
 ####  List of Workouts 
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
 
-#### Create a Workout - Enter a name and touch '+' to add your first exercise!
+#### Create a Workout - Enter a name and touch '+' to add your first exercise sets!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Create%20Workout%20Form.png" width="400"/>
 
-#### Select your first exercise 
-<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Select%20Exercise.png" width="400"/>
-
-#### Enter the number of reps and sets plus any special notes or instructions 
+#### This area is where you build your set. Add your first exercise!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Exercise%20Form.png" width="400"/>
 
-#### Cool there's validation!
-<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Validation.png" width="400"/>
-#### you can keep entering exercises if you would like!
+#### Select your first exercise!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Select%20Exercise.png" width="400"/>
+
+#### Enter the number of reps!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Choose%20Reps.png" width="400"/>
+
+### Here's what your set looks like and it seems like you've added notes! don't forget to hold at the bottom!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/View%20Set%20and%20Add%20Notes.png" width="400"/>
+
+### You can modify the reps for a particular set. Wow 20 reps on your last set?!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Modify%20reps%20for%20Exercise.png" width="400"/>
+
+### You can even make super sets by adding another exercise!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Add%20another%20exercise%20-%20Super.png" width="400"/>
+
+#### You can go and build hard workouts!
+<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Workout%20Table.png" width="400"/>
 
 #### This workout was too hard, let's delete it!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Delete%20Workout.png" width="400"/>
@@ -63,6 +74,4 @@ Test were made using Quick and Nimble. Run tests in test navigator.
 #### Ooh I can re-order my exercise order or delete by pressing 'Edit'!
 <img src="https://github.com/paulsalinas/Fleks/blob/master/images/Edit%20Workout.png" width="400"/>
 
-#### Selecting an exercise set allows you to edit it!
-<img src="https://github.com/paulsalinas/Fleks/blob/master/images/Edit%20Exercise%20Set.png" width="400"/>
 
