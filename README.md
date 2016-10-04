@@ -12,7 +12,7 @@ From a database of canned exercises plus exercises you create yourself, you can 
 5. Swift 2.2
 6. ReactiveCocoa for some FRP goodness (still a noob and learning)
 7. MVVM to avoid Fat Controllers 
-8. Quick and Nimbe for some unit tests
+8. Quick and Nimble for some unit tests
 
 ## Build, Run, and Use
 1. open Fleks.xcworkspace
